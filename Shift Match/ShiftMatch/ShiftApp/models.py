@@ -5,9 +5,18 @@ class Registration(models.Model):
     firstName = models.CharField(max_length=100)
     lastName = models.CharField(max_length=100)
     userEmail = models.EmailField()
+    id = models.ImageField()
     userPassword = models.CharField(max_length=100)
-    confirmPassword = models.CharField(max_length=100)
     
 class User(models.Model):
     userEmail = models.EmailField()
     userPassword = models.CharField(max_length=100)
+    
+class Admin(models.Model):
+    userName = models.CharField(max_length=20)
+    adminPassword = models.CharField(max_length=100)
+    
+class IdRequest(models.Model):
+    id = models.ImageField()
+    decision = models.Choices()
+    

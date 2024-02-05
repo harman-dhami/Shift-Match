@@ -1,5 +1,5 @@
 from django import forms 
-from .models import Registration, User
+from .models import Registration, User, Admin, IdRequest
 from django.contrib.auth.password_validation import validate_password
 class RegistrationForm(forms.ModelForm):
     Choices = (('', ''), ('Air Canada', 'Air Canada'), ('McDonalds', 'McDonalds'))
@@ -28,4 +28,22 @@ class LoginForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ["email", "password"]
+        
+
+class AdminLogin(forms.ModelForm):
+    userName = forms.CharField(label="Username:", max_length=20)
+    adminPassword = forms.CharField(widget=forms.PasswordInput(), label="Password:")
+    
+    class Meta:
+        model = Admin
+        fields = ["userName", "adminPassword"]
+        
+class IDRequest(forms.ModelForm):
+    Choices = (('Please Select', 'Please Select'), ('Accept', 'Accept'), ('Deny', 'Deny'))
+    id = forms.ImageField(label = "ID:")
+    decision = forms.ChoiceField(label = "Decision:", choices = Choices)
+    
+    class Meta:
+        model = IdRequest
+        fields = ["id", "decision"]
         

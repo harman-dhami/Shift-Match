@@ -16,9 +16,11 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import registration, login
+from .views import registration, login, adminLogin, idRequest
 
 urlpatterns = [
     path('', registration, name='registration'),
-    path('ShiftApp/', login, name='login')
+    path('ShiftApp/', login, name='login'),
+    path('ShiftApp/adminLogin', adminLogin, name='adminLogin'),
+    path('ShiftApp/idRequest', idRequest, name='idRequest')
 ]

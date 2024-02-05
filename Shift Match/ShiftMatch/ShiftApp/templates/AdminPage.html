@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
+    <title>Admin Tasks</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -43,21 +43,16 @@
 </head>
 <body>
 
-    <h2>Registration</h2>
+    <h2>Admin Tasks</h2>
+    <form action="{% url 'idRequest' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_table }}
+        
 
-        <form action="{% url 'registration' %}" method="POST">
-            {% csrf_token %}
-            {{form }}
-            <button type="submit">Submit</button>
-        </form>
+        <button type="submit">Submit</button>
+    </form>
 
-        <a href="{% url 'login' %}">
-            <button>Login</button>
-        </a> 
-
-        <a href="{% url 'adminLogin' %}">
-            <button>Admin Login</button>
-        </a>
+        
 
 
 </body>
