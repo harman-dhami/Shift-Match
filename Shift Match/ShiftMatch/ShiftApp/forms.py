@@ -39,9 +39,10 @@ class AdminLogin(forms.ModelForm):
         fields = ["userName", "adminPassword"]
         
 class IDRequest(forms.ModelForm):
-    Choices = (('Please Select', 'Please Select'), ('Accept', 'Accept'), ('Deny', 'Deny'))
-    id = forms.ImageField(label = "ID:")
-    decision = forms.ChoiceField(label = "Decision:", choices = Choices)
+    def __init__(self, *args, **kwargs):
+        Choices = (('Please Select', 'Please Select'), ('Accept', 'Accept'), ('Deny', 'Deny'))
+        self.id = kwargs.pop('id')
+        decision = forms.ChoiceField(label = "Decision:", choices = Choices)
     
     class Meta:
         model = IdRequest

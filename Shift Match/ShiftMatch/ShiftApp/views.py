@@ -3,8 +3,9 @@ from django.template.response import TemplateResponse
 import pymongo
 from django.core.mail import send_mail
 from .models import Registration
-from .forms import RegistrationForm, LoginForm, AdminLogin
+from .forms import RegistrationForm, LoginForm, AdminLogin, IDRequest
 from django.contrib import messages
+from .settings import EMAIL_HOST_USER
 
 myclient = pymongo.MongoClient("mongodb+srv://user01:WAX5VkFPgLmrclRt@shiftmatch.mux73es.mongodb.net/?retryWrites=true&w=majority")
 mydb = myclient["ShiftMatch"]
@@ -21,12 +22,20 @@ def registration(request):
             id = form.cleaned_data['id']
             company = form.cleaned_data['company']
             userPassword = form.cleaned_data['password']
+            
+            if (id != None):
+                return TemplateResponse(request, 'AdminPage.html', {"id": id})
                 
-            if (id == True):
-                return TemplateResponse(request, "AdminPage.html", {"id": id})
-        
-            mydict = { "Firstname": firstName, "Lastname": lastName, "Email": userEmail , "ID": id, "Company": company, "Password": userPassword}
-            x = mycol.insert_one(mydict)
+                
+            if (idRequest == 'Deny'):
+                subject = 'ShiftMatch Account Request'
+                message = f'Hello' +firstName+ ', your ID has not been approved due to criteria requirements. Please register again for another ID approval request. Thanks'
+                email_from = EMAIL_HOST_USER
+                recipient = userEmail
+                send_mail(subject, message, email_from, recipient)
+            else:
+                mydict = { "Firstname": firstName, "Lastname": lastName, "Email": userEmail , "ID": id, "Company": company, "Password": userPassword}
+                x = mycol.insert_one(mydict)
     else:
         form = RegistrationForm()
     return render(request, "Registration.html", {"form": form})
@@ -69,6 +78,12 @@ def adminLogin(request):
             
     return render(request, "AdminLogin.html", {"form": form})
     
-def idRequest():
-    return
+def idRequest(request):
+    form = IDRequest(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            requestDecision = form.cleaned_data['decision']
+            
+            return requestDecision
+    
             
