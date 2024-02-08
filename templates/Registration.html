@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="Registration.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <h1>shiftXChange</h1>
+        <h2>Registration</h2>
+
+        <div class="input-box">
+            <form action="{% url 'registration' %}" method="POST">
+                {% csrf_token %}
+                {{form }}
+                <br>
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+
+        <p class="text">Already have an account?</p>
+
+        <div class="login-link">
+            <p>User:
+                <a href="{% url 'login' %}">Login</a>
+            </p>
+        </div>
+
+        <div class="admin-login-link">
+            <p>Administrator:
+                <a href="{% url 'adminLogin' %}">Admin Login</a>
+            </p>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
