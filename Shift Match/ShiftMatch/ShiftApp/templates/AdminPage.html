@@ -46,9 +46,20 @@
     <h2>Admin Tasks</h2>
     <form action="{% url 'idRequest' %}" method="POST">
         {% csrf_token %}
-        {{ form.as_table }}
-        
-
+        enctype='multipart/form-data'
+        <table>
+            <tr>
+                <th>ID:</th>
+                <th>Decision</th>
+            </tr>
+            <tr>
+                <td>{{id }}</td>
+                <td><select>
+                        <option value="Accept">Accept</option>
+                        <option value="Deny">Deny</option>
+                    </select></td>
+            <tr>
+            </table>
         <button type="submit">Submit</button>
     </form>
 

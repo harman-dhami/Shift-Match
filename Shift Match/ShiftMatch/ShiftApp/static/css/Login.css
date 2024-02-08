@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #E6F0FA; /* Light blue background */
+}
+
+
+
+.login-container {
+    display: flex;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.sidebar {
+    background-color: #007BFF; /* Blue background */
+    color: white;
+    padding: 20px;
+    position: relative;
+    width: 250px; /* Adjust the width as needed */
+}
+
+.sidebar h1, .sidebar h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.form-container {
+    background-color: white;
+    padding: 20px;
+    width: 300px; /* Adjust the width as needed */
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container h2 {
+    color: #333;
+    margin: 0 0 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+input[type="email"],
+input[type="password"],
+select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #007BFF;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Add wavy background to the sidebar */
+.sidebar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px; /* Adjust the height as needed */
+    background-image: url('path-to-your-wavy-background.png'); /* Path to your wavy background image */
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+

@@ -1,59 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/AdminLogin.css' %}">
 </head>
 <body>
 
-    <h2>Admin Login</h2>
+    <div class="wrapper">
 
-        <form action="{% url 'adminLogin' %}" method="POST">
-            {% csrf_token %}
-            {{form }}
+        <h1>shiftXChange</h1>
+        <h2>Admin Login</h2>
+
+        <div class="input-box">
+            <form action="{% url 'adminLogin' %}" method="POST">
+                {% csrf_token %}
+                {{form }}
             
-            <button type="submit">Submit</button>
-        </form>
+                <button type="submit" class="btn">Submit</button>
+            </form>
 
+        </div>
+        
         {{htmltext }}
 
+    </div>
 
 </body>
 </html>

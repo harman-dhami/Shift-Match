@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.template.response import TemplateResponse
+from django.shortcuts import render, redirect
 import pymongo
 from django.core.mail import send_mail
 from .models import Registration
@@ -13,8 +12,10 @@ mycol = mydb["users"]
 
 
 def registration(request):
-    form = RegistrationForm(request.POST)
+    global id
+    
     if request.method == 'POST':
+        form = RegistrationForm(request.POST, request.FILES)
         if form.is_valid():
             firstName = form.cleaned_data['firstName']
             lastName = form.cleaned_data['lastName']
@@ -23,13 +24,10 @@ def registration(request):
             company = form.cleaned_data['company']
             userPassword = form.cleaned_data['password']
             
-            if (id != None):
-                return TemplateResponse(request, 'AdminPage.html', {"id": id})
-                
                 
             if (idRequest == 'Deny'):
                 subject = 'ShiftMatch Account Request'
-                message = f'Hello' +firstName+ ', your ID has not been approved due to criteria requirements. Please register again for another ID approval request. Thanks'
+                message = f'Hello' +firstName+ ', your identification has not been approved due to criteria requirements. Please register again for another ID approval request. Thanks'
                 email_from = EMAIL_HOST_USER
                 recipient = userEmail
                 send_mail(subject, message, email_from, recipient)
@@ -44,11 +42,13 @@ def login(request):
     form = LoginForm(request.POST)
     if request.method == 'POST':
         if form.is_valid():
-            userEmail = form.cleaned_data['email']
+            userName = form.cleaned_data['email']
             userPassword = form.cleaned_data['password']
             
-            dbpwd = mydb.users.find_one({"Email": userEmail}, {"Password": 1, "_id": 0})
-            dbemail = mydb.users.find_one({"Email": userEmail})
+            dbpwd = mydb.users.find_one({"Email": userName}, {"Password": 1, "_id": 0})
+            dbemail = mydb.users.find_one({"Email": userName})
+            adminpwd = mydb.Admins.find_one({"userName": userName}, {"password": 1, "_id": 0})
+            adminName = mydb.Admins.find_one({"userName": userName})
             
             if (dbemail == None):
                 print("Email does not exist")
@@ -56,6 +56,8 @@ def login(request):
                 print("Wrong password/email")
             else:
                 print("Successful Login")
+    else:
+        form = LoginForm()
     return render(request, "Login.html", {"form": form})
 
 def adminLogin(request):
@@ -79,6 +81,9 @@ def adminLogin(request):
     return render(request, "AdminLogin.html", {"form": form})
     
 def idRequest(request):
+    if (id != None):
+        return render (request, 'AdminPage.html',{"id": id})
+    
     form = IDRequest(request.POST)
     if request.method == 'POST':
         if form.is_valid():
