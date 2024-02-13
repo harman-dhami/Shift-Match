@@ -1,41 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
-    <link rel="stylesheet" href="Registration.css">
+    <link rel="stylesheet" href="{% static 'css/Registration.css' %}">
 </head>
 
 <body>
 
     <div class="wrapper">
 
-        <h1>shiftXChange</h1>
-        <h2>Registration</h2>
+        <div class="registration-container">
 
-        <div class="input-box">
-            <form action="{% url 'registration' %}" method="POST">
-                {% csrf_token %}
-                {{form }}
-                <br>
-                <button type="submit" class="btn">Submit</button>
-            </form>
-        </div>
+            <div class="sidebar">
+                <!-- Sidebar content goes here -->
+                <h2>Welcome to</h2><br>
+                <div class="logo">
+                    
+                </div>
+                <!-- Include the wavy background image in the CSS -->
+            </div>
 
-        <p class="text">Already have an account?</p>
 
-        <div class="login-link">
-            <p>User:
-                <a href="{% url 'login' %}">Login</a>
-            </p>
-        </div>
+            <div class="form-container">
 
-        <div class="admin-login-link">
-            <p>Administrator:
-                <a href="{% url 'adminLogin' %}">Admin Login</a>
-            </p>
+                <h2>Registration</h2>
+
+                <div class="input-box">
+                    <form action="{% url 'registration' %}" method="POST">
+                        {% csrf_token %}
+                        {{form }}
+                        <div class="terms-conditions">
+                            <p>By signing Up I Agree with 
+                                <a href=" ">Terms & Conditions</a>
+                            </p>
+                        </div>
+                        <br>
+                        <button type="submit">Sign Up</button>
+                    </form>
+                </div>
+
+                <p class="text">Already have an account? 
+                    <a href="{% url 'login' %}">Login</a>
+                </p>
+
+                <!-- <div class="login-link">
+                    <p>Login:
+                        <a href="{% url 'login' %}">Login</a>
+                    </p>
+                </div> -->
+
+                <!-- <div class="admin-login-link">
+                    <p>Administrator:
+                        <a href="{% url 'adminLogin' %}">Admin Login</a>
+                    </p>
+                </div>  -->
+
+            </div>
+
+
         </div>
 
     </div>

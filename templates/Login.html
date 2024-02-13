@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="Login.css">
+    <link rel="stylesheet" href="{% static 'css/Login.css' %}">
 </head>
 
 <body>
 
     <div class="wrapper">
 
-        <h1>shiftXChange</h1>
-        <h2>Login</h2>
+        <div class="login-container">
+            <div class="sidebar">
+                <!-- Sidebar content goes here -->
+                <h2>Welcome to</h2><br>
+                <div class="logo">
+                
+                </div>
+                <!-- Include the wavy background image in the CSS -->
+            </div>
 
-        <form action="{% url 'login' %}" method="POST">
-            {% csrf_token %}
-            {{form }}
-            <br>
-            <button type="submit" class="btn">Submit</button>
-        </form>
+        <div class="form-container">
+
+            <h2>Login</h2>
+
+            <div class="input-box">
+                <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    {{form }}
+                    <!-- <p>Remember me</p>
+                    <p>Forgot Password</p> -->
+                    <br>
+                    <button type="submit" class="btn">Submit</button>
+                </form>
+            </div>
+
+        </div>
 
     </div>
 
