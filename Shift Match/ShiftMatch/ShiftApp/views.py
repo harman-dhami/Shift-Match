@@ -50,14 +50,13 @@ def login(request):
             adminpwd = mydb.Admins.find_one({"userName": userName}, {"password": 1, "_id": 0})
             adminName = mydb.Admins.find_one({"userName": userName})
             
-            if (adminName == None or dbemail == None ):
-                return render(request, "Login.html", {"form": form, "htmltext": "User Does Not Exist!"})
-            elif (adminpwd.get("password") != userPassword or dbpwd.get("password") != userPassword):
-                return render(request, "Login.html", {"form": form, "htmltext": "Incorrect Username/Password"})
-            elif (adminpwd.get("password") == userPassword):
-                return render(request, "AdminPage.html")
-            elif (dbpwd.get("password") == userPassword):
-                return render(request, "Home.html")
+            if (dbemail == None):
+                return render(request, "Login.html")
+            elif (dbpwd.get("Password") != userPassword):
+                return render(request, "Login.html")
+            else:
+                return render(request, "Dashboard.html")
+                
     else:
         form = LoginForm()
     return render(request, "Login.html", {"form": form})
