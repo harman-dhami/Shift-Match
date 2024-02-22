@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #E6F0FA;
+    /* Light blue background */
+}
+
+.wrapper {
+    padding: 30px 40px;
+}
+
+.login-container {
+    display: flex;
+    box-shadow: rgb(38, 57, 77) 10px 20px 30px -5px;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.sidebar {
+    background-color: #094b9f;
+    background-image: linear-gradient(to bottom, #094b9f, #2e95f7);
+    color: white;
+    padding: 20px;
+    position: relative;
+    width: 400px;
+    /* Adjust the width as needed */
+    background-color: #094B9F;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23094B9F' cx='50' cy='0' r='50'/%3E%3Cg fill='%230c4ea3' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%230e52a8' cx='50' cy='100' r='50'/%3E%3Cg fill='%231156ac' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%231359b0' cx='50' cy='200' r='50'/%3E%3Cg fill='%23155db5' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%231760b9' cx='50' cy='300' r='50'/%3E%3Cg fill='%231964bd' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%231b68c2' cx='50' cy='400' r='50'/%3E%3Cg fill='%231d6bc6' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%231e6fcb' cx='50' cy='500' r='50'/%3E%3Cg fill='%232073cf' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%232276d3' cx='50' cy='600' r='50'/%3E%3Cg fill='%23237ad8' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%23257edc' cx='50' cy='700' r='50'/%3E%3Cg fill='%232682e1' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%232886e5' cx='50' cy='800' r='50'/%3E%3Cg fill='%232a89ea' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%232b8dee' cx='50' cy='900' r='50'/%3E%3Cg fill='%232d91f3' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%232E95F7' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: contain;
+}
+
+.sidebar h2 {
+    margin: 40px 0 0;
+    padding: 0;
+    text-align: center;
+    font-family: Roboto, sans-serif;
+}
+
+.logo {
+    width: 250px;
+    height: 200px;
+    background-image: url('logo-transparent.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin-left: 75px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.form-container {
+    background-color: white;
+    padding: 20px;
+    width: 500px;
+    /* Adjust the width as needed */
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container h2 {
+    color: #333;
+    margin: 40px 0 40px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+form {
+    font-size: 14px;
+    max-width: 400px;
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    font-size: 12px;
+    border: none;
+    border-bottom: 1px solid #007BFF;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #007BFF;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Add wavy background to the sidebar */
+.sidebar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.wrapper p {
+    font-size: 14px;
+}
+
+.wrapper .text {
+    text-align: center;
+    font-size: 14px;
+}
