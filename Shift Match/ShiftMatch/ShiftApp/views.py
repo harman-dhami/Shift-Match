@@ -50,36 +50,23 @@ def login(request):
             adminpwd = mydb.Admins.find_one({"userName": userName}, {"password": 1, "_id": 0})
             adminName = mydb.Admins.find_one({"userName": userName})
             
-            if (dbemail == None):
-                return render(request, "Login.html")
-            elif (dbpwd.get("Password") != userPassword):
-                return render(request, "Login.html")
-            else:
-                return render(request, "Dashboard.html")
+            if (dbemail != None):
+                if (dbpwd.get("Password") != userPassword):
+                    return render(request, "Login.html", {"form": form})
+                else:
+                    return render(request, "Dashboard.html")
+            elif (adminName != None):
+                if (adminpwd.get("password") != userPassword):
+                    return render(request, "Login.html", {"form": form})
+                else:
+                    return render(request, "AdminPage.html")
                 
     else:
         form = LoginForm()
     return render(request, "Login.html", {"form": form})
 
 def adminLogin(request):
-    form = AdminLogin(request.POST)
-    if request.method == 'POST':
-        if form.is_valid():
-            userName = form.cleaned_data['userName']
-            adminPassword = form.cleaned_data['adminPassword']
-            
-            adminpwd = mydb.Admins.find_one({"userName": userName}, {"password": 1, "_id": 0})
-            adminName = mydb.Admins.find_one({"userName": userName})
-            
-            
-            if (adminName == None):
-                return render(request, "AdminLogin.html", {"form": form, "htmltext": "Username Does Not Exist!"})
-            elif (adminpwd.get("password") != adminPassword):
-                return render(request, "AdminLogin.html", {"form": form, "htmltext": "Incorrect Username/Password"})
-            else:
-                return render(request, "AdminPage.html")
-            
-    return render(request, "AdminLogin.html", {"form": form})
+        return render(request, "AdminPage.html")
     
 def idRequest(request):
     if (id != None):
@@ -91,5 +78,8 @@ def idRequest(request):
             requestDecision = form.cleaned_data['decision']
             
             return requestDecision
+        
+def calendarShiftInput(request):
     
+    return render(request, "Dashboard.html")
             
