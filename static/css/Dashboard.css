@@ -29,7 +29,8 @@ body {
 
 .sidebar {
     width: 90px;
-    background: #2d53da;
+    background: #252e3a;
+    border: 1px solid #151515;
     height: 87vh;
     transition: all 0.3s linear;
     border-top-left-radius: 20px;
