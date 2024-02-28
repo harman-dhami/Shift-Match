@@ -8,24 +8,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="Dashboard.css">
+    <!-- <link rel="stylesheet" href="{% static 'css/Dashboard.css' %}"> -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
 </head>
 
 <body>
 
-    <div class="sidebar">
+    <div class="wrapper">
 
-        <div class="top">
-            <div class="logo">
-
+        <div id="header">
+            <img src=" " alt=" ">
+            <div class="title">
+                WELCOME BACK,
+                <br>
+                <p>Name</p>
             </div>
+
+            <i class="bx bxs-bell"></i>
         </div>
 
-        <div class="user">
+        <div id="pages">
 
+            <div class="sidebar">
+                <nav>
+                    <div class="logo"> </div>
+                    <a class="active" href="#"><i class="bx bxs-dashboard"></i>Home</a>
+
+                    <a href="#"><i class="bx bxs-user"></i>Profile</a>
+
+                    <a href="{% url 'calendar' %}"><i class="bx bx-calendar"></i>Calendar</a>
+
+                    <a href="#"><i class="bx bxs-data"></i>Pool</a>
+
+                    <a href="#"><i class="bx bx-loader"></i>Status</a>
+
+                    <a href="#"><i class="bx bx-chat"></i>Chat</a>
+
+                    <a href="#"><i class="bx bx-cog"></i>Settings</a>
+                    <br>
+                    <br>
+                    <br>
+                    <a href="#"><i class="bx bx-log-out"></i>Logout</a>
+                </nav>
+            </div>
+
+            <div class="left-column">
+
+                <div id="shift-view">
+                    <div class="title">UPCOMING SHIFTS</div>
+
+                    <p class="sub-title">Week of:</p>
+
+                    <div class="shifts">
+                        <p>Monday</p>
+                    </div>
+                    <div class="shifts">
+                        <p>Tuesday</p>
+                    </div>
+                    <div class="shifts">
+                        <p>Wednesday</p>
+                    </div>
+                    <div class="shifts">
+                        <p>Thursday</p>
+                    </div>
+                    <div class="shifts">
+                        <p>Friday</p>
+                    </div>
+                    <br>
+                    <button>Calendar</button>
+                </div>
+
+                <div class="boxes">
+                    <div class="contacts">
+                        <div class="title">CONTACTS</div>
+                    </div>
+
+                    <div class="setting">
+                        <div class="title">SETTINGS</div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+
+                <div id="shift-pool">
+                    <div class="title">SHIFT POOL</div>
+
+                    <button>View More</button>
+                </div>
+
+                <div id="shift-status">
+                    <div class="title">SHIFT STATUS</div>
+
+                    <button>View More</button>
+                </div>
+            </div>
 
         </div>
-        
-        <ul></ul>
 
     </div>
 

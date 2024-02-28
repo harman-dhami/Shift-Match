@@ -15,6 +15,7 @@
     <div class="wrapper">
 
         <div class="login-container">
+
             <div class="sidebar">
                 <!-- Sidebar content goes here -->
                 <h2>Welcome back</h2><br>
@@ -23,24 +24,26 @@
                 </div>
             </div>
 
-        <div class="form-container">
+            <div class="form-container">
 
-            <h2>Login</h2>
+                <h2>Login</h2>
 
-            <div class="input-box">
-                <form action="{% url 'login' %}" method="POST">
-                    {% csrf_token %}
-                    {{form }}
-                    <!-- <p>Remember me</p>
-                    <p>Forgot Password</p> -->
-                    <br>
-                    <button type="submit" class="btn">Submit</button>
-                </form>
+                <div class="input-box">
+                    <form action="{% url 'login' %}" method="POST">
+                        {% csrf_token %}
+                        {{form }}
+                        <!-- <p>Remember me</p>
+                        Forgot Password</p> -->
+                        <br>
+                        <button type="submit" class="btn">Submit</button>
+                    </form>
+                </div>
+
+                <p class="text"> 
+                    <a href="{% url 'registration' %}">Create Account</a>
+                </p>
+
             </div>
-
-            <p class="text"> 
-                <a href="{% url 'registration' %}">Create Account</a>
-            </p>
 
         </div>
 
