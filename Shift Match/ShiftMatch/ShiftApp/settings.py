@@ -51,6 +51,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+#AUTHENTICATION_BACKENDS = [
+ #   'ShiftApp.authentication.authBackend'
+#]
+
 ROOT_URLCONF = 'ShiftApp.urls'
 
 TEMPLATES = [
@@ -71,6 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ShiftApp.wsgi.application'
 
+AUTH_USER_MODEL = "ShiftApp.User"
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

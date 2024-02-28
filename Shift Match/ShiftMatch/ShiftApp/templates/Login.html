@@ -24,6 +24,8 @@
                 <!-- Include the wavy background image in the CSS -->
             </div>
 
+            
+
         <div class="form-container">
 
             <h2>Login</h2>
@@ -36,6 +38,13 @@
                     <p>Forgot Password</p> -->
                     <br>
                     <button type="submit" class="btn">Submit</button>
+                {% for message in messages %}
+
+                    <div class="alert alert-success">
+                        <a class="close" href="#" data-dismiss="alert"></a>
+                            {{ message }}
+                    </div>
+                {% endfor %}
                 </form>
             </div>
 

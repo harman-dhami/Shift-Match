@@ -34,6 +34,8 @@
                     <form action="{% url 'registration' %}" method="POST">
                         {% csrf_token %}
                         {{form }}
+                        {{form.errors}}
+                        {{form.non_field_errors}}
                         <div class="terms-conditions">
                             <p>By signing Up I Agree with 
                                 <a href=" ">Terms & Conditions</a>
