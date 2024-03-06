@@ -16,11 +16,12 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import registration, userLogin, adminLogin, idRequest
+from .views import registration, userLogin, adminLogin, idRequest, calendarShiftInput
 
 urlpatterns = [
     path('', registration, name='registration'),
     path('ShiftApp/', userLogin, name='login'),
     path('ShiftApp/adminLogin', adminLogin, name='adminLogin'),
-    path('ShiftApp/idRequest', idRequest, name='idRequest')
+    path('ShiftApp/idRequest', idRequest, name='idRequest'),
+    path('ShiftApp/calendarShiftInput', calendarShiftInput, name='calendarShiftInput')
 ]

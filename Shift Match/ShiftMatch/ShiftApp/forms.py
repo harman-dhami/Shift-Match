@@ -1,5 +1,5 @@
 from django import forms 
-from .models import User, Login, Admin, IdRequest
+from .models import User, Admin, IdRequest
 from django.contrib.auth.password_validation import validate_password
 class RegistrationForm(forms.ModelForm):
     Choices = (('', ''), ('Air Canada', 'Air Canada'), ('McDonalds', 'McDonalds'))

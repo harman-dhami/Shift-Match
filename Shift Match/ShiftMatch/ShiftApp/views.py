@@ -1,12 +1,16 @@
 from django.shortcuts import render, redirect
 import pymongo
 from django.core.mail import send_mail
-from .models import User
+from .models import User, Shifts
 from .forms import RegistrationForm, LoginForm, AdminLogin, IDRequest
 from django.contrib import messages
 from .settings import EMAIL_HOST_USER
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.hashers import make_password
+import json
+from django.http import JsonResponse
+from datetime import datetime
+from django.contrib.auth.decorators import login_required
 
 myclient = pymongo.MongoClient("mongodb+srv://user01:WAX5VkFPgLmrclRt@shiftmatch.mux73es.mongodb.net/?retryWrites=true&w=majority")
 mydb = myclient["ShiftMatch"]
@@ -51,19 +55,11 @@ def userLogin(request):
             username = request.POST.get('email')
             password = request.POST.get('password')
             
-            #dbpwd = mydb.users.find_one({"Email": userName}, {"Password": 1, "_id": 0})
-            #dbemail = mydb.users.find_one({"Email": userName})
-            #adminpwd = mydb.Admins.find_one({"userName": userName}, {"password": 1, "_id": 0})
-            #adminName = mydb.Admins.find_one({"userName": userName})
-            
-            #username = User.objects.get(userEmail=userName).userEmail
-            #userPassword = User.objects.get(userPassword=password).userPassword
-            
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return render(request, "Dashboard.html")
+                    return redirect('calendarShiftInput')
             else:
                 print(username, password)
                 messages.error(request, "Username or password is incorrect")
@@ -86,6 +82,31 @@ def idRequest(request):
             
             return requestDecision
         
+@login_required
 def calendarShiftInput(request):
-    return render(request, "Dashboard.html")
-            
+    username = request.user.username
+    all_events = Shifts.objects.filter(username = username)
+    event_arr = []
+    for i in all_events:
+        event_sub_arr = {}
+        shiftStart = datetime.strptime(str(i.shiftStart), "%Y-%m-%d %H:%M:%S%z").strftime("%Y-%m-%d %H:%M:%S%z")
+        shiftEnd = datetime.strptime(str(i.shiftEnd), "%Y-%m-%d %H:%M:%S%z").strftime("%Y-%m-%d %H:%M:%S%z")
+        hours = str(i.hours)
+        event_sub_arr['title'] = "Shift"
+        event_sub_arr['start'] = shiftStart
+        event_sub_arr['end'] = shiftEnd
+        event_arr.append(event_sub_arr)
+    data = JsonResponse((event_arr), safe=False)
+    dataset = json.dumps(event_arr)
+    context = {
+        "shifts": dataset 
+    }
+                    
+    return render(request, "Dashboard.html", context)  
+
+@login_required
+def shiftPoolPage(request):
+    shift_pool = Shifts.objects.filter()
+    
+    
+    return (request, "ShiftPool.html")    

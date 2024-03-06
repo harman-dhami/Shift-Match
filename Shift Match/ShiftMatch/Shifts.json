@@ -1,0 +1,29 @@
+[
+    {
+      "model": "ShiftApp.shifts",
+      "fields": {
+        "shiftStart": "2024-03-05 8:00:00+0000",
+        "shiftEnd": "2024-03-05 12:00:00+0000",
+        "hours": 4,
+        "username_id": "h@gmail.com"
+      }
+    },
+    {
+        "model": "ShiftApp.shifts",
+        "fields": {
+          "shiftStart": "2024-03-07 8:00:00+0000",
+          "shiftEnd": "2024-03-07 12:00:00+0000",
+          "hours": 4,
+          "username_id": "h@gmail.com"
+      }
+    },
+    {
+        "model": "ShiftApp.shifts",
+        "fields": {
+          "shiftStart": "2024-03-05 8:00:00+0000",
+          "shiftEnd": "2024-03-05 1:00:00+0000",
+          "hours": 5,
+          "username_id": "g@gmail.com"
+      }
+    }
+  ]

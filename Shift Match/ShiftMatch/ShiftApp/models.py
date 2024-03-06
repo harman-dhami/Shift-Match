@@ -9,13 +9,20 @@ class User(AbstractBaseUser):
     employeeId = models.CharField(max_length=100)
     company = models.CharField(max_length=100)
     password = models.CharField(max_length=100, default="password12r")
+    role = models.CharField(max_length=100,  default="Basic")
     USERNAME_FIELD = "username"
     
     objects=UserAccountManager()
     
-class Login(models.Model):
-    userEmail = models.EmailField()
-    userPassword = models.CharField(max_length=100)
+#class Login(models.Model):
+    #userEmail = models.EmailField()
+    #userPassword = models.CharField(max_length=100)
+    
+class Shifts(models.Model):
+    shiftStart = models.DateTimeField()
+    shiftEnd = models.DateTimeField()
+    hours = models.IntegerField()
+    username = models.ForeignKey(User, on_delete=models.PROTECT, to_field="username")
     
 class Admin(models.Model):
     userName = models.CharField(max_length=20)
