@@ -16,25 +16,12 @@
 
     <div class="wrapper">
 
-        <div id="header">
-            <img src=" " alt=" ">
-            <div class="title">
-                WELCOME BACK,
-                <br>
-                <p>Name</p>
-            </div>
-
-            <i class="bx bxs-bell"></i>
-        </div>
-
         <div id="pages">
 
             <div class="sidebar">
                 <nav>
                     <div class="logo"> </div>
                     <a class="active" href="#"><i class="bx bxs-dashboard"></i>Home</a>
-
-                    <a href="#"><i class="bx bxs-user"></i>Profile</a>
 
                     <a href="{% url 'calendar' %}"><i class="bx bx-calendar"></i>Calendar</a>
 
@@ -43,6 +30,8 @@
                     <a href="#"><i class="bx bx-loader"></i>Status</a>
 
                     <a href="#"><i class="bx bx-chat"></i>Chat</a>
+
+                    <a href="#"><i class="bx bx bx-bell"></i>Notifications</a>
 
                     <a href="#"><i class="bx bx-cog"></i>Settings</a>
                     <br>
@@ -54,38 +43,67 @@
 
             <div class="left-column">
 
-                <div id="shift-view">
-                    <div class="title">UPCOMING SHIFTS</div>
-
-                    <p class="sub-title">Week of:</p>
-
-                    <div class="shifts">
-                        <p>Monday</p>
+                <div id="header">
+                    <img src="logo-png.png" alt="picture">
+                    <div class="title">
+                        WELCOME BACK,
+                        <br>
+                        <h1>Name</h1>
                     </div>
-                    <div class="shifts">
-                        <p>Tuesday</p>
-                    </div>
-                    <div class="shifts">
-                        <p>Wednesday</p>
-                    </div>
-                    <div class="shifts">
-                        <p>Thursday</p>
-                    </div>
-                    <div class="shifts">
-                        <p>Friday</p>
-                    </div>
-                    <br>
-                    <button>Calendar</button>
                 </div>
 
-                <div class="boxes">
-                    <div class="contacts">
-                        <div class="title">CONTACTS</div>
+                <div id="shift-view">
+                    <div class="title">UPCOMING SHIFTS
+                        <i class="bx bxs-plus-circle"></i>
                     </div>
+                    <div class="shift">
+                        <p>Date:</p>
+                        <p>Time:</p>
+                        <p>Position:</p>
+                    </div>
+                    <div class="shift">
+                        <p>Date:</p>
+                        <p>Time:</p>
+                        <p>Position:</p>
+                    </div>
+                    <div class="shift">
+                        <p>Date:</p>
+                        <p>Time:</p>
+                        <p>Position:</p>
+                    </div>
+                    <div class="shift">
+                        <p>Date:</p>
+                        <p>Time:</p>
+                        <p>Position:</p>
+                    </div>
+                    <div class="shift">
+                        <p>Date:</p>
+                        <p>Time:</p>
+                        <p>Position:</p>
+                    </div>
+                </div>
 
-                    <div class="setting">
-                        <div class="title">SETTINGS</div>
-
+                <div id="shift-status">
+                    <div class="title">SHIFT STATUS</div>
+                    <div class="status-boxes">
+                        <div class="status">
+                            <div class="title">Shift 1</div>
+                            <a href="#">Name</a>
+                            <p>Pending</p>
+                            <p>Time Left:</p>
+                        </div>
+                        <div class="status">
+                            <div class="title">Shift 2</div>
+                            <a href="#">Name</a>
+                            <p>Pending</p>
+                            <p>Time Left:</p>
+                        </div>
+                        <div class="status">
+                            <div class="title">Shift 3</div>
+                            <a href="#">Name</a>
+                            <p>Pending</p>
+                            <p>Time Left:</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -95,13 +113,67 @@
                 <div id="shift-pool">
                     <div class="title">SHIFT POOL</div>
 
-                    <button>View More</button>
+                    <div class="available-shifts">
+                        <img src=" " alt="picture">
+                        <div class="shift-info">
+                            <a href="#">Name</a>
+                            <div class="shift-time">
+                                <p>Date:</p>
+                                <p>Time:</p>
+                                <p>Request: Trade or Pick-up</p>
+                            </div>
+                        </div>
+                        <i class="bx bxs-info-circle"></i>
+                    </div>
+                    <div class="available-shifts">
+                        <img src=" " alt="picture">
+                        <div class="shift-info">
+                            <a href="#">Name</a>
+                            <div class="shift-time">
+                                <p>Date:</p>
+                                <p>Time:</p>
+                                <p>Request:</p>
+                            </div>
+                        </div>
+                        <i class="bx bxs-info-circle"></i>
+                    </div>
+                    <div class="available-shifts">
+                        <img src=" " alt="picture">
+                        <div class="shift-info">
+                            <a href="#">Name</a>
+                            <div class="shift-time">
+                                <p>Date:</p>
+                                <p>Time:</p>
+                                <p>Request:</p>
+                            </div>
+                        </div>
+                        <i class="bx bxs-info-circle"></i>
+                    </div>
+                    <div class="available-shifts">
+                        <img src=" " alt="picture">
+                        <div class="shift-info">
+                            <a href="#">Name</a>
+                            <div class="shift-time">
+                                <p>Date:</p>
+                                <p>Time:</p>
+                                <p>Request:</p>
+                            </div>
+                        </div>
+                        <i class="bx bxs-info-circle"></i>
+                    </div>
                 </div>
 
-                <div id="shift-status">
-                    <div class="title">SHIFT STATUS</div>
+                <div id="contacts">
+                    <div class="title">CONTACTS</div>
 
-                    <button>View More</button>
+                    <div class="contact">
+                        <img src=" " alt="picture">
+                        <img src=" " alt="picture">
+                        <img src=" " alt="picture">
+                        <img src=" " alt="picture">
+                        <img src=" " alt="picture">
+                        <img src=" " alt="picture">
+                    </div>
                 </div>
             </div>
 
