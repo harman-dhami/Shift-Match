@@ -33,7 +33,6 @@ body {
 .sidebar {
     width: 90px;
     background-color: #2d53da;
-    /* background-image: linear-gradient(to bottom, #094b9f, #2e95f7); */
     height: 92vh;
     transition: all 0.3s linear;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -108,8 +107,10 @@ nav a:hover,
 }
 
 #header .title {
+    display: flex;
     font-size: 20px;
     color: #000;
+    flex-direction: column;
 }
 
 #header h1 {
@@ -117,10 +118,10 @@ nav a:hover,
     font-size: 30px;
 }
 
-.bxs-bell {
-    color: #000;
-    font-size: 25px;
-    margin-left: 83%;
+#header .bxs-bell {
+    color: #2d53da;
+    font-size: 30px;
+    margin-right: 2.5%;
 }
 
 /* Main Content */
