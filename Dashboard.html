@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- {% load static %} -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="Dashboard.css">
+    <!-- <link rel="stylesheet" href="{% static 'css/Dashboard.css' %}"> -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <div id="pages">
+
+            <div class="sidebar">
+                <nav>
+                    <div class="logo"> </div>
+                    <a class="active" href="#"><i class="bx bxs-dashboard"></i>Home</a>
+
+                    <a href="{% url 'calendarShiftInput' %}"><i class="bx bx-calendar"></i>Calendar</a>
+
+                    <a href="#"><i class="bx bxs-data"></i>Pool</a>
+
+                    <a href="#"><i class="bx bx-loader"></i>Status</a>
+
+                    <a href="#"><i class="bx bx-chat"></i>Chat</a>
+
+                    <a href="#"><i class="bx bx-cog"></i>Settings</a>
+                    <br>
+                    <br>
+                    <br>
+                    <a href="#"><i class="bx bx-log-out"></i>Logout</a>
+                </nav>
+            </div>
+
+            <div class="left-column">
+
+                <div id="header">
+                    <img src="logo-png.png" alt="picture">
+                    <div class="title">
+                        WELCOME BACK,
+                        <br>
+                        <h1>Name</h1>
+                    </div>
+                    <i class="bx bx bxs-bell"></i>
+                </div>
+
+                <div id="shift-view">
+                    <div class="title">UPCOMING SHIFTS
+                        <i class="bx bxs-plus-circle"></i>
+                    </div>
+                    <div class="shift">
+                        <p>Date:</p>
+                        <p>Time:</p>
+                        <p>Role:</p>
+                        <p>Location:</p>
+                    </div>
+                    <div class="shift">
+                        <p>Date:</p>
+                        <p>Time:</p>
+                        <p>Role:</p>
+                        <p>Location:</p>
+                    </div>
+                    <div class="shift">
+                        <p>Date:</p>
+                        <p>Time:</p>
+                        <p>Role:</p>
+                        <p>Location:</p>
+                    </div>
+                    <div class="shift">
+                        <p>Date:</p>
+                        <p>Time:</p>
+                        <p>Role:</p>
+                        <p>Location:</p>
+                    </div>
+                    <div class="shift">
+                        <p>Date:</p>
+                        <p>Time:</p>
+                        <p>Role:</p>
+                        <p>Location:</p>
+                    </div>
+                </div>
+
+                <div id="shift-status">
+                    <div class="title">SHIFT STATUS</div>
+                    <div class="status-boxes">
+                        <div class="status">
+                            <div class="title">Shift 1</div>
+                            <a href="#">Name</a>
+                            <p>Pending</p>
+                            <p>Time Left:</p>
+                        </div>
+                        <div class="status">
+                            <div class="title">Shift 2</div>
+                            <a href="#">Name</a>
+                            <p>Pending</p>
+                            <p>Time Left:</p>
+                        </div>
+                        <div class="status">
+                            <div class="title">Shift 3</div>
+                            <a href="#">Name</a>
+                            <p>Pending</p>
+                            <p>Time Left:</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+
+                <div id="shift-pool">
+                    <div class="title">SHIFT POOL</div>
+
+                    <div class="available-shifts">
+                        <img src=" " alt="picture">
+                        <div class="shift-info">
+                            <a href="#">Name</a>
+                            <div class="shift-time">
+                                <p>Date:</p>
+                                <p>Time:</p>
+                                <p>Request: Trade or Pick-up</p>
+                            </div>
+                        </div>
+                        <i class="bx bxs-info-circle"></i>
+                    </div>
+                    <div class="available-shifts">
+                        <img src=" " alt="picture">
+                        <div class="shift-info">
+                            <a href="#">Name</a>
+                            <div class="shift-time">
+                                <p>Date:</p>
+                                <p>Time:</p>
+                                <p>Request:</p>
+                            </div>
+                        </div>
+                        <i class="bx bxs-info-circle"></i>
+                    </div>
+                    <div class="available-shifts">
+                        <img src=" " alt="picture">
+                        <div class="shift-info">
+                            <a href="#">Name</a>
+                            <div class="shift-time">
+                                <p>Date:</p>
+                                <p>Time:</p>
+                                <p>Request:</p>
+                            </div>
+                        </div>
+                        <i class="bx bxs-info-circle"></i>
+                    </div>
+                    <div class="available-shifts">
+                        <img src=" " alt="picture">
+                        <div class="shift-info">
+                            <a href="#">Name</a>
+                            <div class="shift-time">
+                                <p>Date:</p>
+                                <p>Time:</p>
+                                <p>Request:</p>
+                            </div>
+                        </div>
+                        <i class="bx bxs-info-circle"></i>
+                    </div>
+                </div>
+
+                <div id="contacts">
+                    <div class="title">CONTACTS</div>
+
+                    <div class="contact">
+                        <img src=" " alt="picture">
+                        <img src=" " alt="picture">
+                        <img src=" " alt="picture">
+                        <img src=" " alt="picture">
+                        <img src=" " alt="picture">
+                        <img src=" " alt="picture">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
