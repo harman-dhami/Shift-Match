@@ -11,12 +11,14 @@
         document.addEventListener('DOMContentLoaded', function() {
             var calendarE1 = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarE1, {
-                initialView: 'dayGridMonth'
+                editable:true,
+                selectable:true,
+                events: {{ shifts|safe }},
             });
             calendar.render();
         })
     </script>
-    <title>Login</title>
+    <title>Dashboard</title>
     <!-- <link rel="stylesheet" href="{% static 'css/Dashboard.css' %}"> -->
 </head>
 
