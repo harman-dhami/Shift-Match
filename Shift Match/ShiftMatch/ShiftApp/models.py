@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from .managers import UserAccountManager
+from multiselectfield import MultiSelectField
 
 class User(AbstractBaseUser):
     firstName = models.CharField(max_length=100)
@@ -22,6 +23,7 @@ class Shifts(models.Model):
     shiftStart = models.DateTimeField()
     shiftEnd = models.DateTimeField()
     hours = models.IntegerField()
+    ShiftPool = models.BooleanField(default=False)
     username = models.ForeignKey(User, on_delete=models.PROTECT, to_field="username")
     
 class Admin(models.Model):

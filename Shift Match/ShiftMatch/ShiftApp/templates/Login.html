@@ -15,37 +15,34 @@
     <div class="wrapper">
 
         <div class="login-container">
+
             <div class="sidebar">
                 <!-- Sidebar content goes here -->
                 <h2>Welcome back</h2><br>
                 <div class="logo">
                 
                 </div>
-                <!-- Include the wavy background image in the CSS -->
             </div>
 
-            
+            <div class="form-container">
 
-        <div class="form-container">
+                <h2>Login</h2>
 
-            <h2>Login</h2>
+                <div class="input-box">
+                    <form action="{% url 'login' %}" method="POST">
+                        {% csrf_token %}
+                        {{form }}
+                        <!-- <p>Remember me</p>
+                        Forgot Password</p> -->
+                        <br>
+                        <button type="submit" class="btn">Submit</button>
+                    </form>
+                </div>
 
-            <div class="input-box">
-                <form action="{% url 'login' %}" method="POST">
-                    {% csrf_token %}
-                    {{form }}
-                    <!-- <p>Remember me</p>
-                    <p>Forgot Password</p> -->
-                    <br>
-                    <button type="submit" class="btn">Submit</button>
-                {% for message in messages %}
+                <p class="text"> 
+                    <a href="{% url 'registration' %}">Create Account</a>
+                </p>
 
-                    <div class="alert alert-success">
-                        <a class="close" href="#" data-dismiss="alert"></a>
-                            {{ message }}
-                    </div>
-                {% endfor %}
-                </form>
             </div>
 
         </div>

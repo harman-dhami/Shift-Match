@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 import pymongo
 from django.core.mail import send_mail
 from .models import User, Shifts
-from .forms import RegistrationForm, LoginForm, AdminLogin, IDRequest
+from .forms import RegistrationForm, LoginForm, AdminLogin, IDRequest, ShiftPoolForm
 from django.contrib import messages
 from .settings import EMAIL_HOST_USER
 from django.contrib.auth import authenticate, login
@@ -102,11 +102,18 @@ def calendarShiftInput(request):
         "shifts": dataset 
     }
                     
-    return render(request, "Dashboard.html", context)  
+    return render(request, "Dashboard.html", context)   
 
 @login_required
-def shiftPoolPage(request):
-    shift_pool = Shifts.objects.filter()
-    
-    
-    return (request, "ShiftPool.html")    
+def shiftMatching(request):
+    form = ShiftPoolForm(request.POST, username = request.user.username)
+    username = request.user.username
+    if request.method == 'POST':
+        shift = request.POST.get("shift")
+        daysAvailabletoWork = request.POST.get("daysAvailabletoWork")
+        
+        shiftUpdate = Shifts.objects.filter(shiftStart=shift).update(ShiftPool=True)
+        
+    shiftAvailable = Shifts.objects.filter(ShiftPool = True)
+        
+    return render(request, "ShiftPool.html", {"shifts": shiftAvailable, "form": form})

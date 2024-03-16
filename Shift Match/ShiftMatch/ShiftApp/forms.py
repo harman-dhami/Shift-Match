@@ -1,5 +1,5 @@
 from django import forms 
-from .models import User, Admin, IdRequest
+from .models import User, Admin, IdRequest, Shifts
 from django.contrib.auth.password_validation import validate_password
 class RegistrationForm(forms.ModelForm):
     Choices = (('', ''), ('Air Canada', 'Air Canada'), ('McDonalds', 'McDonalds'))
@@ -42,3 +42,20 @@ class IDRequest(forms.ModelForm):
         model = IdRequest
         fields = ["id", "decision"]
         
+class ShiftPoolForm(forms.ModelForm):
+    
+    shift = forms.ModelChoiceField(queryset=Shifts.objects.all())
+    daysAvailabletoWork = forms.DateField(widget= forms.SelectDateWidget())
+    
+    class Meta:
+        model = Shifts
+        fields = ["shift", "daysAvailabletoWork"]
+    
+    def __init__(self, *args, **kwargs):
+        username = kwargs.pop('username')
+        super(ShiftPoolForm, self).__init__(*args, **kwargs)
+        self.fields['shift'].queryset = Shifts.objects.filter(username = username).filter(ShiftPool = False)
+        
+    
+    
+    

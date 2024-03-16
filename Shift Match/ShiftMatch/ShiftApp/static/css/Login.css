@@ -46,13 +46,13 @@ body {
 }
 
 .logo {
-    width: 150px;
-    height: 50px;
+    width: 250px;
+    height: 200px;
     background-image: url('logo-transparent.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
-    margin-left: 50px;
+    margin-left: 75px;
     margin-top: 10px;
     margin-bottom: 20px;
 }
@@ -117,13 +117,15 @@ button:hover {
     left: 0;
     right: 0;
     height: 150px;
-    /* Adjust the height as needed */
-    background-image: url('path-to-your-wavy-background.png');
-    /* Path to your wavy background image */
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 .wrapper p {
+    font-size: 14px;
+}
+
+.wrapper .text {
+    text-align: center;
     font-size: 14px;
 }

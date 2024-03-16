@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shift Pool</title>
+    <link rel="stylesheet" href="{% static 'css/Registration.css' %}">
+</head>
+
+<body>
+                <h2>Shift Pool</h2>
+
+                    <form action="{% url 'shiftMatching' %}" method="POST">
+                        {% csrf_token %}
+                        {{ form }}
+                        
+                        <br>
+                        <button type="submit">Sign Up</button>
+                    </form>
+            <h2>Shift Pool</h2>
+            <form>
+            <table>
+                <tr>
+                    <th>Shift Start</th>
+                    <th>Shift End</th>
+                    <th>Hours</th>
+                    <th>Owner</th>
+                </tr>
+                <input type="checkbox" id="shift" name="shift" value="shift">
+                <tr>
+                    {% for shift in shifts %}
+                    <td>{{ shift.shiftStart}}</td>
+                    <td>{{ shift.shiftEnd}}</td>
+                    <td>{{ shift.hours}}</td>
+                    <td>{{ shift.username}}</td>
+                    {% endfor %}
+                    {% if not forloop.last %}+{% endif %}
+            </table>
+
+</body>
+
+</html>

@@ -116,9 +116,6 @@ button:hover {
     left: 0;
     right: 0;
     height: 150px;
-    /* Adjust the height as needed */
-    background-image: url('path-to-your-wavy-background.png');
-    /* Path to your wavy background image */
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -142,4 +139,3 @@ button:hover {
     text-align: center;
     margin-top: 5px;
 }
-

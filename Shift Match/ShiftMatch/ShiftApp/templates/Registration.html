@@ -22,9 +22,8 @@
                 <div class="logo">
                     
                 </div>
-                <!-- Include the wavy background image in the CSS -->
-            </div>
 
+            </div>
 
             <div class="form-container">
 
@@ -34,8 +33,6 @@
                     <form action="{% url 'registration' %}" method="POST">
                         {% csrf_token %}
                         {{form }}
-                        {{form.errors}}
-                        {{form.non_field_errors}}
                         <div class="terms-conditions">
                             <p>By signing Up I Agree with 
                                 <a href=" ">Terms & Conditions</a>
@@ -50,12 +47,6 @@
                     <a href="{% url 'login' %}">Login</a>
                 </p>
 
-                <!-- <div class="login-link">
-                    <p>Login:
-                        <a href="{% url 'login' %}">Login</a>
-                    </p>
-                </div> -->
-
                 <!-- <div class="admin-login-link">
                     <p>Administrator:
                         <a href="{% url 'adminLogin' %}">Admin Login</a>
@@ -63,7 +54,6 @@
                 </div>  -->
 
             </div>
-
 
         </div>
 
