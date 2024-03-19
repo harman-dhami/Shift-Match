@@ -111,8 +111,8 @@ def shiftMatching(request):
     if request.method == 'POST':
         shift = request.POST.get("shift")
         daysAvailabletoWork = request.POST.get("daysAvailabletoWork")
-        
-        shiftUpdate = Shifts.objects.filter(shiftStart=shift).update(ShiftPool=True)
+        print(shift)
+        Shifts.objects.filter(username=username).filter(shiftStart__contains=shift).update(ShiftPool=True)
         
     shiftAvailable = Shifts.objects.filter(ShiftPool = True)
         

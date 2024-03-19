@@ -44,9 +44,9 @@ class IDRequest(forms.ModelForm):
         
 class ShiftPoolForm(forms.ModelForm):
     
-    shift = forms.ModelChoiceField(queryset=Shifts.objects.all())
-    daysAvailabletoWork = forms.DateField(widget= forms.SelectDateWidget())
     
+    shift = forms.DateField(label="Select Shift Date: ", widget= forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}), input_formats=["%Y-%m-%d"])
+    daysAvailabletoWork = forms.DateField(widget= forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}), input_formats=["%Y-%m-%d"])
     class Meta:
         model = Shifts
         fields = ["shift", "daysAvailabletoWork"]
@@ -55,6 +55,7 @@ class ShiftPoolForm(forms.ModelForm):
         username = kwargs.pop('username')
         super(ShiftPoolForm, self).__init__(*args, **kwargs)
         self.fields['shift'].queryset = Shifts.objects.filter(username = username).filter(ShiftPool = False)
+        
         
     
     
