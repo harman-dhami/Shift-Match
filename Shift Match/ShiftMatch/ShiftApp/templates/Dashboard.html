@@ -21,21 +21,27 @@
             <div class="sidebar">
                 <nav>
                     <div class="logo"> </div>
-                    <a class="active" href="#"><i class="bx bxs-dashboard"></i>Home</a>
+                    <a class="design" href="{% url 'calendarShiftInput' %}"><i class="bx bxs-dashboard"></i>Home</a>
 
-                    <a href="{% url 'calendarShiftInput' %}"><i class="bx bx-calendar"></i>Calendar</a>
+                    <a class="design" href="{% url 'calendarView' %}"><i class="bx bx-calendar"></i>Calendar</a>
 
-                    <a href="#"><i class="bx bxs-data"></i>Pool</a>
+                    <div class="dropdown">
+                        <a class="active" href="#"><i class="bx bxs-data"></i>Pool</a>
+                        <div class="dropdown-content">
+                            <a href="{% url 'TradePoolView' %}">Trade Request</a>
+                            <a href="{% url 'PickupPoolView' %}">Pickup Request</a>
+                        </div>
+                    </div>
 
-                    <a href="#"><i class="bx bx-loader"></i>Status</a>
+                    <a class="design" href="#"><i class="bx bx-loader"></i>Status</a>
 
-                    <a href="#"><i class="bx bx-chat"></i>Chat</a>
+                    <a class="design" href="#"><i class="bx bx-chat"></i>Chat</a>
 
-                    <a href="#"><i class="bx bx-cog"></i>Settings</a>
+                    <a class="design" href="#"><i class="bx bx-cog"></i>Settings</a>
                     <br>
                     <br>
                     <br>
-                    <a href="#"><i class="bx bx-log-out"></i>Logout</a>
+                    <a class="design" href="#"><i class="bx bx-log-out"></i>Logout</a>
                 </nav>
             </div>
 
@@ -48,7 +54,7 @@
                         <br>
                         <h1>Name</h1>
                     </div>
-                    <i class ="bx bx-bxs-shell"></i>
+                    <i class="bx bx bxs-bell"></i>
                 </div>
 
                 <div id="shift-view">
@@ -58,27 +64,32 @@
                     <div class="shift">
                         <p>Date:</p>
                         <p>Time:</p>
-                        <p>Position:</p>
+                        <p>Role:</p>
+                        <p>Location:</p>
                     </div>
                     <div class="shift">
                         <p>Date:</p>
                         <p>Time:</p>
-                        <p>Position:</p>
+                        <p>Role:</p>
+                        <p>Location:</p>
                     </div>
                     <div class="shift">
                         <p>Date:</p>
                         <p>Time:</p>
-                        <p>Position:</p>
+                        <p>Role:</p>
+                        <p>Location:</p>
                     </div>
                     <div class="shift">
                         <p>Date:</p>
                         <p>Time:</p>
-                        <p>Position:</p>
+                        <p>Role:</p>
+                        <p>Location:</p>
                     </div>
                     <div class="shift">
                         <p>Date:</p>
                         <p>Time:</p>
-                        <p>Position:</p>
+                        <p>Role:</p>
+                        <p>Location:</p>
                     </div>
                 </div>
 
@@ -158,8 +169,7 @@
                                 <p>Request:</p>
                             </div>
                         </div>
-                        <i class="bx bxs-info-circle"></i>
-                        <a href="{% url 'shiftMatching' %}">Login</a>
+                        <a href="{% url 'shiftMatching' %}"><i class="bx bxs-info-circle"></i></a>
                     </div>
                 </div>
 
