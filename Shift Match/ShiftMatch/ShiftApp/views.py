@@ -117,3 +117,12 @@ def shiftMatching(request):
     shiftAvailable = Shifts.objects.filter(ShiftPool = True)
         
     return render(request, "ShiftPool.html", {"shifts": shiftAvailable, "form": form})
+
+def calendarView(request):
+        return render(request, "Calendar.html")
+
+def TradePoolView(request):
+        return render(request, "TradePool.html")
+
+def PickupPoolView(request):
+        return render(request, "PickupPool.html")

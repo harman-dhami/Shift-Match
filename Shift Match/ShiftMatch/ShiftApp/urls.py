@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import registration, userLogin, adminLogin, idRequest, calendarShiftInput, shiftMatching
+from .views import registration, userLogin, adminLogin, idRequest, calendarShiftInput, shiftMatching, calendarView, TradePoolView, PickupPoolView
 
 urlpatterns = [
     path('', registration, name='registration'),
@@ -24,5 +24,8 @@ urlpatterns = [
     path('ShiftApp/adminLogin', adminLogin, name='adminLogin'),
     path('ShiftApp/idRequest', idRequest, name='idRequest'),
     path('ShiftApp/calendarShiftInput', calendarShiftInput, name='calendarShiftInput'),
-    path('ShiftApp/shiftMatching', shiftMatching, name='shiftMatching')
+    path('ShiftApp/shiftMatching', shiftMatching, name='shiftMatching'),
+    path('ShiftApp/calendarView', calendarView, name='calendarView'),
+    path('ShiftApp/TradePoolView', TradePoolView, name='TradePoolView'),
+    path('ShiftApp/PickupPoolView', PickupPoolView, name='PickupPoolView')
 ]
