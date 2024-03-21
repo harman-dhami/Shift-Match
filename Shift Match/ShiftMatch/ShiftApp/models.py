@@ -23,7 +23,9 @@ class Shifts(models.Model):
     shiftStart = models.DateTimeField()
     shiftEnd = models.DateTimeField()
     hours = models.IntegerField()
+    dateAvailable = models.DateField(default="2024-01-01")
     ShiftPool = models.BooleanField(default=False)
+    isPaid = models.BooleanField(default=False)
     username = models.ForeignKey(User, on_delete=models.PROTECT, to_field="username")
     
 class Admin(models.Model):

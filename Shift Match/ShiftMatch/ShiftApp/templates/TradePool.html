@@ -21,9 +21,9 @@
             <div class="sidebar">
                 <nav>
                     <div class="logo"> </div>
-                    <a class="design" href="{% url 'calendarShiftInput' %}"><i class="bx bxs-dashboard"></i>Home</a>
+                    <a class="design" href="{% url 'dashboard' %}"><i class="bx bxs-dashboard"></i>Home</a>
 
-                    <a class="design" href="{% url 'calendarView' %}"><i class="bx bx-calendar"></i>Calendar</a>
+                    <a class="design" href="{% url 'calendarShiftInput' %}"><i class="bx bx-calendar"></i>Calendar</a>
 
                     <div class="dropdown">
                         <a class="active" href="#"><i class="bx bxs-data"></i>Pool</a>
@@ -52,20 +52,36 @@
                         <h4>Trade Request</h4>
                     </div>
                     <div class="option">
-                        <a href="#">Free</a>
-                        <p> | </p>
-                        <a href="#">Paid</a>
+                        <form action="{% url 'TradePoolView' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="radio" name="filter" id="free">
+                            <label for="free">Free</label>
+                            <input type="radio" name="filter" id="paid">
+                            <label for="paid">Paid</label>
+                            <button type="submit">Filter</button>
+                        </form>
                     </div>
                 </div>
-
-                <div id="shift">
-                    <div class="info">
-                        <img src=" " alt="picture">
-                        <i class="bx bxs-message-rounded"></i>
+                <form action="{% url 'pickingUpShifts' %}" method="POST">
+                    {% csrf_token %}
+                    {% for shift in shifts %}
+                    
+                    <div id="shift">
+                        <div class="info">
+                            <img src=" " alt="picture">
+                            <i class="bx bxs-message-rounded"></i>
+                            <input type="hidden" id="shift" name="shift" value="
+                            {{ shift.id}}">
+                            Shift Start: {{ shift.shiftStart}}
+                            Shift End: {{ shift.shiftEnd}}
+                            Hours: {{ shift.hours}}
+                            Owner: {{ shift.username}}
+                            <button type="submit"><i class="bx bxs-check-circle"></i></button>
+                        </div>
+                        
                     </div>
-                    <i class="bx bxs-x-circle"></i>
-                    <i class="bx bxs-check-circle"></i>
-                </div>
+                    {% endfor %}
+                </form>
 
                 <div id="shift">
                     <div class="info">

@@ -20,25 +20,6 @@
                         <br>
                         <button type="submit">Sign Up</button>
                     </form>
-            <h2>Shift Pool</h2>
-            <form>
-            <table>
-                <tr>
-                    <th>Shift Start</th>
-                    <th>Shift End</th>
-                    <th>Hours</th>
-                    <th>Owner</th>
-                </tr>
-                <input type="checkbox" id="shift" name="shift" value="shift">
-                <tr>
-                    {% for shift in shifts %}
-                    <td>{{ shift.shiftStart}}</td>
-                    <td>{{ shift.shiftEnd}}</td>
-                    <td>{{ shift.hours}}</td>
-                    <td>{{ shift.username}}</td>
-                    {% endfor %}
-                    {% if not forloop.last %}+{% endif %}
-            </table>
 
 </body>
 

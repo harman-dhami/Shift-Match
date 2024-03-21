@@ -59,7 +59,7 @@ def userLogin(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('calendarShiftInput')
+                    return redirect('dashboard')
             else:
                 print(username, password)
                 messages.error(request, "Username or password is incorrect")
@@ -83,6 +83,10 @@ def idRequest(request):
             return requestDecision
         
 @login_required
+def dashboard(request):
+    return render(request, "Dashboard.html")
+        
+@login_required
 def calendarShiftInput(request):
     username = request.user.username
     all_events = Shifts.objects.filter(username = username)
@@ -96,17 +100,18 @@ def calendarShiftInput(request):
         event_sub_arr['start'] = shiftStart
         event_sub_arr['end'] = shiftEnd
         event_arr.append(event_sub_arr)
-    data = JsonResponse((event_arr), safe=False)
+    # data = JsonResponse((event_arr), safe=False)
     dataset = json.dumps(event_arr)
+    print (dataset)
     context = {
-        "shifts": dataset 
+        "shifts": dataset
     }
                     
-    return render(request, "Dashboard.html", context)   
+    return render(request, "Calendar.html", context)   
 
 @login_required
 def shiftMatching(request):
-    form = ShiftPoolForm(request.POST, username = request.user.username)
+    form = ShiftPoolForm(request.POST or None, username = request.user.username)
     username = request.user.username
     if request.method == 'POST':
         shift = request.POST.get("shift")
@@ -114,15 +119,51 @@ def shiftMatching(request):
         print(shift)
         Shifts.objects.filter(username=username).filter(shiftStart__contains=shift).update(ShiftPool=True)
         
-    shiftAvailable = Shifts.objects.filter(ShiftPool = True)
+    shiftAvailable = Shifts.objects.filter(ShiftPool = True).filter(dateAvailable = daysAvailabletoWork)
         
     return render(request, "ShiftPool.html", {"shifts": shiftAvailable, "form": form})
 
 def calendarView(request):
+    
+    
         return render(request, "Calendar.html")
 
 def TradePoolView(request):
-        return render(request, "TradePool.html")
+    shiftsAvaible = Shifts.objects.filter(ShiftPool = True)
+    if request.method == 'POST':
+        free = request.POST.get("free")
+        paid = request.POST.get("paid")
+        
+        if free == True:
+            shiftsAvaible = Shifts.objects.filter(ShiftPool = True).filter(isPaid = False)
+        if paid == True:
+            shiftsAvaible = Shifts.objects.filter(ShiftPool = True).filter(isPaid = True)
+    
+    return render(request, "TradePool.html", {"shifts": shiftsAvaible})
 
 def PickupPoolView(request):
-        return render(request, "PickupPool.html")
+    form = ShiftPoolForm(request.POST or None, username = request.user.username, use_required_attribute = False)
+    daysAvailabletoWork = "Hello"
+    shift = "Hello"
+    username = request.user.username
+    if request.method == 'POST':
+        shift = request.POST.get("shift")
+        daysAvailabletoWork = request.POST.get("daysAvailabletoWork")
+        if request.POST.get("post_shift"):
+            Shifts.objects.filter(username=username).filter(shiftStart__contains=shift).update(ShiftPool=True)
+            Shifts.objects.filter(username=username).filter(shiftStart__contains=shift).update(dateAvailable=daysAvailabletoWork)
+        elif request.POST.get("shift_match"):
+            Shifts.objects.filter(username=username).filter(shiftStart__contains=shift).filter(ShiftPool=False).update(dateAvailable=daysAvailabletoWork)  
+    shiftAvailable = Shifts.objects.filter(ShiftPool=True).filter(dateAvailable__contains=shift)
+        
+    return render(request, "PickupPool.html", {"shifts": shiftAvailable, "form": form})
+
+def pickingUpShifts(request):
+    username = request.user.username
+    if request.method == 'POST':
+        shift = request.POST.get("shift")
+        print (shift)
+        Shifts.objects.filter(id=shift).update(username = username)
+        Shifts.objects.filter(id=shift).update(ShiftPool=False)
+    shiftsAvailable = Shifts.objects.filter(ShiftPool=True)
+    return render(request, "TradePool.html", {"shifts": shiftsAvailable})

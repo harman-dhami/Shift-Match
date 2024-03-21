@@ -21,9 +21,9 @@
             <div class="sidebar">
                 <nav>
                     <div class="logo"> </div>
-                    <a class="design" href="{% url 'calendarShiftInput' %}"><i class="bx bxs-dashboard"></i>Home</a>
+                    <a class="design" href="{% url 'dashboard' %}"><i class="bx bxs-dashboard"></i>Home</a>
 
-                    <a class="design" href="{% url 'calendarView' %}"><i class="bx bx-calendar"></i>Calendar</a>
+                    <a class="design" href="{% url 'calendarShiftInput' %}"><i class="bx bx-calendar"></i>Calendar</a>
 
                     <div class="dropdown">
                         <a class="active" href="#"><i class="bx bxs-data"></i>Pool</a>
@@ -56,16 +56,30 @@
                         <p> | </p>
                         <a href="#">Paid</a>
                     </div>
+                    <form action="{% url 'PickupPoolView' %}" method="POST">
+                        {% csrf_token %}
+                        {{ form }}
+                        <input type="submit" name="post_shift" value="Post Shift">
+                        <input type="submit" name="shift_match" value="Shift Match">
+                    </form>
                 </div>
+
+                {% for shift in shifts %}
 
                 <div id="shift">
                     <div class="info">
                         <img src=" " alt="picture">
                         <i class="bx bxs-message-rounded"></i>
+                        Shift Start: {{ shift.shiftStart}}
+                        Shift End: {{ shift.shiftEnd}}
+                        Hours: {{ shift.hours}}
+                        Owner: {{ shift.username}}
+                        Shift Exchange: {{ shift.dateAvailable}}
                     </div>
                     <i class="bx bxs-x-circle"></i>
                     <i class="bx bxs-check-circle"></i>
                 </div>
+                {% endfor %}
 
                 <div id="shift">
                     <div class="info">

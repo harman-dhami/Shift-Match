@@ -1,6 +1,7 @@
 from django import forms 
 from .models import User, Admin, IdRequest, Shifts
 from django.contrib.auth.password_validation import validate_password
+
 class RegistrationForm(forms.ModelForm):
     Choices = (('', ''), ('Air Canada', 'Air Canada'), ('McDonalds', 'McDonalds'))
     
@@ -45,8 +46,8 @@ class IDRequest(forms.ModelForm):
 class ShiftPoolForm(forms.ModelForm):
     
     
-    shift = forms.DateField(label="Select Shift Date: ", widget= forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}), input_formats=["%Y-%m-%d"])
-    daysAvailabletoWork = forms.DateField(widget= forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}), input_formats=["%Y-%m-%d"])
+    shift = forms.DateField(label="Select Shift Date", widget= forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}), input_formats=["%Y-%m-%d"])
+    daysAvailabletoWork = forms.DateField(label="Dates Willing To Work", widget= forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}), input_formats=["%Y-%m-%d"])
     class Meta:
         model = Shifts
         fields = ["shift", "daysAvailabletoWork"]

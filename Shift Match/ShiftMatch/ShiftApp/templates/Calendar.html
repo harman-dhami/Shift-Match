@@ -11,23 +11,24 @@
         document.addEventListener('DOMContentLoaded', function() {
             var calendarE1 = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarE1, {
-                initialView: 'dayGridMonth'
+                initialView: 'dayGridMonth',
                 editable:true,
                 selectable:true,
+                timezone: 'UTC',
+                allDay: false,
                 events: {{ shifts|safe }},
+                timeFormat: 'h:mm:ss ZZ',
             });
             calendar.render();
         })
     </script>
-    <title>Login</title>
-    <title>Dashboard</title>
+    <title>Calendar</title>
     <!-- <link rel="stylesheet" href="{% static 'css/Dashboard.css' %}"> -->
 </head>
 
 <body>
 
     <div id='calendar'></div>
-    <h1>Dashboard</h1>
 
 </body>
 
