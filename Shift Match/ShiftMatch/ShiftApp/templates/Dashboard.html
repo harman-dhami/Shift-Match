@@ -28,16 +28,16 @@
                     <div class="dropdown">
                         <a class="active" href="#"><i class="bx bxs-data"></i>Pool</a>
                         <div class="dropdown-content">
-                            <a href="{% url 'TradePoolView' %}">Trade Request</a>
+                            <a href="{% url 'MatchView' %}">Match</a>
                             <a href="{% url 'PickupPoolView' %}">Pickup Request</a>
                         </div>
                     </div>
 
-                    <a class="design" href="#"><i class="bx bx-loader"></i>Status</a>
+                    <a class="design" href="{% url 'ShiftStatusView' %}"><i class="bx bx-loader"></i>Status</a>
 
                     <a class="design" href="#"><i class="bx bx-chat"></i>Chat</a>
 
-                    <a class="design" href="#"><i class="bx bx-cog"></i>Settings</a>
+                    <a class="design" href="{% url 'SettingsView' %}"><i class="bx bx-cog"></i>Settings</a>
                     <br>
                     <br>
                     <br>
