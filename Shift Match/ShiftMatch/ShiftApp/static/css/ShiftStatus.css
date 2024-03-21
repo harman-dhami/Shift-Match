@@ -173,31 +173,11 @@ nav .design:hover,
     overflow: hidden;
 }
 
-/* Main Content */
 #main-content {
     display: flex;
+    flex-direction: column;
+    height: 34vh;
     margin: 0 1% 0 1%;
-    height: 75vh;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 10px;
-}
-
-#free-shifts {
-    display: flex;
-    flex-direction: column;
-    height: 75vh;
-    margin: 2% 1% 0 2%;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 10px;
-}
-
-#paid-shifts {
-    display: flex;
-    flex-direction: column;
-    height: 75vh;
-    margin: 2% 2% 0 1%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
@@ -211,75 +191,54 @@ nav .design:hover,
     overflow: hidden;
 }
 
-#filter {
+#main-content-wrapper {
     display: flex;
-    flex-grow: 1;
-    height: 5vh;
+    flex-direction: row;
+    height: 55vh;
     margin: 1% 2% 1% 2%;
+    background-color: #fff;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px; */
+}
+
+#shift-for-grabs {
+    display: table-row;
+    height: 28vh;
+    margin: 1% 0.5% 1% 0.5%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
+    text-align: center;
 }
 
-#filter p {
-    align-self: center;
-    color: red;
-    font-weight: bold;
-    margin-left: 40%;
-}
-
-#pool-details {
-    display: flex;
-    flex-grow: 1;
-    height: 15vh;
-    margin: 1% 2% 1% 2%;
+#matching-status {
+    display: table-row;
+    height: 28vh;
+    margin: 1% 0.5% 1% 0.5%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
+    text-align: center;
 }
 
-#pool-details .bxs-x-circle,
-#pool-details .bxs-check-circle {
-    align-self: center;
-    margin-right: 1%;
-    font-size: 25px;
-    color: #2d53da;
+#shift-for-grabs .title,
+#matching-status .title {
+    color: #000;
+    text-align: start;
+    padding: 5% 2%;
+    margin-bottom: 20%;
 }
 
-#pool-details img {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 1px solid #000;
-    padding: 1rem;
-    cursor: pointer;
-    margin: 4% 0 0 2%;
-}
-
-.info {
-    display: flex;
-}
-
-.info .name {
+#matching-status .name {
     font-size: 18px;
     text-decoration: none;
     color: #000;
     font-weight: bold;
-    margin-right: 2%;
 }
 
-.info p {
-    /* change when theres shift details */
-    margin-right: 5%;
-    align-self: center;
-    font-size: 15px;
+#shift-for-grabs p,
+#matching-status p {
+    margin-top: 5px;
     color: #c2baba;
     font-weight: bold;
-}
-
-.info .bx-message-rounded {
-    font-size: 18px;
-    margin-right: 5%;
-    align-self: center;
-    color: #000;
 }

@@ -176,6 +176,7 @@ nav .design:hover,
 /* Main Content */
 #main-content {
     display: flex;
+    flex-direction: column;
     margin: 0 1% 0 1%;
     height: 75vh;
     background-color: #fff;
@@ -183,103 +184,22 @@ nav .design:hover,
     border-radius: 10px;
 }
 
-#free-shifts {
-    display: flex;
-    flex-direction: column;
-    height: 75vh;
-    margin: 2% 1% 0 2%;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 10px;
-}
-
-#paid-shifts {
-    display: flex;
-    flex-direction: column;
-    height: 75vh;
-    margin: 2% 2% 0 1%;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 10px;
-}
-
-.title {
-    font-size: 17px;
-    padding: 2% 1%;
-    color: #000;
-    font-weight: 600;
-    overflow: hidden;
-}
-
-#filter {
+#setting {
     display: flex;
     flex-grow: 1;
-    height: 5vh;
-    margin: 1% 2% 1% 2%;
+    height: 7vh;
+    margin: 2% 1% 0 1%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
+    align-items: center;
 }
 
-#filter p {
-    align-self: center;
-    color: red;
-    font-weight: bold;
-    margin-left: 40%;
-}
-
-#pool-details {
-    display: flex;
-    flex-grow: 1;
-    height: 15vh;
-    margin: 1% 2% 1% 2%;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 10px;
-}
-
-#pool-details .bxs-x-circle,
-#pool-details .bxs-check-circle {
-    align-self: center;
-    margin-right: 1%;
-    font-size: 25px;
-    color: #2d53da;
-}
-
-#pool-details img {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 1px solid #000;
-    padding: 1rem;
-    cursor: pointer;
-    margin: 4% 0 0 2%;
-}
-
-.info {
-    display: flex;
-}
-
-.info .name {
-    font-size: 18px;
+#setting p {
+    margin-left: 1%;
+    font-size: 15px;
     text-decoration: none;
     color: #000;
     font-weight: bold;
     margin-right: 2%;
-}
-
-.info p {
-    /* change when theres shift details */
-    margin-right: 5%;
-    align-self: center;
-    font-size: 15px;
-    color: #c2baba;
-    font-weight: bold;
-}
-
-.info .bx-message-rounded {
-    font-size: 18px;
-    margin-right: 5%;
-    align-self: center;
-    color: #000;
 }

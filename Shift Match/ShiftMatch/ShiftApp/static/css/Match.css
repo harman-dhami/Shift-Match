@@ -5,7 +5,7 @@
     border: none;
     text-decoration: none;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 body {
@@ -141,6 +141,57 @@ nav .design:hover,
     border-radius: 1%;
 }
 
+/* Left Column */
+.left-column {
+    width: 10%;
+    display: flex;
+    flex-grow: 3;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-left: 5px;
+    margin-bottom: 1%;
+}
+
+.left-column div {
+    flex-grow: 1;
+    margin: 0 8px;
+}
+
+.left-column div+div {
+    margin-top: 8px;
+}
+
+#header {
+    display: flex;
+    font-size: 20px;
+    color: #000;
+    height: 0.1vh;
+    margin: 2% 0 0 2.5%;
+    font-weight: 600;
+    padding: 2% 1%;
+    overflow: hidden;
+}
+
+#owned-shift {
+    display: flex;
+    flex-direction: column;
+    height: 35vh;
+    margin: 2.5% 1% 0 2%;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+}
+
+#shift-for-grabs {
+    display: flex;
+    flex-direction: column;
+    height: 35vh;
+    margin: 2.5% 1% 0 2%;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+}
+
 /* Right Column */
 .right-column {
     width: 10%;
@@ -161,54 +212,55 @@ nav .design:hover,
     margin-top: 8px;
 }
 
-/* Header */
-#header {
+#shift-pool {
     display: flex;
-    font-size: 18px;
-    color: #000;
-    height: 0.1vh;
-    margin: 0.2% 0 0 1%;
-    font-weight: 600;
-    padding: 2% 1%;
-    overflow: hidden;
+    flex-direction: column;
+    height: 35vh;
+    margin: 2.5% 2% 0 2%;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
 }
 
 /* Main Content */
-#main-content {
-    display: flex;
-    margin: 0 1% 0 1%;
-    height: 75vh;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 10px;
-}
-
-#free-shifts {
-    display: flex;
-    flex-direction: column;
-    height: 75vh;
-    margin: 2% 1% 0 2%;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 10px;
-}
-
-#paid-shifts {
-    display: flex;
-    flex-direction: column;
-    height: 75vh;
-    margin: 2% 2% 0 1%;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 10px;
-}
-
 .title {
     font-size: 17px;
     padding: 2% 1%;
     color: #000;
     font-weight: 600;
     overflow: hidden;
+}
+
+#shift {
+    display: flex;
+    flex-grow: 1;
+    height: 10vh;
+    margin: 1% 2% 1% 2%;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+}
+
+.details {
+    display: flex;
+}
+
+.details p {
+    /* change when theres shift details */
+    margin-right: 5%;
+    margin-left: 1%;
+    align-self: center;
+    font-size: 15px;
+    color: #c2baba;
+    font-weight: bold;
+}
+
+#shift .bxs-plus-circle,
+#shift .bxs-x-circle {
+    align-self: center;
+    margin-right: 1%;
+    font-size: 20px;
+    color: #2d53da;
 }
 
 #filter {
@@ -253,7 +305,7 @@ nav .design:hover,
     border: 1px solid #000;
     padding: 1rem;
     cursor: pointer;
-    margin: 4% 0 0 2%;
+    margin: 5% 0 0 2%;
 }
 
 .info {
