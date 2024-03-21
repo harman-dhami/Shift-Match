@@ -85,7 +85,7 @@ def idRequest(request):
 @login_required
 def dashboard(request):
     return render(request, "Dashboard.html")
-        
+
 @login_required
 def calendarShiftInput(request):
     username = request.user.username
@@ -104,7 +104,7 @@ def calendarShiftInput(request):
     dataset = json.dumps(event_arr)
     print (dataset)
     context = {
-        "shifts": dataset
+        "shifts": dataset 
     }
                     
     return render(request, "Calendar.html", context)   
@@ -116,30 +116,30 @@ def shiftMatching(request):
     if request.method == 'POST':
         shift = request.POST.get("shift")
         daysAvailabletoWork = request.POST.get("daysAvailabletoWork")
-        print(shift)
-        Shifts.objects.filter(username=username).filter(shiftStart__contains=shift).update(ShiftPool=True)
+        
+        shiftUpdate = Shifts.objects.filter(shiftStart=shift).update(ShiftPool=True)
         
     shiftAvailable = Shifts.objects.filter(ShiftPool = True).filter(dateAvailable = daysAvailabletoWork)
         
     return render(request, "ShiftPool.html", {"shifts": shiftAvailable, "form": form})
 
 def calendarView(request):
-    
-    
+        
+
         return render(request, "Calendar.html")
 
-def TradePoolView(request):
+def MatchView(request):
     shiftsAvaible = Shifts.objects.filter(ShiftPool = True)
     if request.method == 'POST':
         free = request.POST.get("free")
         paid = request.POST.get("paid")
-        
+
         if free == True:
             shiftsAvaible = Shifts.objects.filter(ShiftPool = True).filter(isPaid = False)
         if paid == True:
             shiftsAvaible = Shifts.objects.filter(ShiftPool = True).filter(isPaid = True)
-    
-    return render(request, "TradePool.html", {"shifts": shiftsAvaible})
+
+    return render(request, "Match.html", {"shifts": shiftsAvaible})
 
 def PickupPoolView(request):
     form = ShiftPoolForm(request.POST or None, username = request.user.username, use_required_attribute = False)
@@ -155,7 +155,7 @@ def PickupPoolView(request):
         elif request.POST.get("shift_match"):
             Shifts.objects.filter(username=username).filter(shiftStart__contains=shift).filter(ShiftPool=False).update(dateAvailable=daysAvailabletoWork)  
     shiftAvailable = Shifts.objects.filter(ShiftPool=True).filter(dateAvailable__contains=shift)
-        
+
     return render(request, "PickupPool.html", {"shifts": shiftAvailable, "form": form})
 
 def pickingUpShifts(request):
@@ -166,4 +166,10 @@ def pickingUpShifts(request):
         Shifts.objects.filter(id=shift).update(username = username)
         Shifts.objects.filter(id=shift).update(ShiftPool=False)
     shiftsAvailable = Shifts.objects.filter(ShiftPool=True)
-    return render(request, "TradePool.html", {"shifts": shiftsAvailable})
+    return render(request, "Match.html", {"shifts": shiftsAvailable})
+
+def ShiftStatusView(request):
+        return render(request, "ShiftStatus.html")
+
+def SettingsView(request):
+        return render(request, "Settings.html")
