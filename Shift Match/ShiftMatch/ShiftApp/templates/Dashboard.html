@@ -21,12 +21,12 @@
             <div class="sidebar">
                 <nav>
                     <div class="logo"> </div>
-                    <a class="design" href="{% url 'dashboard' %}"><i class="bx bxs-dashboard"></i>Home</a>
+                    <a class="active" href="{% url 'dashboard' %}"><i class="bx bxs-dashboard"></i>Home</a>
 
                     <a class="design" href="{% url 'calendarShiftInput' %}"><i class="bx bx-calendar"></i>Calendar</a>
 
                     <div class="dropdown">
-                        <a class="active" href="#"><i class="bx bxs-data"></i>Pool</a>
+                        <a class="design" href="#"><i class="bx bxs-data"></i>Pool</a>
                         <div class="dropdown-content">
                             <a href="{% url 'MatchView' %}">Match</a>
                             <a href="{% url 'PickupPoolView' %}">Pickup Request</a>
@@ -46,7 +46,6 @@
             </div>
 
             <div class="left-column">
-
                 <div id="header">
                     <img src="logo-png.png" alt="picture">
                     <div class="title">
@@ -54,38 +53,39 @@
                         <br>
                         <h1>Name</h1>
                     </div>
-                    <i class="bx bx bxs-bell"></i>
+                    <i class="bx bxs-bell"></i>
                 </div>
 
                 <div id="shift-view">
-                    <div class="title">UPCOMING SHIFTS
+                    <div class="title">
+                        UPCOMING SHIFT
                         <i class="bx bxs-plus-circle"></i>
                     </div>
-                    <div class="shift">
+                    <div id="shift">
                         <p>Date:</p>
                         <p>Time:</p>
                         <p>Role:</p>
                         <p>Location:</p>
                     </div>
-                    <div class="shift">
+                    <div id="shift">
                         <p>Date:</p>
                         <p>Time:</p>
                         <p>Role:</p>
                         <p>Location:</p>
                     </div>
-                    <div class="shift">
+                    <div id="shift">
                         <p>Date:</p>
                         <p>Time:</p>
                         <p>Role:</p>
                         <p>Location:</p>
                     </div>
-                    <div class="shift">
+                    <div id="shift">
                         <p>Date:</p>
                         <p>Time:</p>
                         <p>Role:</p>
                         <p>Location:</p>
                     </div>
-                    <div class="shift">
+                    <div id="shift">
                         <p>Date:</p>
                         <p>Time:</p>
                         <p>Role:</p>
@@ -95,22 +95,22 @@
 
                 <div id="shift-status">
                     <div class="title">SHIFT STATUS</div>
-                    <div class="status-boxes">
-                        <div class="status">
+                    <div id="status-wrapper">
+                        <div id="status">
                             <div class="title">Shift 1</div>
-                            <a href="#">Name</a>
+                            <p class="name">Name</p>
                             <p>Pending</p>
                             <p>Time Left:</p>
                         </div>
-                        <div class="status">
+                        <div id="status">
                             <div class="title">Shift 2</div>
-                            <a href="#">Name</a>
+                            <p class="name">Name</p>
                             <p>Pending</p>
                             <p>Time Left:</p>
                         </div>
-                        <div class="status">
+                        <div id="status">
                             <div class="title">Shift 3</div>
-                            <a href="#">Name</a>
+                            <p class="name">Name</p>
                             <p>Pending</p>
                             <p>Time Left:</p>
                         </div>
@@ -119,11 +119,12 @@
             </div>
 
             <div class="right-column">
-
                 <div id="shift-pool">
-                    <div class="title">SHIFT POOL</div>
-
-                    <div class="available-shifts">
+                    <div class="title">PICKUP POOL</div>
+                    <div id="filter">
+                        <p>Filter goes here</p>
+                    </div>
+                    <div id="available-shifts">
                         <img src=" " alt="picture">
                         <div class="shift-info">
                             <a href="#">Name</a>
@@ -135,7 +136,7 @@
                         </div>
                         <i class="bx bxs-info-circle"></i>
                     </div>
-                    <div class="available-shifts">
+                    <div id="available-shifts">
                         <img src=" " alt="picture">
                         <div class="shift-info">
                             <a href="#">Name</a>
@@ -147,7 +148,7 @@
                         </div>
                         <i class="bx bxs-info-circle"></i>
                     </div>
-                    <div class="available-shifts">
+                    <div id="available-shifts">
                         <img src=" " alt="picture">
                         <div class="shift-info">
                             <a href="#">Name</a>
@@ -159,7 +160,7 @@
                         </div>
                         <i class="bx bxs-info-circle"></i>
                     </div>
-                    <div class="available-shifts">
+                    <div id="available-shifts">
                         <img src=" " alt="picture">
                         <div class="shift-info">
                             <a href="#">Name</a>
@@ -169,20 +170,49 @@
                                 <p>Request:</p>
                             </div>
                         </div>
-                        <a href="{% url 'shiftMatching' %}"><i class="bx bxs-info-circle"></i></a>
+                        <i class="bx bxs-info-circle"></i>
+                    </div>
+                    <div id="available-shifts">
+                        <img src=" " alt="picture">
+                        <div class="shift-info">
+                            <a href="#">Name</a>
+                            <div class="shift-time">
+                                <p>Date:</p>
+                                <p>Time:</p>
+                                <p>Request:</p>
+                            </div>
+                        </div>
+                        <i class="bx bxs-info-circle"></i>
                     </div>
                 </div>
 
                 <div id="contacts">
-                    <div class="title">CONTACTS</div>
-
-                    <div class="contact">
-                        <img src=" " alt="picture">
-                        <img src=" " alt="picture">
-                        <img src=" " alt="picture">
-                        <img src=" " alt="picture">
-                        <img src=" " alt="picture">
-                        <img src=" " alt="picture">
+                    <div class="title">RECENTS</div>
+                    <div id="contact">
+                        <div id="user">
+                            <img src=" " alt="picture">
+                            <p>Name</p>
+                        </div>
+                        <div id="user">
+                            <img src=" " alt="picture">
+                            <p>Name</p>
+                        </div>
+                        <div id="user">
+                            <img src=" " alt="picture">
+                            <p>Name</p>
+                        </div>
+                        <div id="user">
+                            <img src=" " alt="picture">
+                            <p>Name</p>
+                        </div>
+                        <div id="user">
+                            <img src=" " alt="picture">
+                            <p>Name</p>
+                        </div>
+                        <div id="user">
+                            <img src=" " alt="picture">
+                            <p>Name</p>
+                        </div>
                     </div>
                 </div>
             </div>
