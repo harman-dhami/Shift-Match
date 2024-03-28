@@ -10,7 +10,7 @@ class User(AbstractBaseUser):
     employeeId = models.CharField(max_length=100)
     company = models.CharField(max_length=100)
     password = models.CharField(max_length=100, default="password12r")
-    role = models.CharField(max_length=100,  default="Basic")
+    qualifications = models.CharField(max_length=100,  default="Basic")
     USERNAME_FIELD = "username"
     
     objects=UserAccountManager()
@@ -26,6 +26,9 @@ class Shifts(models.Model):
     dateAvailable = models.DateField(default="2024-01-01")
     ShiftPool = models.BooleanField(default=False)
     isPaid = models.BooleanField(default=False)
+    moneyAmount = models.CharField(max_length=10, default=0)
+    qualification = models.CharField(max_length=100, default="None")
+    location = models.CharField(max_length=100, default="YVR")
     username = models.ForeignKey(User, on_delete=models.PROTECT, to_field="username")
     
 class Admin(models.Model):

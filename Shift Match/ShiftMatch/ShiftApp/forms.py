@@ -57,7 +57,14 @@ class ShiftPoolForm(forms.ModelForm):
         super(ShiftPoolForm, self).__init__(*args, **kwargs)
         self.fields['shift'].queryset = Shifts.objects.filter(username = username).filter(ShiftPool = False)
         
-        
+class AddShiftForm(forms.ModelForm):
+    hours = forms.CharField(label="Hours:", max_length=100)
     
-    
-    
+    class Meta:
+        model = Shifts
+        fields = ["shiftStart", "shiftEnd", "hours"]
+
+        widgets = {
+            "shiftStart":forms.TextInput(attrs={'type':'datetime-local' }),
+            "shiftEnd":forms.TextInput(attrs={'type':'datetime-local' })
+        }

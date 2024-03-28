@@ -16,18 +16,22 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import registration, userLogin, adminLogin, idRequest, calendarShiftInput, shiftMatching, calendarView, TradePoolView, PickupPoolView, dashboard, pickingUpShifts
+from .views import registration, userLogin, adminLogin, idRequest, calendarShiftInput, shiftMatching, calendarView, MatchView, PickupPoolView, dashboard, pickingUpShifts, SettingsView, ShiftStatusView, addShift, userLogout
 
 urlpatterns = [
     path('', registration, name='registration'),
-    path('ShiftApp/', userLogin, name='login'),
+    path('ShiftApp/', userLogin, name='userLogin'),
     path('ShiftApp/adminLogin', adminLogin, name='adminLogin'),
     path('ShiftApp/idRequest', idRequest, name='idRequest'),
     path('ShiftApp/calendarShiftInput', calendarShiftInput, name='calendarShiftInput'),
     path('ShiftApp/shiftMatching', shiftMatching, name='shiftMatching'),
     path('ShiftApp/calendarView', calendarView, name='calendarView'),
-    path('ShiftApp/TradePoolView', TradePoolView, name='TradePoolView'),
+    path('ShiftApp/MatchView', MatchView, name='MatchView'),
     path('ShiftApp/PickupPoolView', PickupPoolView, name='PickupPoolView'),
     path('ShiftApp/dashboard', dashboard, name='dashboard'),
-    path('ShiftApp/pickingUpShifts', pickingUpShifts, name='pickingUpShifts')
+    path('ShiftApp/pickingUpShifts', pickingUpShifts, name='pickingUpShifts'),
+    path('ShiftApp/ShiftStatusView', ShiftStatusView, name='ShiftStatusView'),
+    path('ShiftApp/SettingsView', SettingsView, name='SettingsView'),
+    path('ShiftApp/addShift', addShift, name='addShift'),
+    path('ShiftApp/userLogout', userLogout, name='userLogout')
 ]

@@ -196,9 +196,6 @@ nav .design:hover,
     flex-direction: row;
     height: 55vh;
     margin: 1% 2% 1% 2%;
-    background-color: #fff;
-    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 10px; */
 }
 
 #shift-for-grabs {

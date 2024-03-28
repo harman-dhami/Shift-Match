@@ -21,12 +21,12 @@
             <div class="sidebar">
                 <nav>
                     <div class="logo"> </div>
-                    <a class="design" href="{% url 'dashboard' %}"><i class="bx bxs-dashboard"></i>Home</a>
+                    <a class="active" href="{% url 'dashboard' %}"><i class="bx bxs-dashboard"></i>Home</a>
 
                     <a class="design" href="{% url 'calendarShiftInput' %}"><i class="bx bx-calendar"></i>Calendar</a>
 
                     <div class="dropdown">
-                        <a class="active" href="#"><i class="bx bxs-data"></i>Pool</a>
+                        <a class="design" href="#"><i class="bx bxs-data"></i>Pool</a>
                         <div class="dropdown-content">
                             <a href="{% url 'MatchView' %}">Match</a>
                             <a href="{% url 'PickupPoolView' %}">Pickup Request</a>
@@ -41,7 +41,7 @@
                     <br>
                     <br>
                     <br>
-                    <a class="design" href="#"><i class="bx bx-log-out"></i>Logout</a>
+                    <a class="design" href="{% url 'userLogout' %}"><i class="bx bx-log-out"></i>Logout</a>
                 </nav>
             </div>
 
@@ -52,45 +52,24 @@
                     <div class="title">
                         WELCOME BACK,
                         <br>
-                        <h1>Name</h1>
+                        <h1> {{name}} </h1>
                     </div>
                     <i class="bx bx bxs-bell"></i>
                 </div>
 
                 <div id="shift-view">
                     <div class="title">UPCOMING SHIFTS
-                        <i class="bx bxs-plus-circle"></i>
+                        <a href="{% url 'calendarShiftInput' %}"><i class="bx bxs-plus-circle"></i></a>
                     </div>
+                    {% for shift in upcomingShifts %}
                     <div class="shift">
-                        <p>Date:</p>
-                        <p>Time:</p>
-                        <p>Role:</p>
-                        <p>Location:</p>
+                        <p>Date: {{shift.shiftStart.date}} </p>
+                        <p>Time: {{shift.shiftStart.time}} </p>
+                        <p>Role: {{shift.qualification}} </p>
+                        <p>Location: {{shift.location}} </p>
                     </div>
-                    <div class="shift">
-                        <p>Date:</p>
-                        <p>Time:</p>
-                        <p>Role:</p>
-                        <p>Location:</p>
-                    </div>
-                    <div class="shift">
-                        <p>Date:</p>
-                        <p>Time:</p>
-                        <p>Role:</p>
-                        <p>Location:</p>
-                    </div>
-                    <div class="shift">
-                        <p>Date:</p>
-                        <p>Time:</p>
-                        <p>Role:</p>
-                        <p>Location:</p>
-                    </div>
-                    <div class="shift">
-                        <p>Date:</p>
-                        <p>Time:</p>
-                        <p>Role:</p>
-                        <p>Location:</p>
-                    </div>
+                    {% endfor %}
+                    
                 </div>
 
                 <div id="shift-status">
@@ -121,20 +100,29 @@
             <div class="right-column">
 
                 <div id="shift-pool">
+                    
                     <div class="title">SHIFT POOL</div>
-
+                    
                     <div class="available-shifts">
+                        {% for shift in shiftsInPool %}
                         <img src=" " alt="picture">
+                        
                         <div class="shift-info">
-                            <a href="#">Name</a>
+                            
+                            <a href="#"> {{shift.username.firstName}} </a>
                             <div class="shift-time">
-                                <p>Date:</p>
-                                <p>Time:</p>
+                                <p>Date: {{shift.shiftStart.date}} </p>
+                                <p>Time: {{shift.shiftStart.time}} </p>
                                 <p>Request: Trade or Pick-up</p>
+                                
                             </div>
+                            
                         </div>
+                        
                         <i class="bx bxs-info-circle"></i>
+                        {% endfor %}
                     </div>
+                    
                     <div class="available-shifts">
                         <img src=" " alt="picture">
                         <div class="shift-info">
@@ -169,7 +157,7 @@
                                 <p>Request:</p>
                             </div>
                         </div>
-                        <a href="{% url 'shiftMatching' %}"><i class="bx bxs-info-circle"></i></a>
+                        <i class="bx bxs-info-circle"></i>
                     </div>
                 </div>
 

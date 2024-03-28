@@ -28,7 +28,7 @@
                     <div class="dropdown">
                         <a class="active" href="#"><i class="bx bxs-data"></i>Pool</a>
                         <div class="dropdown-content">
-                            <a href="{% url 'TradePoolView' %}">Trade Request</a>
+                            <a href="{% url 'MatchView' %}">Match</a>
                             <a href="{% url 'PickupPoolView' %}">Pickup Request</a>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                         <h4>Trade Request</h4>
                     </div>
                     <div class="option">
-                        <form action="{% url 'TradePoolView' %}" method="POST">
+                        <form action="{% url 'MatchView' %}" method="POST">
                             {% csrf_token %}
                             <input type="radio" name="filter" id="free">
                             <label for="free">Free</label>

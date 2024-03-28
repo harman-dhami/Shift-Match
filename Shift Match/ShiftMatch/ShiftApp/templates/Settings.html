@@ -51,28 +51,33 @@
                     <h1>Settings</h1>
                 </div>
 
-                <div id="main-content">
-                    <div id="settings">
-                        <div id="setting">
-                            <p>First Name:</p>
-                        </div>
-                        <div id="setting">
-                            <p>Last Name:</p>
-                        </div>
-                        <div id="setting">
-                            <p>Email:</p>
-                        </div>
-                        <div id="setting">
-                            <p>Password:</p>
-                        </div>
-                        <div id="setting">
-                            <p>Roles:</p>
-                        </div>
-                        <div id="setting">
-                            <p>Notifications</p>
+                    <div id="main-content">
+                        <div id="settings">
+                            <div id="setting">
+                                <p>First Name: {{firstName}} </p>
+                            </div>
+                            <div id="setting">
+                                <p>Last Name: {{lastName}} </p>
+                            </div>
+                            <div id="setting">
+                                <p>Email: {{email}} </p>
+                            </div>
+                            <div id="setting">
+                                <p>Password: {{password}} </p>
+                            </div>
+                            <form action="{% url 'SettingsView' %}" method="POST">
+                                {% csrf_token %}
+                            <div id="setting">
+                                <p>Roles: <input type="text" id="role" name="role" value="{{roles}}"></p>
+                            </div>
+                            
+                            <div id="setting">
+                                <p>Notifications</p>
+                            </div>
+                            <input type="submit" value="Save">
+                            </form>
                         </div>
                     </div>
-                </div>
             </div>
 
         </div>
