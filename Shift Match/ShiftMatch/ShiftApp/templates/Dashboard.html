@@ -60,36 +60,15 @@
                     <div class="title">UPCOMING SHIFTS
                         <i class="bx bxs-plus-circle"></i>
                     </div>
+                    {% for shift in upcomingShifts %}
                     <div class="shift">
-                        <p>Date:</p>
-                        <p>Time:</p>
-                        <p>Role:</p>
-                        <p>Location:</p>
+                        <p>Date: {{shift.shiftStart.date}} </p>
+                        <p>Time: {{shift.shiftStart.time}} </p>
+                        <p>Role: {{shift.qualification}} </p>
+                        <p>Location: {{shift.location}} </p>
                     </div>
-                    <div class="shift">
-                        <p>Date:</p>
-                        <p>Time:</p>
-                        <p>Role:</p>
-                        <p>Location:</p>
-                    </div>
-                    <div class="shift">
-                        <p>Date:</p>
-                        <p>Time:</p>
-                        <p>Role:</p>
-                        <p>Location:</p>
-                    </div>
-                    <div class="shift">
-                        <p>Date:</p>
-                        <p>Time:</p>
-                        <p>Role:</p>
-                        <p>Location:</p>
-                    </div>
-                    <div class="shift">
-                        <p>Date:</p>
-                        <p>Time:</p>
-                        <p>Role:</p>
-                        <p>Location:</p>
-                    </div>
+                    {% endfor %}
+                    
                 </div>
 
                 <div id="shift-status">
@@ -125,7 +104,7 @@
                         <img src=" " alt="picture">
                         
                         <div class="shift-info">
-                            
+                            {% for shift in shiftsInPool %}
                             <a href="#"> {{shift.username.firstName}} </a>
                             <div class="shift-time">
                                 <p>Date: {{shift.shiftStart.date}} </p>
@@ -135,46 +114,11 @@
                             </div>
                             
                         </div>
-                        
-                        <i class="bx bxs-info-circle"></i>
                         {% endfor %}
-                    </div>
-                    <div class="available-shifts">
-                        <img src=" " alt="picture">
-                        <div class="shift-info">
-                            <a href="#">Name</a>
-                            <div class="shift-time">
-                                <p>Date:</p>
-                                <p>Time:</p>
-                                <p>Request:</p>
-                            </div>
-                        </div>
                         <i class="bx bxs-info-circle"></i>
+                        
                     </div>
-                    <div id="available-shifts">
-                        <img src=" " alt="picture">
-                        <div class="shift-info">
-                            <a href="#">Name</a>
-                            <div class="shift-time">
-                                <p>Date:</p>
-                                <p>Time:</p>
-                                <p>Request:</p>
-                            </div>
-                        </div>
-                        <i class="bx bxs-info-circle"></i>
-                    </div>
-                    <div id="available-shifts">
-                        <img src=" " alt="picture">
-                        <div class="shift-info">
-                            <a href="#">Name</a>
-                            <div class="shift-time">
-                                <p>Date:</p>
-                                <p>Time:</p>
-                                <p>Request:</p>
-                            </div>
-                        </div>
-                        <i class="bx bxs-info-circle"></i>
-                    </div>
+                    
                 </div>
 
                 <div id="contacts">

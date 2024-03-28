@@ -111,10 +111,16 @@ def calendarShiftInput(request):
         event_sub_arr = {}
         shiftStart = datetime.strptime(str(i.shiftStart), "%Y-%m-%d %H:%M:%S%z").strftime("%Y-%m-%d %H:%M:%S%z")
         shiftEnd = datetime.strptime(str(i.shiftEnd), "%Y-%m-%d %H:%M:%S%z").strftime("%Y-%m-%d %H:%M:%S%z")
-        hours = str(i.hours)
+        hours = "Hours:",str(i.hours)
+        location = "Location:",i.location
+        role = "Roles:",i.qualification
+        description = []
+        des = hours,location,role
+        description.extend(des)
         event_sub_arr['title'] = "Shift"
         event_sub_arr['start'] = shiftStart
         event_sub_arr['end'] = shiftEnd
+        event_sub_arr['description'] = description
         event_arr.append(event_sub_arr)
     # data = JsonResponse((event_arr), safe=False)
     dataset = json.dumps(event_arr)
