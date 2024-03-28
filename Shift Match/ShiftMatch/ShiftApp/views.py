@@ -120,7 +120,7 @@ def calendarShiftInput(request):
     dataset = json.dumps(event_arr)
     print (dataset)
     context = {
-        "shifts": dataset
+        "shifts": dataset 
     }
                     
     return render(request, "Calendar.html", context)   
@@ -132,16 +132,16 @@ def shiftMatching(request):
     if request.method == 'POST':
         shift = request.POST.get("shift")
         daysAvailabletoWork = request.POST.get("daysAvailabletoWork")
-        print(shift)
-        Shifts.objects.filter(username=username).filter(shiftStart__contains=shift).update(ShiftPool=True)
+        
+        shiftUpdate = Shifts.objects.filter(shiftStart=shift).update(ShiftPool=True)
         
     shiftAvailable = Shifts.objects.filter(ShiftPool = True).filter(dateAvailable = daysAvailabletoWork)
         
     return render(request, "ShiftPool.html", {"shifts": shiftAvailable, "form": form})
 
 def calendarView(request):
-    
-    
+        
+
         return render(request, "Calendar.html")
 
 def PickupPoolView(request):
@@ -171,7 +171,7 @@ def MatchView(request):
             Shifts.objects.filter(username=username).filter(shiftStart__contains=shift).filter(ShiftPool=False).update(dateAvailable=daysAvailabletoWork)  
     shiftAvailable = Shifts.objects.filter(ShiftPool=True).filter(dateAvailable__contains=shift)
         
-    return render(request, "Match.html", {"shifts": shiftAvailable, "form": form})
+    return render(request, "PickupPool.html", {"shifts": shiftAvailable, "form": form})
 
 def pickingUpShifts(request):
     username = request.user.username
