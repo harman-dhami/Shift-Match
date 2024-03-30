@@ -23,15 +23,15 @@ mycol = mydb["users"]
 def registration(request):
     
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
+        form1 = RegistrationForm(request.POST)
+        if form1.is_valid():
             
-            firstName = form.cleaned_data['firstName']
-            lastName = form.cleaned_data['lastName']
-            userEmail = form.cleaned_data['email']
-            employeeId = form.cleaned_data['id']
-            company = form.cleaned_data['company']
-            userPassword = form.cleaned_data['password']
+            firstName = form1.cleaned_data['firstName']
+            lastName = form1.cleaned_data['lastName']
+            userEmail = form1.cleaned_data['email']
+            employeeId = form1.cleaned_data['id']
+            company = form1.cleaned_data['company']
+            userPassword = form1.cleaned_data['password']
             userPassword1 = make_password(userPassword)
             user = User.objects.create_user(firstName=firstName, lastName=lastName, username=userEmail, employeeId=employeeId, company=company, password=userPassword1)
             user.is_active = True
@@ -49,11 +49,11 @@ def registration(request):
                 #x = mycol.insert_one(mydict)
                 print("Hello")
     else:
-        form = RegistrationForm()
-    return render(request, "Registration.html", {"form": form})
+        form1 = RegistrationForm()
+    return render(request, "Login-Registration.html", {"form1": form1})
 
 def userLogin(request):
-    form = LoginForm(request.POST)
+    form2 = LoginForm(request.POST)
     if request.method == 'POST':
             username = request.POST.get('email')
             password = request.POST.get('password')
@@ -66,10 +66,10 @@ def userLogin(request):
             else:
                 print(username, password)
                 messages.error(request, "Username or password is incorrect")
-                return render(request, "Login.html", {"form": form})
+                return render(request, "Login-Registration.html", {"form2": form2})
     else:
-        form = LoginForm()
-    return render(request, "Login.html", {"form": form})
+        form2 = LoginForm()
+    return render(request, "Login-Registration.html", {"form2": form2})
 
 def adminLogin(request):
         return render(request, "AdminPage.html")
