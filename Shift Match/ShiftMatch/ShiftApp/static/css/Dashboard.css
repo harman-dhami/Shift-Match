@@ -31,7 +31,6 @@ body {
 
 .sidebar {
     width: 90px;
-    background-color: #2d53da;
     height: 92vh;
     transition: all 0.3s linear;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -41,6 +40,11 @@ body {
     border-bottom-right-radius: 10px;
     margin: 1% 0 1% 1%;
     display: flex;
+    background-color: #094b9f;
+    background-image: linear-gradient(to bottom, #094b9f, #2e95f7);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23094B9F' cx='50' cy='0' r='50'/%3E%3Cg fill='%230c4ea3' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%230e52a8' cx='50' cy='100' r='50'/%3E%3Cg fill='%231156ac' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%231359b0' cx='50' cy='200' r='50'/%3E%3Cg fill='%23155db5' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%231760b9' cx='50' cy='300' r='50'/%3E%3Cg fill='%231964bd' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%231b68c2' cx='50' cy='400' r='50'/%3E%3Cg fill='%231d6bc6' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%231e6fcb' cx='50' cy='500' r='50'/%3E%3Cg fill='%232073cf' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%232276d3' cx='50' cy='600' r='50'/%3E%3Cg fill='%23237ad8' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%23257edc' cx='50' cy='700' r='50'/%3E%3Cg fill='%232682e1' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%232886e5' cx='50' cy='800' r='50'/%3E%3Cg fill='%232a89ea' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%232b8dee' cx='50' cy='900' r='50'/%3E%3Cg fill='%232d91f3' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%232E95F7' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: contain;
 }
 
 .sidebar:hover {
@@ -76,7 +80,7 @@ nav .design,
 nav .design:hover,
 .active {
     background: #fff;
-    color: #1c66be;
+    color: #094b9f;
     border-radius: 10px;
 }
 
@@ -88,8 +92,7 @@ nav .design:hover,
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #2d53da;
-    min-width: 100%;
+    background-color: #1e6fcb;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-radius: 10px;
@@ -105,14 +108,6 @@ nav .design:hover,
 .dropdown-content a:hover {
     background-color: #2e95f7;
     border-radius: 10px;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown-content {
-    display: none;
 }
 
 .dropdown:hover .dropdown-content {
@@ -173,9 +168,9 @@ nav .design:hover,
 }
 
 #header .bxs-bell {
-    color: #2d53da;
+    color: #094b9f;
     font-size: 30px;
-    margin-right: 2%;
+    margin-right: 1.5%;
 }
 
 .title {
@@ -234,7 +229,7 @@ nav .design:hover,
 
 #shift-view .bxs-plus-circle {
     font-size: 20px;
-    color: #2d53da;
+    color: #094b9f;
 }
 
 #shift {
@@ -318,7 +313,7 @@ nav .design:hover,
     display: flex;
     flex-direction: column;
     height: 50vh;
-    margin: 2.5% 1% 0 2%;
+    margin: 2.5% 2.5% 0 1%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
@@ -328,7 +323,7 @@ nav .design:hover,
     display: flex;
     flex-direction: column;
     height: 20vh;
-    margin: 1.5% 1% 0.3% 2%;
+    margin: 1.5% 2.5% 0.3% 1%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
@@ -365,7 +360,7 @@ nav .design:hover,
 
 #available-shifts .bxs-info-circle {
     font-size: 25px;
-    color: #2d53da;
+    color: #094b9f;
     margin-right: 2%;
 }
 
@@ -416,8 +411,8 @@ nav .design:hover,
 }
 
 #user img {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     border: 1px solid #000;
     padding: 0.5rem;

@@ -1,149 +1,147 @@
 * {
-    margin: 0;
-    padding: 0;
-    outline: none;
-    border: none;
-    text-decoration: none;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 body {
-    background-color: #d0d7f2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+  background-color: #d0d7f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 /* Sidebar */
 .logo {
-    width: 80px;
-    height: 80px;
-    background-image: url('logo-transparent.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
-    align-self: center;
-    padding: 1px;
-    cursor: pointer;
+  width: 80px;
+  height: 80px;
+  background-image: url('logo-transparent.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  align-self: center;
+  padding: 1px;
+  cursor: pointer;
 }
 
 .sidebar {
-    width: 90px;
-    background-color: #2d53da;
-    height: 92vh;
-    transition: all 0.3s linear;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    margin: 1% 0 1% 1%;
-    display: flex;
+  width: 90px;
+  height: 92vh;
+  transition: all 0.3s linear;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin: 1% 0 1% 1%;
+  display: flex;
+  background-color: #094b9f;
+  background-image: linear-gradient(to bottom, #094b9f, #2e95f7);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23094B9F' cx='50' cy='0' r='50'/%3E%3Cg fill='%230c4ea3' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%230e52a8' cx='50' cy='100' r='50'/%3E%3Cg fill='%231156ac' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%231359b0' cx='50' cy='200' r='50'/%3E%3Cg fill='%23155db5' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%231760b9' cx='50' cy='300' r='50'/%3E%3Cg fill='%231964bd' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%231b68c2' cx='50' cy='400' r='50'/%3E%3Cg fill='%231d6bc6' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%231e6fcb' cx='50' cy='500' r='50'/%3E%3Cg fill='%232073cf' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%232276d3' cx='50' cy='600' r='50'/%3E%3Cg fill='%23237ad8' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%23257edc' cx='50' cy='700' r='50'/%3E%3Cg fill='%232682e1' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%232886e5' cx='50' cy='800' r='50'/%3E%3Cg fill='%232a89ea' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%232b8dee' cx='50' cy='900' r='50'/%3E%3Cg fill='%232d91f3' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%232E95F7' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: contain;
 }
 
 .sidebar:hover {
-    width: 185px;
+  width: 185px;
 }
 
 nav {
-    padding: 1.2rem;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 1rem;
-    overflow: hidden;
+  padding: 1.2rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
 }
 
 nav .bx {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 nav .design,
 .active {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    font-size: 1rem;
-    padding: 1rem;
-    color: #fff;
-    font-weight: 500;
-    overflow: hidden;
-    transition: all 0.3s ease-in;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 1rem;
+  padding: 1rem;
+  color: #fff;
+  font-weight: 500;
+  overflow: hidden;
+  transition: all 0.3s ease-in;
+  text-decoration: none;
 }
 
 nav .design:hover,
 .active {
-    background: #fff;
-    color: #1c66be;
-    border-radius: 10px;
+  background: #fff;
+  color: #094b9f;
+  border-radius: 10px;
 }
 
 .dropdown {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #2d53da;
-    min-width: 100%;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    border-radius: 10px;
+  display: none;
+  position: absolute;
+  background-color: #1e6fcb;
+  min-width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 10px;
 }
 
 .dropdown-content a {
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+  font-size: 12;
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
 }
 
 .dropdown-content a:hover {
-    background-color: #2e95f7;
-    border-radius: 10px;
+  background-color: #2e95f7;
+  border-radius: 10px;
 }
 
 .dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown-content {
-    display: none;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
+  display: block;
 }
 
 /* Main Container */
 .wrapper {
-    height: 90%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin: 1% 1% 0 1%;
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 1% 1% 0 1%;
 }
 
 #pages {
-    width: 95%;
-    margin: 0 1% 1% 1%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: #f1f4fc;
-    align-self: center;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-    border-radius: 1%;
+  width: 95%;
+  margin: 0 1% 1% 1%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #f1f4fc;
+  align-self: center;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  border-radius: 1%;
 }
 
 #calendar {
-    width: 250vh;
-    height: 90vh;
-    margin: 2% 2% 0 2%;
+  width: 250vh;
+  height: 90vh;
+  margin: 2% 2% 0 2%;
 }
 
 .popper,
@@ -154,10 +152,11 @@ nav .design:hover,
   color: black;
   width: 150px;
   border-radius: 3px;
-  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
   padding: 10px;
   text-align: center;
 }
+
 .style5 .tooltip {
   background: #1E252B;
   color: #FFFFFF;
@@ -166,6 +165,7 @@ nav .design:hover,
   font-size: .8rem;
   padding: .5em 1em;
 }
+
 .popper .popper__arrow,
 .tooltip .tooltip-arrow {
   width: 0;
@@ -179,13 +179,16 @@ nav .design:hover,
 .popper .popper__arrow {
   border-color: #FFC107;
 }
+
 .style5 .tooltip .tooltip-arrow {
   border-color: #1E252B;
 }
+
 .popper[x-placement^="top"],
 .tooltip[x-placement^="top"] {
   margin-bottom: 5px;
 }
+
 .popper[x-placement^="top"] .popper__arrow,
 .tooltip[x-placement^="top"] .tooltip-arrow {
   border-width: 5px 5px 0 5px;
@@ -197,10 +200,12 @@ nav .design:hover,
   margin-top: 0;
   margin-bottom: 0;
 }
+
 .popper[x-placement^="bottom"],
 .tooltip[x-placement^="bottom"] {
   margin-top: 5px;
 }
+
 .tooltip[x-placement^="bottom"] .tooltip-arrow,
 .popper[x-placement^="bottom"] .popper__arrow {
   border-width: 0 5px 5px 5px;
@@ -212,10 +217,12 @@ nav .design:hover,
   margin-top: 0;
   margin-bottom: 0;
 }
+
 .tooltip[x-placement^="right"],
 .popper[x-placement^="right"] {
   margin-left: 5px;
 }
+
 .popper[x-placement^="right"] .popper__arrow,
 .tooltip[x-placement^="right"] .tooltip-arrow {
   border-width: 5px 5px 5px 0;
@@ -227,10 +234,12 @@ nav .design:hover,
   margin-left: 0;
   margin-right: 0;
 }
+
 .popper[x-placement^="left"],
 .tooltip[x-placement^="left"] {
   margin-right: 5px;
 }
+
 .popper[x-placement^="left"] .popper__arrow,
 .tooltip[x-placement^="left"] .tooltip-arrow {
   border-width: 5px 0 5px 5px;
