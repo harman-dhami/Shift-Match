@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from .managers import UserAccountManager
-from multiselectfield import MultiSelectField
 
 class User(AbstractBaseUser):
     firstName = models.CharField(max_length=100)
@@ -11,9 +10,18 @@ class User(AbstractBaseUser):
     company = models.CharField(max_length=100)
     password = models.CharField(max_length=100, default="password12r")
     qualifications = models.CharField(max_length=100,  default="Basic")
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
     USERNAME_FIELD = "username"
     
     objects=UserAccountManager()
+    
+    def has_perm(self, perm, obj=None):
+        return self.is_superuser
+
+    def has_module_perms(self, app_label):
+        return self.is_superuser
     
 #class Login(models.Model):
     #userEmail = models.EmailField()
@@ -26,10 +34,12 @@ class Shifts(models.Model):
     dateAvailable = models.DateField(default="2024-01-01")
     ShiftPool = models.BooleanField(default=False)
     isPaid = models.BooleanField(default=False)
+    Matching =  models.BooleanField(default=False)
     moneyAmount = models.CharField(max_length=10, default=0)
     qualification = models.CharField(max_length=100, default="None")
     location = models.CharField(max_length=100, default="YVR")
-    username = models.ForeignKey(User, on_delete=models.PROTECT, to_field="username")
+    locationNotWillingToWork = models.CharField(max_length=100, default="None")
+    username = models.ForeignKey(User, on_delete=models.CASCADE, to_field="username")
     
 class Admin(models.Model):
     userName = models.CharField(max_length=20)
@@ -38,3 +48,8 @@ class Admin(models.Model):
 class IdRequest(models.Model):
     userID = models.CharField(max_length=100)
     decision = models.CharField(max_length=100)
+    
+class Conversation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.CharField(blank=True, null=True, max_length=225)
+    status = models.CharField(blank=True, null=True, max_length=225)

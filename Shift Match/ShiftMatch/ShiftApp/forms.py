@@ -43,18 +43,21 @@ class IDRequest(forms.ModelForm):
         model = IdRequest
         fields = ["id", "decision"]
         
-class ShiftPoolForm(forms.ModelForm):
+class MatchingShiftsForm(forms.ModelForm):
     
+    Choices = (('BAGROOM', 'BAGROOM'), ('INBND RNR', 'INBND RNR'), ('Lavs', 'Lavs'), ('CSA', 'CSA'), ('LSA', 'LSA'), ('Feulling', 'Feulling'),('Deice', 'Deice'), ('RT', 'RT'))
     
     shift = forms.DateField(label="Select Shift Date", widget= forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}), input_formats=["%Y-%m-%d"])
     daysAvailabletoWork = forms.DateField(label="Dates Willing To Work", widget= forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}), input_formats=["%Y-%m-%d"])
+    #rolesNotWillingToWork = forms.ChoiceField(label="Location not willing to work:", choices = Choices)
+    
     class Meta:
         model = Shifts
         fields = ["shift", "daysAvailabletoWork"]
     
     def __init__(self, *args, **kwargs):
         username = kwargs.pop('username')
-        super(ShiftPoolForm, self).__init__(*args, **kwargs)
+        super(MatchingShiftsForm, self).__init__(*args, **kwargs)
         self.fields['shift'].queryset = Shifts.objects.filter(username = username).filter(ShiftPool = False)
         
 class AddShiftForm(forms.ModelForm):
@@ -68,3 +71,6 @@ class AddShiftForm(forms.ModelForm):
             "shiftStart":forms.TextInput(attrs={'type':'datetime-local' }),
             "shiftEnd":forms.TextInput(attrs={'type':'datetime-local' })
         }
+        
+class ChatForm(forms.ModelForm):
+    message = forms.CharField(label="Message: ", max_length=200)

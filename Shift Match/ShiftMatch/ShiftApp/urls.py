@@ -15,10 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from django.contrib import admin
+admin.autodiscover()
+
+
 from django.urls import path
-from .views import registration, userLogin, adminLogin, idRequest, calendarShiftInput, shiftMatching, calendarView, PickupPoolView, dashboard, pickingUpShifts, MatchView, ShiftStatusView, SettingsView, userLogout, addShift
+from .views import registration, userLogin, adminLogin, idRequest, calendarShiftInput, shiftMatching, calendarView, PickupPoolView, dashboard, pickingUpShifts, MatchView, ShiftStatusView, SettingsView, userLogout, addShift, Chatview, broadcast, conversations, delivered, pusher_auth
 
 urlpatterns = [
+    path("admin/", admin.site.urls),
     path('', registration, name='registration'),
     path('ShiftApp/', userLogin, name='userLogin'),
     path('ShiftApp/adminLogin', adminLogin, name='adminLogin'),
@@ -33,5 +38,10 @@ urlpatterns = [
     path('ShiftApp/ShiftStatusView', ShiftStatusView, name='ShiftStatusView'),
     path('ShiftApp/SettingsView', SettingsView, name='SettingsView'),
     path('ShiftApp/userLogout', userLogout, name='userLogout'),
-    path('ShiftApp/addShift', addShift, name='addShift')
+    path('ShiftApp/addShift', addShift, name='addShift'),
+    path('ShiftApp/Chatview', Chatview, name='Chatview'),
+    path('ShiftApp/conversations', conversations, name='conversations'),
+    path('ShiftApp/delivered', delivered, name='delivered'),
+    path('ShiftApp/broadcast', broadcast, name='broadcast'),
+    path('ShiftApp/pusher_auth', pusher_auth, name='pusher_auth'),
 ]

@@ -10,6 +10,9 @@
     <!-- <link rel="stylesheet" href="Match.css"> -->
     <link rel="stylesheet" href="{% static 'css/Match.css' %}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -45,18 +48,7 @@
                 </nav>
             </div>
 
-            <!-- <i class="bx bxs-message-rounded"></i>
-            <i class="bx bxs-x-circle"></i>
-            <i class="bx bxs-check-circle"></i> -->
-
-            <!-- <form action="{% url 'MatchView' %}" method="POST">
-                {% csrf_token %}
-                <input type="radio" name="filter" id="free">
-                <label for="free">Free</label>
-                <input type="radio" name="filter" id="paid">
-                <label for="paid">Paid</label>
-                <button type="submit">Filter</button>
-            </form> -->
+ 
 
             <!-- <form action="{% url 'pickingUpShifts' %}" method="POST">
                 {% csrf_token %}
@@ -82,6 +74,17 @@
                 <div id="header">
                     <h1>Match</h1>
                 </div>
+                <form action="{% url 'MatchView' %}" method="POST">
+                    {% csrf_token %}
+                    {{form}}
+                    <select class="js-example-basic-multiple" id="locations" name="locations[]" multiple="multiple">
+                        {% for i in locations %}
+                            <option name="locations" value="{{i}}">{{i}}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Match">
+                </form>
+
 
                 <div id="owned-shift">
                     <div class="title">ADD TO POOL</div>
@@ -196,14 +199,16 @@
                     </div>
                     <div id="pool-details">
                         <img src=" " alt="picture">
+                        {% for shift in matchingShifts %}
                         <div class="info">
-                            <p class="name">Name</p>
+                            <p class="name"> {{shift.username.firstName}} </p>
                             <i class="bx bx-message-rounded"></i>
-                            <p>Date:</p>
-                            <p>Time:</p>
-                            <p>Role:</p>
-                            <p>Location:</p>
+                            <p>Date: {{shift.shiftStart.date}} </p>
+                            <p>Time: {{shift.shiftStart.time}} </p>
+                            <p>Role: {{shift.qualification}} </p>
+                            <p>Location: {{shift.location}} </p>
                         </div>
+                        {% endfor %}
                         <i class="bx bxs-x-circle"></i>
                         <i class="bx bxs-check-circle"></i>
                     </div>
@@ -277,7 +282,12 @@
         </div>
 
     </div>
-
+<script>
+    $(document).ready(function() {
+        $('#locations').select2();
+    });
+</script>
+    
 </body>
 
 </html>

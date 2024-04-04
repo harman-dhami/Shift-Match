@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, HttpResponse
+from django.http import HttpResponseForbidden
 import pymongo
 from django.core.mail import send_mail
-from .models import User, Shifts
-from .forms import RegistrationForm, LoginForm, AdminLogin, IDRequest, ShiftPoolForm, AddShiftForm
+from .models import User, Shifts, Conversation
+from .forms import RegistrationForm, LoginForm, AdminLogin, IDRequest, MatchingShiftsForm, AddShiftForm
 from django.contrib import messages
 from .settings import EMAIL_HOST_USER
 from django.contrib.auth import authenticate, login, logout
@@ -13,6 +14,13 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.utils.timezone import now
 from django.db.models import Q
+import schedule
+import time
+from schedule import repeat, every
+import pusher
+from pusher import Pusher
+from .pusher import pusher_client
+from django.views.decorators.csrf import csrf_exempt
 
 
 myclient = pymongo.MongoClient("mongodb+srv://user01:WAX5VkFPgLmrclRt@shiftmatch.mux73es.mongodb.net/?retryWrites=true&w=majority")
@@ -91,13 +99,34 @@ def dashboard(request):
     
     today = now().date()
     shiftsInPool = Shifts.objects.exclude(username=request.user.username).filter(ShiftPool=True).filter(shiftStart__gte=today).order_by('shiftStart')
-    upcomingShifts = Shifts.objects.filter(username=request.user.username).filter(shiftStart__gte=today).filter(ShiftPool=False).order_by('shiftStart')
+    #upcomingShifts = Shifts.objects.filter(username=request.user.username).filter(shiftStart__gte=today).filter(ShiftPool=False).order_by('shiftStart')
     userShiftsInPool = Shifts.objects.filter(username=request.user.username).filter(ShiftPool=True)
+    
+    username = request.user.username
+    all_events = Shifts.objects.filter(username = username)
+    event_arr = []
+    for i in all_events:
+        event_sub_arr = {}
+        shiftStart = datetime.strptime(str(i.shiftStart), "%Y-%m-%d %H:%M:%S%z").strftime("%Y-%m-%d %H:%M:%S%z")
+        shiftEnd = datetime.strptime(str(i.shiftEnd), "%Y-%m-%d %H:%M:%S%z").strftime("%Y-%m-%d %H:%M:%S%z")
+        hours = "Hours:",str(i.hours)
+        location = "Location:",i.location
+        role = "Roles:",i.qualification
+        description = []
+        des = hours,location,role
+        description.extend(des)
+        event_sub_arr['title'] = "Shift"
+        event_sub_arr['start'] = shiftStart
+        event_sub_arr['end'] = shiftEnd
+        event_sub_arr['description'] = description
+        event_arr.append(event_sub_arr)
+    dataset = json.dumps(event_arr)
+    
     
     context = {
         "name": name,
         "shiftsInPool": shiftsInPool,
-        "upcomingShifts": upcomingShifts,
+        "upcomingShifts": dataset,
         "userShiftsInPool": userShiftsInPool
     }
     return render(request, "Dashboard.html", context)
@@ -126,14 +155,14 @@ def calendarShiftInput(request):
     dataset = json.dumps(event_arr)
     print (dataset)
     context = {
-        "shifts": dataset 
+        "shifts": dataset,
     }
                     
     return render(request, "Calendar.html", context)   
 
 @login_required
 def shiftMatching(request):
-    form = ShiftPoolForm(request.POST or None, username = request.user.username)
+    form = MatchingShiftsForm(request.POST or None, username = request.user.username)
     username = request.user.username
     if request.method == 'POST':
         shift = request.POST.get("shift")
@@ -162,23 +191,58 @@ def PickupPoolView(request):
     
     return render(request, "PickupPool.html", context)
 
+
+def MatchingShiftsSearch(username, shift, daysAvailabletoWork, locationNotWillingToWork, roles):
+    matchingShifts = Shifts.objects.exclude(username=username).filter(shiftStart__contains=daysAvailabletoWork).exclude(qualification__contains=locationNotWillingToWork).filter(dateAvailable__contains=shift).filter(Matching=True)
+    print("Try to match Shifts")
+    return matchingShifts
+
+@login_required
 def MatchView(request):
-    form = ShiftPoolForm(request.POST or None, username = request.user.username, use_required_attribute = False)
-    daysAvailabletoWork = "Hello"
-    shift = "Hello"
+    form = MatchingShiftsForm(request.POST or None, username = request.user.username, use_required_attribute = False)
+    daysAvailabletoWork = ""
+    shift = ""
+    locationNotWillingToWork = ""
+    matchingShifts = ""
     username = request.user.username
+    roles = request.user.qualifications
     if request.method == 'POST':
         shift = request.POST.get("shift")
-        daysAvailabletoWork = request.POST.get("daysAvailabletoWork")
-        if request.POST.get("post_shift"):
-            Shifts.objects.filter(username=username).filter(shiftStart__contains=shift).update(ShiftPool=True)
-            Shifts.objects.filter(username=username).filter(shiftStart__contains=shift).update(dateAvailable=daysAvailabletoWork)
-        elif request.POST.get("shift_match"):
-            Shifts.objects.filter(username=username).filter(shiftStart__contains=shift).filter(ShiftPool=False).update(dateAvailable=daysAvailabletoWork)  
-    shiftAvailable = Shifts.objects.filter(ShiftPool=True).filter(dateAvailable__contains=shift)
+        daysAvailabletoWork = request.POST.get("daysAvailabletoWork") 
+        locationNotWillingToWork = request.POST.getlist("locations[]") 
+        #Updating DB to pool and match shifts
+        Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(Matching=True)
+        Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(dateAvailable=daysAvailabletoWork)
+        Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(locationNotWillingToWork=locationNotWillingToWork)
+        Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(ShiftPool=True)
+        matchingShifts = MatchingShiftsSearch(username=username, shift=shift, daysAvailabletoWork=daysAvailabletoWork, locationNotWillingToWork=locationNotWillingToWork, roles=roles)
+        schedule.every(5).seconds.do(MatchingShiftsSearch, username, shift, daysAvailabletoWork, locationNotWillingToWork, roles)
+        print("Searching...")
+    
+    print(matchingShifts)
+    if (not matchingShifts):
+        print ("No Match Found!")  
+    else:
+        Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(Matching=False)
+        Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(ShiftPool=False)
+        matchingShifts.update(Matching=False)
+        matchingShifts.update(ShiftPool=False)
+        print(shift, matchingShifts)
+        print ("Match Found!")
+        #send both users emails
         
-    return render(request, "PickupPool.html", {"shifts": shiftAvailable, "form": form})
+    locations = ["INBND RNR", "LAVS", "CSA", "LSA", "FEULLING", "DEICE"]
+    
+    context = {
+        "form": form,
+        "matchingShifts": matchingShifts,
+        "locations": locations
+    }
+        
+    return render(request, "Match.html",context)
 
+
+@login_required
 def pickingUpShifts(request):
     username = request.user.username
     if request.method == 'POST':
@@ -190,14 +254,15 @@ def pickingUpShifts(request):
     #send email using django email service; setup testing email using django framework
     return render(request, "Match.html", {"shifts": shiftsAvailable})
 
+@login_required
 def ShiftStatusView(request):
         return render(request, "ShiftStatus.html")
 
+@login_required
 def SettingsView(request):
     
     if request.method == 'POST':
-        role = request.POST.get("role")
-        
+        role = request.POST.getlist("locations[]")
         User.objects.filter(username=request.user.username).update(qualifications=role)
     
     firstName = request.user.firstName
@@ -206,12 +271,15 @@ def SettingsView(request):
     password = request.user.password
     roles = request.user.qualifications
     
+    locations = ["INBND RNR", "LAVS", "CSA", "LSA", "FEULLING", "DEICE"]
+    
     context = {
         "firstName": firstName,
         "lastName": lastName,
         "email": email,
         "password": password,
-        "roles": roles
+        "roles": roles,
+        "locations": locations
     }
     return render(request, "Settings.html", context)
 
@@ -231,6 +299,74 @@ def addShift(request):
             return HttpResponse(status=204)
     else:
         form = AddShiftForm()
-         
+        
+    locations = ["BAGROOM", "INBND RNR", "LAVS", "CSA", "LSA", "FEULLING", "DEICE", "RT"]
     
-    return render(request, "Add_Shift.html", {"form": form})
+    context = {
+        "form": form,
+        "locations": locations
+    }
+         
+    return render(request, "Add_Shift.html", context)
+
+
+def Chatview(request):
+    
+    users = User.objects.all()
+    user = request.user
+    context = {
+        "users": users,
+        "user": user,
+    }
+    
+    return render(request, "Chat.html", context)
+
+pusher = Pusher(app_id=u'1781407', key=u'4b5bb58a37e41d8eb66d', secret=u'4be0810d178aa1aa094c', cluster=u'us3')
+
+@csrf_exempt
+def broadcast(request):
+    # collect the message from the post parameters, and save to the database
+    message = Conversation(message=request.POST.get('message', ''), status='', user=request.user)
+    message.save()
+    # create an dictionary from the message instance so we can send only required details to pusher
+    message = {'name': message.user.firstName, 'status': message.status, 'message': message.message, 'id': message.id}
+    #trigger the message, channel and event to pusher
+    pusher.trigger(u'presence-a_channel', u'an_event', message)
+    # return a json response of the broadcasted message
+    return JsonResponse(message, safe=False)
+
+def conversations(request):
+    data = Conversation.objects.all()
+    # loop through the data and create a new list from them. Alternatively, we can serialize the whole object and send the serialized response 
+    data = [{'name': person.user.firstName, 'status': person.status, 'message': person.message, 'id': person.id} for person in data]
+    # return a json response of the broadcasted messgae
+    return JsonResponse(data, safe=False)
+    
+@csrf_exempt
+def delivered(request, id):
+    message = Conversation.objects.get(pk=id)
+    # verify it is not the same user who sent the message that wants to trigger a delivered event
+    if request.user.id != message.user.id:
+        socket_id = request.POST.get('socket_id', '')
+        message.status = 'Delivered'
+        message.save()
+        message = {'name': message.user.firstName, 'status': message.status, 'message': message.message, 'id': message.id}
+        pusher.trigger(u'a_channel', u'delivered_message', message, socket_id)
+        return HttpResponse('ok')
+    else:
+        return HttpResponse('Awaiting Delivery')
+    
+def pusher_auth(request):
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden()
+    
+    pusher_client
+
+    # We must generate the token with pusher's service
+    payload = pusher_client.authenticate(
+        channel=request.POST['channel_name'],
+        socket_id=request.POST['socket_id']
+    )
+        
+    return JsonResponse(payload)
+

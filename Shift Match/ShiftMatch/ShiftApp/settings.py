@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-6h=h@_f54b1l&b8_m_wwfb4c3v(5_!(0r@=rjjze_x#5y(=+4x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -51,6 +51,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 #AUTHENTICATION_BACKENDS = [
  #   'ShiftApp.authentication.authBackend'
@@ -144,7 +148,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = 'akdbf6.do'
+EMAIL_HOST_PASSWORD = ''
 
 
 # Default primary key field type

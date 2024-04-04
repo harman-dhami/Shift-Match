@@ -140,11 +140,21 @@ nav .design:hover,
     border-radius: 1%;
 }
 
+/* .right-column {
+  display: flex;
+  flex-direction: column;
+  background-color: green;
+} */
+
 #calendar {
-    width: 250vh;
-    height: 90vh;
     margin: 2% 2% 0 2%;
 }
+
+/* Edit */
+/* button .bxs-plus-circle{
+  font-size: 20px;
+  color: #2d53da;
+} */
 
 .popper,
 .tooltip {
@@ -157,7 +167,13 @@ nav .design:hover,
   box-shadow: 0 0 2px rgba(0,0,0,0.5);
   padding: 10px;
   text-align: center;
+  opacity: 1;
 }
+
+.tooltip-inner {
+  background: transparent;
+}
+
 .style5 .tooltip {
   background: #1E252B;
   color: #FFFFFF;

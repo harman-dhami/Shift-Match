@@ -35,7 +35,7 @@
 
                     <a class="design" href="{% url 'ShiftStatusView' %}"><i class="bx bx-loader"></i>Status</a>
 
-                    <a class="design" href="#"><i class="bx bx-chat"></i>Chat</a>
+                    <a class="design" href="{% url 'Chatview' %}"><i class="bx bx-chat"></i>Chat</a>
 
                     <a class="design" href="{% url 'SettingsView' %}"><i class="bx bx-cog"></i>Settings</a>
                     <br>
@@ -60,15 +60,7 @@
                     <div class="title">UPCOMING SHIFTS
                         <i class="bx bxs-plus-circle"></i>
                     </div>
-                    {% for shift in upcomingShifts %}
-                    <div class="shift">
-                        <p>Date: {{shift.shiftStart.date}} </p>
-                        <p>Time: {{shift.shiftStart.time}} </p>
-                        <p>Role: {{shift.qualification}} </p>
-                        <p>Location: {{shift.location}} </p>
-                    </div>
-                    {% endfor %}
-                    
+                    <div id="calendar"></div>
                 </div>
 
                 <div id="shift-status">
@@ -155,6 +147,26 @@
         </div>
 
     </div>
+
+    <script src = 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarE1 = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarE1, {
+                initialView: 'timeGridWeek',
+                timezone: 'UTC',
+                allDay: false,
+                selectable: true,
+                events: {{ upcomingShifts|safe }},
+                timeFormat: 'h:mm:ss ZZ',
+            });
+            calendar.render();
+        })
+
+
+
+    </script>
 
 </body>
 
