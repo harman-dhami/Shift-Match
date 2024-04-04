@@ -40,7 +40,7 @@
 
                     <a class="design" href="{% url 'ShiftStatusView' %}"><i class="bx bx-loader"></i>Status</a>
 
-                    <a class="design" href="#"><i class="bx bx-chat"></i>Chat</a>
+                    <a class="design" href="{% url 'Chatview' %}"><"><i class="bx bx-chat"></i>Chat</a>
 
                     <a class="design" href="{% url 'SettingsView' %}"><i class="bx bx-cog"></i>Settings</a>
                     <br>
@@ -51,18 +51,10 @@
                 
             </div>
 
-
-            <!-- <div class="right-column">
-
-
-            </div> -->
-
             <div id='calendar'>
                 <button hx-get="{% url 'addShift' %}" hx-target="#dialog" style="font-size: 30px; color: #2d53da;"
                 ><i class="bx bxs-plus-circle"></i></button>
             </div>
-
-
 
         </div>
 

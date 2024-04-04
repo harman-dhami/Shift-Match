@@ -35,7 +35,7 @@
 
                     <a class="design" href="{% url 'ShiftStatusView' %}"><i class="bx bx-loader"></i>Status</a>
 
-                    <a class="design" href="#"><i class="bx bx-chat"></i>Chat</a>
+                    <a class="design" href="{% url 'Chatview' %}"><"><i class="bx bx-chat"></i>Chat</a>
 
                     <a class="design" href="{% url 'SettingsView' %}"><i class="bx bx-cog"></i>Settings</a>
                     <br>
@@ -44,35 +44,6 @@
                     <a class="design" href="{% url 'userLogout' %}"><i class="bx bx-log-out"></i>Logout</a>
                 </nav>
             </div>
-
-            <!-- <i class="bx bxs-message-rounded"></i>
-            <i class="bx bxs-x-circle"></i>
-            <i class="bx bxs-check-circle"></i> -->
-
-            <!-- <form action="{% url 'PickupPoolView' %}" method="POST">
-                {% csrf_token %}
-                {{ form }}
-                <input type="submit" name="post_shift" value="Post Shift">
-                <input type="submit" name="shift_match" value="Shift Match">
-            </form>
-        </div>
-
-        {% for shift in shifts %}
-
-        <div id="shift">
-            <div class="info">
-                <img src=" " alt="picture">
-                <i class="bx bxs-message-rounded"></i>
-                Shift Start: {{ shift.shiftStart}}
-                Shift End: {{ shift.shiftEnd}}
-                Hours: {{ shift.hours}}
-                Owner: {{ shift.username}}
-                Shift Exchange: {{ shift.dateAvailable}}
-            </div>
-            <i class="bx bxs-x-circle"></i>
-            <i class="bx bxs-check-circle"></i>
-        </div>
-        {% endfor %} -->
 
             <div class="right-column">
 
@@ -88,20 +59,34 @@
                         </div>
                         {% for shift in notPaid %}
                         <div id="pool-details">
-                            <img src=" " alt="picture">
-                            <div class="info">
-                                <p class="name"> {{shift.username.firstName}} </p>
-                                <i class="bx bx-message-rounded"></i>
-                                <p>Date: {{shift.shiftStart.date}} </p>
-                                <p>Time: {{shift.shiftStart.time}} </p>
-                                <p>Role: {{shift.qualification}} </p>
-                                <p>Location: {{shift.location}} </p>
+                            <div id="picture">
+                                <img src=" " alt="picture">
+                            </div>
+                            <div class="container">
+                                <div id="users-name">
+                                    <p class="name"> {{shift.username.firstName}} </p>
+                                    <i class="bx bx-message-rounded"></i>
+                                </div>
+                                <div id="shift">
+                                    <a>Date:
+                                        <p> {{shift.shiftStart.date}} </p>
+                                    </a>
+                                    <a>Time:
+                                        <p>{{shift.shiftStart.time}} </p>
+                                    </a>
+                                    <a>Role:
+                                        <p>{{shift.qualification}} </p>
+                                    </a>
+                                    <a>Location:
+                                        <p>{{shift.location}} </p>
+                                    </a>
+                                </div>
                             </div>
                             <i class="bx bxs-x-circle"></i>
                             <i class="bx bxs-check-circle"></i>
                         </div>
                         {% endfor %}
-                        
+
                     </div>
 
                     <div id="paid-shifts">
@@ -111,34 +96,36 @@
                         </div>
                         {% for shift in paid %}
                         <div id="pool-details">
-                            <img src=" " alt="picture">
-                            <div class="info">
-                                <p class="name"> {{shift.username.firstName}} </p>
-                                <i class="bx bx-message-rounded"></i>
-                                <p>Date: {{shift.shiftStart.date}} </p>
-                                <p>Time: {{shift.shiftStart.time}} </p>
-                                <p>Role: {{shift.qualification}} </p>
-                                <p>Location: {{shift.location}} </p>
-                                <p>Amount: ${{shift.moneyAmount}} </p>
+                            <div id="picture">
+                                <img src=" " alt="picture">
+                            </div>
+                            <div class="container">
+                                <div id="users-name">
+                                    <p class="name"> {{shift.username.firstName}} </p>
+                                    <i class="bx bx-message-rounded"></i>
+                                </div>
+                                <div id="shift">
+                                    <a>Date:
+                                        <p> {{shift.shiftStart.date}} </p>
+                                    </a>
+                                    <a>Time:
+                                        <p>{{shift.shiftStart.time}} </p>
+                                    </a>
+                                    <a>Role:
+                                        <p>{{shift.qualification}} </p>
+                                    </a>
+                                    <a>Location:
+                                        <p>{{shift.location}} </p>
+                                    </a>
+                                    <a>Amount:
+                                        <p>${{shift.moneyAmount}} </p>
+                                    </a>
+                                </div>
                             </div>
                             <i class="bx bxs-x-circle"></i>
                             <i class="bx bxs-check-circle"></i>
                         </div>
                         {% endfor %}
-                        <div id="pool-details">
-                            <img src=" " alt="picture">
-                            <div class="info">
-                                <p class="name">Name</p>
-                                <i class="bx bx-message-rounded"></i>
-                                <p>Date:</p>
-                                <p>Time:</p>
-                                <p>Role:</p>
-                                <p>Location:</p>
-                                <p>$$</p>
-                            </div>
-                            <i class="bx bxs-x-circle"></i>
-                            <i class="bx bxs-check-circle"></i>
-                        </div>
                         <div id="pool-details">
                             <img src=" " alt="picture">
                             <div class="info">

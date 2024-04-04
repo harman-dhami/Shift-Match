@@ -91,26 +91,34 @@
             <div class="right-column">
                 <div id="shift-pool">
                     <div class="title">SHIFT POOL</div>
-
-                    <div class="available-shifts">
-                        <img src=" " alt="picture">
-                        
-                        <div class="shift-info">
-                            {% for shift in shiftsInPool %}
-                            <a href="#"> {{shift.username.firstName}} </a>
-                            <div class="shift-time">
-                                <p>Date: {{shift.shiftStart.date}} </p>
-                                <p>Time: {{shift.shiftStart.time}} </p>
-                                <p>Request: Trade or Pick-up</p>
-                                
-                            </div>
-                            
-                        </div>
-                        {% endfor %}
-                        <i class="bx bxs-info-circle"></i>
-                        
+                    <div id="filter">
+                        <p>Filter goes here</p>
                     </div>
-                    
+                    {% for shift in shiftsInPool %}
+                    <div id="pool-details">
+                        <div id="picture">
+                            <img src=" " alt="picture">
+                        </div>
+                        <div class="container">
+                            <div id="users-name">
+                                <p class="name">{{shift.username.firstName}} </p>
+                            </div>
+                            <div id="shift">
+                                <a>Date:
+                                    <p>{{shift.shiftStart.date}} </p>
+                                </a>
+                                <a>Time:
+                                    <p>{{shift.shiftStart.time}} </p>
+                                </a>
+                                <a>Type:
+                                    <p>Request: Trade or Pick-up</p>
+                                </a>
+                            </div>
+                        </div>
+                        <i class="bx bxs-info-circle"></i>
+                    </div>
+                    {% endfor %}
+
                 </div>
 
                 <div id="contacts">
@@ -148,23 +156,21 @@
 
     </div>
 
-    <script src = 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
     <script>
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var calendarE1 = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarE1, {
                 initialView: 'timeGridWeek',
                 timezone: 'UTC',
                 allDay: false,
                 selectable: true,
-                events: {{ upcomingShifts|safe }},
-                timeFormat: 'h:mm:ss ZZ',
+                events: {{ upcomingShifts| safe }},
+            timeFormat: 'h:mm:ss ZZ',
             });
-            calendar.render();
+        calendar.render();
         })
-
-
 
     </script>
 
