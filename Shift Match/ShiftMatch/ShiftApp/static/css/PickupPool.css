@@ -182,26 +182,30 @@ nav .design:hover,
 #free-shifts {
     display: flex;
     flex-direction: column;
-    height: 75vh;
+    width: 45%;
+    max-height: 75vh;
     margin: 2% 1% 0 2%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
+    overflow-y: auto;
 }
 
 #paid-shifts {
     display: flex;
     flex-direction: column;
-    height: 75vh;
+    width: 50%;
+    max-height: 75vh;
     margin: 2% 2% 0 1%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
+    overflow-y: auto;
 }
 
 .title {
     font-size: 17px;
-    padding: 2% 1%;
+    padding: 2% 1% 5% 1%;
     color: #000;
     font-weight: 600;
     overflow: hidden;
@@ -209,9 +213,8 @@ nav .design:hover,
 
 #filter {
     display: flex;
-    flex-grow: 1;
-    height: 5vh;
-    margin: 1% 2% 1% 2%;
+    max-height: 10vh;
+    margin: 2% 2% 1% 2%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
@@ -226,15 +229,13 @@ nav .design:hover,
 
 #pool-details {
     display: flex;
-    flex-grow: 1;
-    height: 15vh;
+    max-height: 15vh;
     margin: 1% 2% 1% 2%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
 }
 
-#pool-details .bxs-x-circle,
 #pool-details .bxs-check-circle {
     align-self: center;
     margin-right: 1%;
@@ -242,40 +243,83 @@ nav .design:hover,
     color: #094b9f;
 }
 
-#pool-details img {
-    width: 20px;
-    height: 20px;
+#pool-details .bxs-check-circle:hover {
+    color: #0c69e2;
+}
+
+#pool-details .bxs-x-circle {
+    align-self: center;
+    margin-right: 1%;
+    font-size: 25px;
+    color: rgb(141, 19, 19);
+}
+
+#pool-details .bxs-x-circle:hover {
+    color: rgb(195, 26, 26);
+}
+
+#picture {
+    display: flex;
+    flex-grow: 1;
+    height: 15vh;
+    margin: 2% 2% 1% 2%;
+}
+
+#picture img {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: 1px solid #000;
     padding: 1rem;
     cursor: pointer;
-    margin: 4% 0 0 2%;
+    margin: 1% 0 0 5%;
 }
 
-.info {
+#users-name {
     display: flex;
+    height: 5vh;
+    margin: 1% 2% 1% 2%;
+    background-color: #fff;
 }
 
-.info .name {
+#users-name .name {
     font-size: 18px;
     text-decoration: none;
     color: #000;
     font-weight: bold;
-    margin-right: 2%;
+    margin: 1.5% 2% 0 -20%;
 }
 
-.info p {
-    /* change when theres shift details */
+#users-name .bx-message-rounded {
+    font-size: 18px;
+    margin: 2.5% 5% 0 0%;
+    color: #000;
+}
+
+.containter {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+#shift {
+    display: flex;
+    height: 1vh;
+    margin: 5% 0 0 -17%;
+}
+
+#shift a {
+    align-self: center;
+    font-size: 15px;
+    color: #000;
+    font-weight: bold;
     margin-right: 5%;
+}
+
+#shift p {
     align-self: center;
     font-size: 15px;
     color: #c2baba;
     font-weight: bold;
-}
-
-.info .bx-message-rounded {
-    font-size: 18px;
-    margin-right: 5%;
-    align-self: center;
-    color: #000;
+    margin-top: 0.5%;
 }

@@ -116,8 +116,7 @@ nav .design:hover,
 
 /* Main Container */
 .wrapper {
-    height: 90vh; /* Changed to 90vh to ensure it's relative to the viewport height */
-    overflow: auto; /* Allow scrolling within the wrapper if needed */
+    height: 90%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -176,7 +175,7 @@ nav .design:hover,
 
 .title {
     font-size: 17px;
-    padding: 2% 1%;
+    padding: 2% 1% 5% 1%;
     color: #000;
     font-weight: 600;
     overflow: hidden;
@@ -184,21 +183,43 @@ nav .design:hover,
 
 /* Left Column */
 .left-column {
+    width: 10%;
     display: flex;
+    flex-grow: 3;
     flex-direction: column;
     gap: 0.5rem;
     margin-left: 5px;
     margin-bottom: 1%;
-    flex-grow: 1; /* Allows column to grow */
-    overflow: hidden; /* Prevents overflow */
 }
 
-/* Shift View */
+.left-column div {
+    flex-grow: 1;
+    margin: 0 8px;
+}
+
+.left-column div+div {
+    margin-top: 8px;
+}
+
 #shift-view {
-    flex-grow: 1; /* Allows this element to grow */
-    overflow: hidden; /* Hides any overflow */
-    margin: 0 1% 1% 2%;
-    padding-bottom: 1rem; /* Space at the bottom */
+    display: flex;
+    flex-direction: column;
+    max-height: 45vh;
+    margin: 0 1% 0 2%;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+#shift-status {
+    display: flex;
+    flex-direction: column;
+    height: 20vh;
+    margin: 1.5% 1% 0.3% 2%;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
 }
 
 /* Content */
@@ -210,25 +231,6 @@ nav .design:hover,
 #shift-view .bxs-plus-circle {
     font-size: 20px;
     color: #094b9f;
-}
-
-#shift {
-    display: flex;
-    flex-grow: 1;
-    height: 10vh;
-    margin: 0% 2% 2% 2%;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 10px;
-}
-
-#shift p {
-    align-self: center;
-    margin-left: 2%;
-    margin-right: 15%;
-    /* remove or change when theres shift details */
-    color: #c2baba;
-    font-weight: bold;
 }
 
 #status-wrapper {
@@ -292,17 +294,18 @@ nav .design:hover,
 #shift-pool {
     display: flex;
     flex-direction: column;
-    height: 50vh;
+    max-height: 70vh;
     margin: 2.5% 2.5% 0 1%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
+    overflow-y: auto;
 }
 
 #contacts {
     display: flex;
     flex-direction: column;
-    height: 20vh;
+    max-height: 30vh;
     margin: 1.5% 2.5% 0.3% 1%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -312,8 +315,7 @@ nav .design:hover,
 /* Content */
 #filter {
     display: flex;
-    flex-grow: 1;
-    height: 5vh;
+    max-height: 10vh;
     margin: 0 2% 2% 2%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -327,24 +329,34 @@ nav .design:hover,
     margin-left: 40%;
 }
 
-#available-shifts {
+#pool-details {
     display: flex;
-    flex-direction: row;
-    height: 8vh;
-    margin: 0% 2% 3% 2%;
+    max-height: 15vh;
+    margin: 1% 2% 2% 2%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
-    align-items: center;
 }
 
-#available-shifts .bxs-info-circle {
+#pool-details .bxs-info-circle {
+    align-self: center;
+    margin-right: 2%;
     font-size: 25px;
     color: #094b9f;
-    margin-right: 2%;
 }
 
-#available-shifts img {
+#pool-details .bxs-info-circle:hover {
+    color: #0c69e2;
+}
+
+#picture {
+    display: flex;
+    flex-grow: 1;
+    height: 15vh;
+    margin: 2% 2% 1% 2%;
+}
+
+#picture img {
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -354,22 +366,47 @@ nav .design:hover,
     margin: 0 2%;
 }
 
-.shift-info a {
+#users-name {
+    display: flex;
+    height: 5vh;
+    margin: 1% 2% 1% 2%;
+    background-color: #fff;
+}
+
+#users-name .name {
     font-size: 15px;
     text-decoration: none;
     color: #000;
     font-weight: bold;
+    margin: 1.5% 2% 0 -13%;
 }
 
-.shift-time {
+.containter {
     display: flex;
+    flex-direction: column;
+    width: 80%;
 }
 
-.shift-time p {
-    margin-right: 20px;
+#shift {
+    display: flex;
+    height: 1vh;
+    margin: 5% 0 0 -10%;
+}
+
+#shift a {
+    align-self: center;
     font-size: 13px;
+    color: #000;
     font-weight: bold;
+    margin-right: 5%;
+}
+
+#shift p {
+    align-self: center;
+    font-size: 13px;
     color: #c2baba;
+    font-weight: bold;
+    margin-top: 0.5%;
 }
 
 #contact {

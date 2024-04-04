@@ -127,7 +127,6 @@ nav .design:hover,
 #pages {
     width: 95%;
     margin: 0 1% 1% 1%;
-    /* flex-grow: 1; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -146,6 +145,7 @@ nav .design:hover,
     gap: 0.5rem;
     margin-left: 5px;
     margin-bottom: 1%;
+    max-height: 93.5vh;
 }
 
 .left-column div {
@@ -161,31 +161,32 @@ nav .design:hover,
     display: flex;
     font-size: 20px;
     color: #000;
-    height: 0.1vh;
-    margin: 2% 0 0 2.5%;
+    max-height: 10.5vh;
+    margin: 2% 0 2.5% 2.5%;
     font-weight: 600;
-    padding: 2% 1%;
-    overflow: hidden;
+    padding: 2% 1% 1%;
 }
 
-#owned-shift {
+#add-shift {
     display: flex;
     flex-direction: column;
-    height: 35vh;
+    max-height: 50vh;
+    margin: 0 1% 0 2%;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+#remove-shift {
+    display: flex;
+    flex-direction: column;
+    max-height: 50vh;
     margin: 2.5% 1% 0 2%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
-}
-
-#shift-for-grabs {
-    display: flex;
-    flex-direction: column;
-    height: 35vh;
-    margin: 2.5% 1% 0 2%;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 10px;
+    overflow-y: auto;
 }
 
 /* Right Column */
@@ -211,17 +212,18 @@ nav .design:hover,
 #shift-pool {
     display: flex;
     flex-direction: column;
-    height: 35vh;
+    max-height: 92vh;
     margin: 2.5% 2% 0 2%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
+    overflow-y: auto;
 }
 
 /* Main Content */
 .title {
     font-size: 17px;
-    padding: 2% 1%;
+    padding: 2% 1% 5% 1%;
     color: #000;
     font-weight: 600;
     overflow: hidden;
@@ -229,64 +231,82 @@ nav .design:hover,
 
 #shift {
     display: flex;
-    flex-grow: 1;
-    height: 10vh;
+    max-height: 15vh;
     margin: 1% 2% 1% 2%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
 }
 
-.details {
+#details {
     display: flex;
 }
 
-.details p {
-    /* change when theres shift details */
-    margin-right: 5%;
-    margin-left: 1%;
+#details p {
+    /* change right margin when theres shift details */
+    margin: 3% 5% 3% 1%;
     align-self: center;
     font-size: 15px;
     color: #c2baba;
     font-weight: bold;
 }
 
-#shift .bxs-plus-circle,
-#shift .bxs-x-circle {
+#shift .bxs-plus-circle {
     align-self: center;
     margin-right: 1%;
     font-size: 20px;
     color: #094b9f;
 }
 
+#shift .bxs-plus-circle:hover {
+    color: #0c69e2;
+}
+
+#shift .bxs-x-circle {
+    align-self: center;
+    margin-right: 1%;
+    font-size: 20px;
+    color: rgb(141, 19, 19);
+}
+
+#shift .bxs-x-circle:hover {
+    color: rgb(195, 26, 26);
+}
+
 #filter {
-    display: flex;
-    flex-grow: 1;
-    height: 5vh;
-    margin: 1% 2% 1% 2%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    max-height: 30vh;
+    margin: 0 2% 1% 2%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
 }
 
-#filter p {
-    align-self: center;
-    color: red;
-    font-weight: bold;
-    margin-left: 40%;
+#filter form {
+    display: flex;
+    flex-direction: column;
+    margin: 2% 1% 2% 1%;
+}
+
+#filter form {
+    display: flex;
+}
+
+#filter input {
+    margin: 1% 0 0 0;
 }
 
 #pool-details {
     display: flex;
-    flex-grow: 1;
-    height: 15vh;
+    max-height: 15vh;
     margin: 1% 2% 1% 2%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
 }
 
-#pool-details .bxs-x-circle,
 #pool-details .bxs-check-circle {
     align-self: center;
     margin-right: 1%;
@@ -294,40 +314,83 @@ nav .design:hover,
     color: #094b9f;
 }
 
-#pool-details img {
-    width: 20px;
-    height: 20px;
+#pool-details .bxs-check-circle:hover {
+    color: #0c69e2;
+}
+
+#pool-details .bxs-x-circle {
+    align-self: center;
+    margin-right: 1%;
+    font-size: 25px;
+    color: rgb(141, 19, 19);
+}
+
+#pool-details .bxs-x-circle:hover {
+    color: rgb(195, 26, 26);
+}
+
+#picture {
+    display: flex;
+    flex-grow: 1;
+    height: 15vh;
+    margin: 2% 2% 1% 2%;
+}
+
+#picture img {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: 1px solid #000;
     padding: 1rem;
     cursor: pointer;
-    margin: 5% 0 0 2%;
+    margin: 1% 0 0 5%;
 }
 
-.info {
+#users-name {
     display: flex;
+    height: 5vh;
+    margin: 1% 2% 1% 2%;
+    background-color: #fff;
 }
 
-.info .name {
+#users-name .name {
     font-size: 18px;
     text-decoration: none;
     color: #000;
     font-weight: bold;
-    margin-right: 2%;
+    margin: 1.5% 2% 0 -20%;
 }
 
-.info p {
-    /* change when theres shift details */
+#users-name .bx-message-rounded {
+    font-size: 18px;
+    margin: 2.5% 5% 0 0%;
+    color: #000;
+}
+
+.containter {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+#shifts-in-pool {
+    display: flex;
+    height: 1vh;
+    margin: 5% 0 0 -17%;
+}
+
+#shifts-in-pool a {
+    align-self: center;
+    font-size: 15px;
+    color: #000;
+    font-weight: bold;
     margin-right: 5%;
+}
+
+#shifts-in-pool p {
     align-self: center;
     font-size: 15px;
     color: #c2baba;
     font-weight: bold;
-}
-
-.info .bx-message-rounded {
-    font-size: 18px;
-    margin-right: 5%;
-    align-self: center;
-    color: #000;
+    margin-top: 0.5%;
 }
