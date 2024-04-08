@@ -9,7 +9,8 @@
     <!-- <link rel="stylesheet" href="Calendar.css"> -->
     <link rel="stylesheet" href="{% static 'css/Calendar.css' %}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -17,7 +18,7 @@
 </head>
 
 <body>
-    
+
 
     <div class="wrapper">
 
@@ -48,12 +49,11 @@
                     <br>
                     <a class="design" href="{% url 'userLogout' %}"><i class="bx bx-log-out"></i>Logout</a>
                 </nav>
-                
+
             </div>
 
             <div id='calendar'>
-                <button hx-get="{% url 'addShift' %}" hx-target="#dialog" style="font-size: 30px; color: #2d53da;"
-                ><i class="bx bxs-plus-circle"></i></button>
+                <button hx-get="{% url 'addShift' %}" hx-target="#dialog"></button>
             </div>
 
         </div>
@@ -62,64 +62,83 @@
             <div id="dialog" class="modal-dialog" hx-target="this"></div>
         </div>
 
+        <script src="https://unpkg.com/htmx.org@1.9.11"
+            integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+        <script>
+            (function () {
 
-        
-    <script src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-0gxUXCCR8yv9FM2b+U3FDbsKthCI66oH5IA9fHppQq9DDMHuMauqq1ZHBpJxQ0J0" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-        (function(){
+                const modal = new bootstrap.Modal(document.getElementById("modal"))
 
-            const modal = new bootstrap.Modal(document.getElementById("modal"))
+                htmx.on("htmx:afterSwap", (e) => {
+                    if (e.detail.target.id === "dialog") {
+                        modal.show()
+                    }
+                })
+            })()
 
-            htmx.on("htmx:afterSwap", (e) => {
-                if (e.detail.target.id === "dialog") {
-                    modal.show()
-                }
-            }) 
-        })()
-        
-    </script>
-    <script>
-        (function(){
-            htmx.on("htmx:beforeSwap", (e) => {
-                if (e.detail.target.id == "dialog" && !e.detail.xhr.response) {
-                  modal.hide()
-                  e.detail.shouldSwap = false
-                }
-              })
-        })()
-    </script>
-    <script src = 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarE1 = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarE1, {
-                initialView: 'dayGridMonth',
-                timezone: 'UTC',
-                allDay: false,
-                selectable: true,
-                eventRender: function(info) {
-                    $(info.e1).tooltip({
-                      title: info.event.extendedProps.description,
-                      placement: 'top',
-                      trigger: 'hover',
-                      container: 'body'
-                    });
-                },
-                events: {{ shifts|safe }},
+        </script>
+        <script>
+                (function () {
+                    htmx.on("htmx:beforeSwap", (e) => {
+                        if (e.detail.target.id == "dialog" && !e.detail.xhr.response) {
+                            modal.hide()
+                            e.detail.shouldSwap = false
+                        }
+                    })
+                })()
+        </script>
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var calendarE1 = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarE1, {
+                    initialView: 'dayGridMonth',
+                    timezone: 'UTC',
+                    allDay: false,
+                    selectable: true,
+                    customButtons: {
+                        addShiftButton: {
+                            icon: 'bi bi-calendar-plus',
+                            click: function () {
+                                document.querySelector('[hx-get="{% url "addShift" %}"]').click();
+                            }
+
+                        }
+                    },
+
+                    headerToolbar: {
+                        left: 'title',
+                        center: '',
+                        right: 'addShiftButton today prev,next'
+                    },
+
+                    eventRender: function (info) {
+                        $(info.e1).tooltip({
+                            title: info.event.extendedProps.description,
+                            placement: 'top',
+                            trigger: 'hover',
+                            container: 'body'
+                        });
+                    },
+
+                    events: {{ shifts| safe }},
                 timeFormat: 'h:mm:ss ZZ',
             });
             calendar.render();
         })
-    </script>
+        </script>
 
-    <script>
-        $(document).ready(function() {
-            $('#locations').select2({
-                dropdownParent: $('#locations')
+        <script>
+            $(document).ready(function () {
+                $('#locations').select2({
+                    dropdownParent: $('#locations')
+                });
             });
-        });
-    </script>
+        </script>
 </body>
 
 </html>
