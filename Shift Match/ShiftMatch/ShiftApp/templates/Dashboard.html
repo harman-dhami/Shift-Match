@@ -47,7 +47,7 @@
 
             <div class="left-column">
                 <div id="header">
-                    <img src="logo-png.png" alt="picture">
+                    <img src="logo-transparent.png" alt="picture">
                     <div class="title">
                         WELCOME BACK,
                         <br>
@@ -57,9 +57,6 @@
                 </div>
 
                 <div id="shift-view">
-                    <div class="title">UPCOMING SHIFTS
-                        <i class="bx bxs-plus-circle"></i>
-                    </div>
                     <div id="calendar"></div>
                 </div>
 
@@ -162,10 +159,10 @@
         document.addEventListener('DOMContentLoaded', function () {
             var calendarE1 = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarE1, {
-                initialView: 'timeGridWeek',
+                initialView: 'listWeek',
                 timezone: 'UTC',
-                allDay: false,
                 selectable: true,
+                contentHeight: 250,
                 events: {{ upcomingShifts| safe }},
             timeFormat: 'h:mm:ss ZZ',
             });

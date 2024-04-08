@@ -54,47 +54,59 @@
                     <h1>Settings</h1>
                 </div>
 
-                    <div id="main-content">
-                        <div id="settings">
-                            <div id="setting">
-                                <p>First Name: {{firstName}} </p>
-                            </div>
-                            <div id="setting">
-                                <p>Last Name: {{lastName}} </p>
-                            </div>
-                            <div id="setting">
-                                <p>Email: {{email}} </p>
-                            </div>
-                            <div id="setting">
-                                <p>Password: {{password}} </p>
-                            </div>
-                            <form action="{% url 'SettingsView' %}" method="POST">
-                                {% csrf_token %}
-                            <div id="setting">
-                                <p>Roles: {{roles}}</p>
-                                <select class="js-example-basic-multiple" id="locations" name="locations[]" multiple="multiple">
-                                {% for i in locations %}
-                                    <option name="role" value="{{i}}">{{i}}</option>
-                                {% endfor %}
-                            </div>
-                            </form>
-                            
-                            <div id="setting">
-                                <p>Notifications</p>
+                <div id="main-content">
+                    <div id="settings">
+                        <div id="profile">
+                            <div class="picture"></div>
+                            <button class="edit">Edit profile</button>
+                        </div>
+                        <div id="account">
+                            <h6>
+                                <i class="bx bxs-user"></i>
+                                Account:
+                            </h6>
+                            <p>First Name: {{firstName}} </p>
+                            <p>Last Name: {{lastName}} </p>
+                            <p>Email: {{email}} </p>
+                            <p>Password: {{password}} </p>
+                        </div>
+                        <div id="notifications">
+                            <h6>
+                                <i class="bx bxs-bell"></i>
+                                Notifications:
+                            </h6>
+                            <p>Notifications: 
+                                <i class="bx bxs-toggle-left"></i>
+                            </p>
+                        </div>
+                        <form action="{% url 'SettingsView' %}" method="POST">
+                            {% csrf_token %}
+                            <div id="role">
+                                <h6>
+                                    <i class="bx bxs-briefcase"></i>
+                                    Job:
+                                </h6>
+                                <p>
+                                    Job Roles:{{roles}} <select class="js-example-basic-multiple" id="locations"
+                                        name="locations[]" multiple="multiple">
+                                        {% for i in locations %}
+                                        <option name="role" value="{{i}}">{{i}}</option>
+                                        {% endfor %}
+                                </p>
                             </div>
                             <input type="submit" value="Save">
-                            </form>
-                        </div>
+                        </form>
                     </div>
+                </div>
             </div>
 
         </div>
 
-<script>
-    $(document).ready(function() {
-        $('#locations').select2();
-    });
-</script>
+        <script>
+            $(document).ready(function () {
+                $('#locations').select2();
+            });
+        </script>
 
 </body>
 
