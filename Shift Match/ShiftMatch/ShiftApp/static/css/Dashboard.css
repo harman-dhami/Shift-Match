@@ -160,6 +160,7 @@ nav .design:hover,
     flex-direction: column;
     font-size: 20px;
     color: #000;
+    margin-top: 3%;
 }
 
 #header h1 {
@@ -204,7 +205,7 @@ nav .design:hover,
 #shift-view {
     display: flex;
     flex-direction: column;
-    max-height: 45vh;
+    max-height: 50vh;
     margin: 0 1% 0 2%;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -223,21 +224,53 @@ nav .design:hover,
 }
 
 /* Content */
-#shift-view .title {
-    display: flex;
-    justify-content: space-between;
+#calendar {
+    margin: 2% 0 2% 0;
 }
 
-#shift-view .bxs-plus-circle {
-    font-size: 20px;
-    color: #094b9f;
+#calendar .fc-toolbar-title {
+    margin: 3% 0 0 9%;
+    font-size: 23px;
+}
+
+#calendar .fc-toolbar-chunk button {
+    font-size: 13px;
+}
+
+#calendar .fc-toolbar-chunk .fc-today-button {
+    margin-left: 30%;
+}
+
+#calendar .fc-view-harness {
+    margin-top: -0.5%;
+}
+
+#calendar .fc-cell-shaded {
+    margin: 1% -2% 0 -2%;
+}
+
+#calendar .fc-list-empty {
+    margin-top: 2%;
+    height: 32vh;
+}
+
+#calendar .fc-list-empty-cushion {
+    text-align: center;
+}
+
+#calendar .fc-list-day-text {
+    margin-left: 2%;
+}
+
+#calendar .fc-list-day-side-text {
+    margin-right: 2%;
 }
 
 #status-wrapper {
     display: flex;
     flex-direction: row;
     height: 55vh;
-    margin: 1% 2% 1% 2%;
+    margin: -1% 2% 1% 2%;
 }
 
 #status {
@@ -374,7 +407,7 @@ nav .design:hover,
 }
 
 #users-name .name {
-    font-size: 15px;
+    font-size: 18px;
     text-decoration: none;
     color: #000;
     font-weight: bold;
@@ -395,7 +428,7 @@ nav .design:hover,
 
 #shift a {
     align-self: center;
-    font-size: 13px;
+    font-size: 14px;
     color: #000;
     font-weight: bold;
     margin-right: 5%;
@@ -403,7 +436,7 @@ nav .design:hover,
 
 #shift p {
     align-self: center;
-    font-size: 13px;
+    font-size: 14px;
     color: #c2baba;
     font-weight: bold;
     margin-top: 0.5%;

@@ -127,7 +127,6 @@ nav .design:hover,
 #pages {
     width: 95%;
     margin: 0 1% 1% 1%;
-    /* flex-grow: 1; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -174,28 +173,121 @@ nav .design:hover,
     display: flex;
     flex-direction: column;
     margin: 0 1% 0 1%;
-    height: 75vh;
+    max-height: 80vh;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
 }
 
-#setting {
+#profile {
     display: flex;
-    flex-grow: 1;
-    height: 7vh;
-    margin: 2% 1% 0 1%;
-    background-color: #fff;
+    flex-direction: column;
+    margin: 1% 1% 5% 1%;
+    max-height: 100vh;
+    background-color: #ADD1FF;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='100' y1='33' x2='100' y2='-3'%3E%3Cstop offset='0' stop-color='%23000' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='1'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='100' y1='135' x2='100' y2='97'%3E%3Cstop offset='0' stop-color='%23000' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='%238bafdb' fill-opacity='0.6'%3E%3Crect x='100' width='100' height='100'/%3E%3Crect y='100' width='100' height='100'/%3E%3C/g%3E%3Cg fill-opacity='0.5'%3E%3Cpolygon fill='url(%23a)' points='100 30 0 0 200 0'/%3E%3Cpolygon fill='url(%23b)' points='100 100 0 130 0 100 200 100 200 130'/%3E%3C/g%3E%3C/svg%3E");
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
-    align-items: center;
 }
 
-#setting p {
-    margin-left: 1%;
-    font-size: 15px;
+#main-content #settings .picture {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 1rem;
+    cursor: pointer;
+    margin: 1% 0 -8% 1%;
+    background-image: url('#');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #fff;
+}
+
+#main-content #settings button {
+    margin: 1% 0 1% 90%;
+    height: 30px;
+    width: 100px;
+    background-color: #151111;
+    color: #fff;
+    font-size: 12px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+}
+
+#main-content #settings button:hover {
+    background-color: #8371fd;
+}
+
+#account,
+#notifications,
+#role {
+    display: flex;
+    flex-direction: column;
+    max-height: 50vh;
+    margin: 0.5% 1% 0 1%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+}
+
+#account h6,
+#notifications h6,
+#role h6 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 1% 0 1% 1%;
+}
+
+#account .bxs-user,
+#notifications .bxs-bell,
+#role .bxs-briefcase {
+    font-size: 18px;
+    margin: 0 0.2% 0 0;
+    color: #094b9f;
+}
+
+#account p,
+#role p {
+    margin: 0 0 1% 1%;
+    font-size: 14px;
     text-decoration: none;
-    color: #000;
+    color: #bababa;
     font-weight: bold;
     margin-right: 2%;
+}
+
+#notifications p {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 0 1%;
+    font-size: 14px;
+    text-decoration: none;
+    color: #bababa;
+    font-weight: bold;
+    margin-right: 2%;
+}
+
+#notifications .bxs-toggle-left {
+    font-size: 30px;
+    color: #094b9f;
+    margin: 0 0 0 90%;
+}
+
+form input {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 0 97.5%;
+    height: 30px;
+    width: 42px;
+    background-color: #151111;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    color: #fff;
+    padding: 0 0 0 0.4%;
+}
+
+form input:hover {
+    background-color: #8371fd;
 }

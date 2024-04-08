@@ -231,8 +231,7 @@ main.sign-up-mode .carousel {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
-  margin-top: 20%;
-}
+  margin-top: 25%;
 
 @media (max-width: 850px) {
   .box {

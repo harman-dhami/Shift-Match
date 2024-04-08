@@ -138,23 +138,135 @@ nav .design:hover,
   border-radius: 1%;
 }
 
-/* .right-column {
-  display: flex;
-  flex-direction: column;
-  background-color: green;
-} */
-
 #calendar {
   width: 250vh;
   height: 90vh;
   margin: 2% 2% 0 2%;
 }
 
-/* Edit */
-/* button .bxs-plus-circle{
+#calendar .fc-toolbar-title {
+  font-weight: bold;
+}
+
+#calendar .fc-col-header-cell-cushion {
+  color: #000;
+}
+
+#calendar .fc-event-time,
+#calendar .fc-event-title {
+  color: darkcyan;
+}
+
+/* Modal */
+#modal {
+  position: fixed;
+  max-height: 55vh;
+  max-width: 70vh;
+  top: 23%;
+  left: 32%;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 10px;
+}
+
+#modal .add-shift-modal {
+  background-color: #fff;
+  height: 30vh;
+  border-radius: 10px;
+}
+
+#modal .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: -5% 2% 0 2%;
+  border-bottom: 1px solid #1e6fcb;
+}
+
+#modal .calendar-logo {
+  width: 150px;
+  height: 150px;
+  background-image: url('logo-transparent-png.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding: 1px;
+  cursor: pointer;
+  margin: 0 0 0 3%;
+}
+
+#modal .text {
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+}
+
+#modal .text h2 {
   font-size: 20px;
-  color: #2d53da;
-} */
+  font-weight: bold;
+  margin: 25% 0 0 -25%;
+}
+
+#modal .text p {
+  margin: 0 0 0 -25%;
+}
+
+#modal span {
+  font-size: 20px;
+  margin: -4% 0 0 2%;
+}
+
+#modal .modal-content {
+  border: none;
+  margin: 2% 0 0 0;
+}
+
+#modal .modal-content label {
+  margin: 2% 0 2% 5%;
+  font-weight: bold;
+}
+
+#modal .modal-content input[name="shiftStart"] {
+  margin: 0 0 0 10%;
+}
+
+#modal .modal-content input[name="shiftEnd"] {
+  margin: 0 0 0 11%;
+}
+
+#modal .modal-content input[type="text"] {
+  margin: 0 0 0 14.1%;
+  border: 1px solid #000;
+}
+
+#modal .modal-footer {
+  border: none;
+  margin: 4% 0 0 0;
+}
+
+#modal .modal-footer .cancel-btn,
+#modal .modal-footer .save-btn {
+  /* height: 30px;
+  width: 60px; */
+  background-color: #1E252B;
+  color: #fff;
+  font-size: 12px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 10px;
+}
+
+#modal .modal-footer .cancel-btn {
+  margin: 0 5% 0 0;
+}
+
+#modal .modal-footer .save-btn {
+  height: 30px;
+  width: 100px;
+}
+
+#modal .modal-footer button:hover {
+  background-color: #4c5d6c;
+}
 
 .popper,
 .tooltip {
