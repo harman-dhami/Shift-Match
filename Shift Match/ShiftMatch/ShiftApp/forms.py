@@ -45,11 +45,8 @@ class IDRequest(forms.ModelForm):
         
 class MatchingShiftsForm(forms.ModelForm):
     
-    Choices = (('BAGROOM', 'BAGROOM'), ('INBND RNR', 'INBND RNR'), ('Lavs', 'Lavs'), ('CSA', 'CSA'), ('LSA', 'LSA'), ('Feulling', 'Feulling'),('Deice', 'Deice'), ('RT', 'RT'))
-    
     shift = forms.DateField(label="Select Shift Date", widget= forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}), input_formats=["%Y-%m-%d"])
     daysAvailabletoWork = forms.DateField(label="Dates Willing To Work", widget= forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}), input_formats=["%Y-%m-%d"])
-    #rolesNotWillingToWork = forms.ChoiceField(label="Location not willing to work:", choices = Choices)
     
     class Meta:
         model = Shifts
@@ -61,11 +58,11 @@ class MatchingShiftsForm(forms.ModelForm):
         self.fields['shift'].queryset = Shifts.objects.filter(username = username).filter(ShiftPool = False)
         
 class AddShiftForm(forms.ModelForm):
-    hours = forms.CharField(label="Hours:", max_length=100)
+    location = forms.CharField(label="Location", max_length=100)
     
     class Meta:
         model = Shifts
-        fields = ["shiftStart", "shiftEnd", "hours"]
+        fields = ["shiftStart", "shiftEnd", "location"]
 
         widgets = {
             "shiftStart":forms.TextInput(attrs={'type':'datetime-local' }),

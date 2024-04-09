@@ -24,8 +24,8 @@ from .views import registration, userLogin, adminLogin, idRequest, calendarShift
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', registration, name='registration'),
-    path('ShiftApp/', userLogin, name='userLogin'),
+    path('', userLogin, name='userLogin'),
+    path('ShiftApp/registration', registration, name='registration'),
     path('ShiftApp/adminLogin', adminLogin, name='adminLogin'),
     path('ShiftApp/idRequest', idRequest, name='idRequest'),
     path('ShiftApp/calendarShiftInput', calendarShiftInput, name='calendarShiftInput'),

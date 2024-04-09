@@ -30,7 +30,7 @@ class User(AbstractBaseUser):
 class Shifts(models.Model):
     shiftStart = models.DateTimeField()
     shiftEnd = models.DateTimeField()
-    hours = models.IntegerField()
+    hours = models.IntegerField(default=0)
     dateAvailable = models.DateField(default="2024-01-01")
     ShiftPool = models.BooleanField(default=False)
     isPaid = models.BooleanField(default=False)
@@ -53,3 +53,4 @@ class Conversation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     message = models.CharField(blank=True, null=True, max_length=225)
     status = models.CharField(blank=True, null=True, max_length=225)
+    channel = models.CharField(max_length=100, default="my_channel")

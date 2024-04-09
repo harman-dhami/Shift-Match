@@ -61,20 +61,21 @@ def registration(request):
     return render(request, "Login-Registration.html", {"form1": form1})
 
 def userLogin(request):
-    form2 = LoginForm(request.POST)
+    
     if request.method == 'POST':
-            username = request.POST.get('email')
-            password = request.POST.get('password')
+        form2 = LoginForm(request.POST)
+        username = request.POST.get('email')
+        password = request.POST.get('password')
             
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('dashboard')
-            else:
-                print(username, password)
-                messages.error(request, "Username or password is incorrect")
-                return render(request, "Login-Registration.html", {"form2": form2})
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return redirect('dashboard')
+        else:
+            print(username, password)
+            messages.error(request, "Username or password is incorrect")
+            return render(request, "Login-Registration.html", {"form2": form2})
     else:
         form2 = LoginForm()
     return render(request, "Login-Registration.html", {"form2": form2})
@@ -193,7 +194,7 @@ def PickupPoolView(request):
 
 
 def MatchingShiftsSearch(username, shift, daysAvailabletoWork, locationNotWillingToWork, roles):
-    matchingShifts = Shifts.objects.exclude(username=username).filter(shiftStart__contains=daysAvailabletoWork).exclude(qualification__contains=locationNotWillingToWork).filter(dateAvailable__contains=shift).filter(Matching=True)
+    matchingShifts = Shifts.objects.exclude(username=username).filter(shiftStart__contains=daysAvailabletoWork).exclude(qualification__contains=locationNotWillingToWork).filter(dateAvailable__contains=shift).filter(ShiftPool=True)
     print("Try to match Shifts")
     return matchingShifts
 
@@ -214,7 +215,7 @@ def MatchView(request):
         Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(Matching=True)
         Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(dateAvailable=daysAvailabletoWork)
         Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(locationNotWillingToWork=locationNotWillingToWork)
-        Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(ShiftPool=True)
+        #Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(ShiftPool=True)
         matchingShifts = MatchingShiftsSearch(username=username, shift=shift, daysAvailabletoWork=daysAvailabletoWork, locationNotWillingToWork=locationNotWillingToWork, roles=roles)
         schedule.every(5).seconds.do(MatchingShiftsSearch, username, shift, daysAvailabletoWork, locationNotWillingToWork, roles)
         print("Searching...")
@@ -223,10 +224,10 @@ def MatchView(request):
     if (not matchingShifts):
         print ("No Match Found!")  
     else:
-        Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(Matching=False)
-        Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(ShiftPool=False)
-        matchingShifts.update(Matching=False)
-        matchingShifts.update(ShiftPool=False)
+        #Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(Matching=False)
+        #Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(ShiftPool=False)
+        #matchingShifts.update(Matching=False)
+        #matchingShifts.update(ShiftPool=False)
         print(shift, matchingShifts)
         print ("Match Found!")
         #send both users emails
@@ -293,8 +294,8 @@ def addShift(request):
         if form.is_valid():
             shiftStart = form.cleaned_data['shiftStart']
             shiftEnd = form.cleaned_data['shiftEnd']
-            hours = form.cleaned_data['hours']
-            shift = Shifts.objects.create(shiftStart=shiftStart, shiftEnd=shiftEnd, hours=hours, username=request.user)
+            location = form.cleaned_data['location']
+            shift = Shifts.objects.create(shiftStart=shiftStart, shiftEnd=shiftEnd, location=location, username=request.user)
             shift.save()
             return HttpResponse(status=204)
     else:
@@ -311,12 +312,25 @@ def addShift(request):
 
 
 def Chatview(request):
-    
-    users = User.objects.all()
-    user = request.user
+    userTwo = ''
+    user2 = ''
+    channel = ''
+    if request.method == 'POST':
+        userTwo = request.POST.get('user')
+        print(userTwo)
+        if userTwo == 'Group':
+            channel = 'my_channel'
+            conversations(channel)
+        else:
+            user2 = User.objects.get(firstName=userTwo)
+            channel = f'private-chat-{request.user.id}-{user2.id}'
+            conversations(channel)
+    users = User.objects.exclude(username=request.user.username)
     context = {
         "users": users,
-        "user": user,
+        "currentUser": request.user,
+        "userTwo": user2,
+        "channel": channel
     }
     
     return render(request, "Chat.html", context)
@@ -331,15 +345,14 @@ def broadcast(request):
     # create an dictionary from the message instance so we can send only required details to pusher
     message = {'name': message.user.firstName, 'status': message.status, 'message': message.message, 'id': message.id}
     #trigger the message, channel and event to pusher
-    pusher.trigger(u'presence-a_channel', u'an_event', message)
+    pusher.trigger(u'my_channel', u'an_event', message)
     # return a json response of the broadcasted message
     return JsonResponse(message, safe=False)
 
-def conversations(request):
-    data = Conversation.objects.all()
-    # loop through the data and create a new list from them. Alternatively, we can serialize the whole object and send the serialized response 
+def conversations(channel):
+    data = Conversation.objects.all().filter(channel=channel)
     data = [{'name': person.user.firstName, 'status': person.status, 'message': person.message, 'id': person.id} for person in data]
-    # return a json response of the broadcasted messgae
+    print(data)
     return JsonResponse(data, safe=False)
     
 @csrf_exempt
@@ -351,7 +364,7 @@ def delivered(request, id):
         message.status = 'Delivered'
         message.save()
         message = {'name': message.user.firstName, 'status': message.status, 'message': message.message, 'id': message.id}
-        pusher.trigger(u'a_channel', u'delivered_message', message, socket_id)
+        pusher.trigger(u'my_channel', u'delivered_message', message, socket_id)
         return HttpResponse('ok')
     else:
         return HttpResponse('Awaiting Delivery')

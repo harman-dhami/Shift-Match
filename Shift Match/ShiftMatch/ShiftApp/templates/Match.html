@@ -166,12 +166,14 @@
                         <form action="{% url 'MatchView' %}" method="POST">
                             {% csrf_token %}
                             {{form}}
+                            <label>Roles Not Willing To Work
                             <select class="js-example-basic-multiple" id="locations" name="locations[]"
                                 multiple="multiple">
                                 {% for i in locations %}
                                 <option name="locations" value="{{i}}">{{i}}</option>
                                 {% endfor %}
                             </select>
+                            </label>
                             <input type="submit" value="Match">
                         </form>
                     </div>

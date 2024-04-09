@@ -19,18 +19,18 @@
                 <div class="forms-wrap">
 
                     <!-- Login Form -->
-                    <form action="{% url 'userLogin' %}" method="POST" class="login-form">
+                    <form action="{% url 'userLogin' %}" id="loginForm" method="POST" class="login-form">
 
                         <div class="heading">
                             <h2>Welcome Back</h2>
                             <h6>Not registered yet?</h6>
-                            <a href="#" class="toggle">Sign up</a>
+                            <a href="#" id="showRegistrationForm" class="toggle">Sign up</a>
                         </div>
 
                         <div class="actual-from">
                             <div class="input-wrap">
                                 {% csrf_token %}
-                                {{form2 }}
+                                {{form2}}
                                 <br>
                                 <button type="submit" class="btn">Sign In</button>
                             </div>
@@ -43,12 +43,12 @@
                     </form>
 
                     <!-- Registration Form -->
-                    <form action="{% url 'registration' %}" method="POST" class="registration-form">
+                    <form action="{% url 'registration' %}"  id="registrationForm" method="POST" class="registration-form">
 
                         <div class="heading">
                             <h2>Get Started</h2>
                             <h6>Already have an account?</h6>
-                            <a href="#" class="toggle">Sign in</a>
+                            <a href="#" id="showLoginForm" class="toggle">Sign in</a>
                         </div>
 
                         <div class="input-wrap">
@@ -118,6 +118,25 @@
 
         bullets.forEach((bullet) => {
             bullet.addEventListener("click", moveSlider);
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const showLoginFormButton = document.getElementById('showLoginForm');
+            const showRegistrationFormButton = document.getElementById('showRegistrationForm');
+            const loginForm = document.getElementById('loginForm');
+            const registrationForm = document.getElementById('registrationForm');
+        
+            showLoginFormButton.addEventListener('click', function() {
+                loginForm.style.display = 'block';
+                registrationForm.style.display = 'none';
+            });
+        
+            showRegistrationFormButton.addEventListener('click', function() {
+                loginForm.style.display = 'none';
+                registrationForm.style.display = 'block';
+            });
         });
     </script>
 
