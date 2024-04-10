@@ -51,11 +51,6 @@ class MatchingShiftsForm(forms.ModelForm):
     class Meta:
         model = Shifts
         fields = ["shift", "daysAvailabletoWork"]
-    
-    def __init__(self, *args, **kwargs):
-        username = kwargs.pop('username')
-        super(MatchingShiftsForm, self).__init__(*args, **kwargs)
-        self.fields['shift'].queryset = Shifts.objects.filter(username = username).filter(ShiftPool = False)
         
 class AddShiftForm(forms.ModelForm):
     location = forms.CharField(label="Location", max_length=100)

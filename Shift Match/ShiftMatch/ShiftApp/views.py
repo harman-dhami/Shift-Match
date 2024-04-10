@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 import pymongo
 from django.core.mail import send_mail
 from .models import User, Shifts, Conversation
@@ -195,12 +195,12 @@ def PickupPoolView(request):
 
 def MatchingShiftsSearch(username, shift, daysAvailabletoWork, locationNotWillingToWork, roles):
     matchingShifts = Shifts.objects.exclude(username=username).filter(shiftStart__contains=daysAvailabletoWork).exclude(qualification__contains=locationNotWillingToWork).filter(dateAvailable__contains=shift).filter(ShiftPool=True)
-    print("Try to match Shifts")
+    print("Trying to match Shifts")
     return matchingShifts
 
 @login_required
 def MatchView(request):
-    form = MatchingShiftsForm(request.POST or None, username = request.user.username, use_required_attribute = False)
+    form = MatchingShiftsForm()
     daysAvailabletoWork = ""
     shift = ""
     locationNotWillingToWork = ""
@@ -208,41 +208,49 @@ def MatchView(request):
     username = request.user.username
     roles = request.user.qualifications
     if request.method == 'POST':
-        shift = request.POST.get("shift")
-        daysAvailabletoWork = request.POST.get("daysAvailabletoWork") 
-        locationNotWillingToWork = request.POST.getlist("locations[]") 
-        #Updating DB to pool and match shifts
-        Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(Matching=True)
-        Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(dateAvailable=daysAvailabletoWork)
-        Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(locationNotWillingToWork=locationNotWillingToWork)
-        #Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(ShiftPool=True)
-        matchingShifts = MatchingShiftsSearch(username=username, shift=shift, daysAvailabletoWork=daysAvailabletoWork, locationNotWillingToWork=locationNotWillingToWork, roles=roles)
-        schedule.every(5).seconds.do(MatchingShiftsSearch, username, shift, daysAvailabletoWork, locationNotWillingToWork, roles)
-        print("Searching...")
+        if 'form1' in request.POST:
+            shift = request.POST.get("shift")
+            daysAvailabletoWork = request.POST.get("daysAvailabletoWork") 
+            locationNotWillingToWork = request.POST.getlist("locations[]") 
+            #Updating DB to pool and match shifts
+            Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(Matching=True)
+            Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(dateAvailable=daysAvailabletoWork)
+            Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(locationNotWillingToWork=locationNotWillingToWork)
+            #Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(ShiftPool=True)
+            matchingShifts = MatchingShiftsSearch(username=username, shift=shift, daysAvailabletoWork=daysAvailabletoWork, locationNotWillingToWork=locationNotWillingToWork, roles=roles)
+        if 'form2' in request.POST:
+            shift = request.POST.get("shift")
+            Shifts.objects.filter(id=shift).update(ShiftPool=True)
+        if 'form3' in request.POST:
+            shift = request.POST.get("shift")
+            Shifts.objects.filter(id=shift).update(ShiftPool=False)
+    else:
+        form = MatchingShiftsForm()
     
     print(matchingShifts)
     if (not matchingShifts):
         print ("No Match Found!")  
+        schedule.every(5).seconds.do(MatchingShiftsSearch, username, shift, daysAvailabletoWork, locationNotWillingToWork, roles)
     else:
-        #Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(Matching=False)
-        #Shifts.objects.filter(shiftStart__contains=shift).filter(username=username).update(ShiftPool=False)
-        #matchingShifts.update(Matching=False)
-        #matchingShifts.update(ShiftPool=False)
         print(shift, matchingShifts)
         print ("Match Found!")
         #send both users emails
         
     locations = ["INBND RNR", "LAVS", "CSA", "LSA", "FEULLING", "DEICE"]
-    
+    userShiftsInMatching = Shifts.objects.filter(username=username).filter(Matching=True).filter(ShiftPool=False)
+    userMatchandPool = Shifts.objects.filter(username=username).filter(Matching=True).filter(ShiftPool=True)
     context = {
         "form": form,
         "matchingShifts": matchingShifts,
-        "locations": locations
+        "locations": locations,
+        "userMatchingShifts": userShiftsInMatching,
+        "userMatchingAndPool": userMatchandPool,
+        "form2": True,
+        "form3": True
     }
         
     return render(request, "Match.html",context)
-
-
+    
 @login_required
 def pickingUpShifts(request):
     username = request.user.username
@@ -315,16 +323,17 @@ def Chatview(request):
     userTwo = ''
     user2 = ''
     channel = ''
+    sortedIds = ''
     if request.method == 'POST':
         userTwo = request.POST.get('user')
-        print(userTwo)
         if userTwo == 'Group':
             channel = 'my_channel'
-            conversations(channel)
+            #conversations(request, channel)
         else:
             user2 = User.objects.get(firstName=userTwo)
-            channel = f'private-chat-{request.user.id}-{user2.id}'
-            conversations(channel)
+            sortedIds = sorted([request.user.id, user2.id])
+            channel = '-'.join(map(str, sortedIds))
+            #conversations(request, channel)
     users = User.objects.exclude(username=request.user.username)
     context = {
         "users": users,
@@ -339,20 +348,26 @@ pusher = Pusher(app_id=u'1781407', key=u'4b5bb58a37e41d8eb66d', secret=u'4be0810
 
 @csrf_exempt
 def broadcast(request):
+    channel = ''
+    if request.method == 'POST':
+        channel = request.POST.get('channel', '')
+    print(channel)
     # collect the message from the post parameters, and save to the database
-    message = Conversation(message=request.POST.get('message', ''), status='', user=request.user)
+    message = Conversation(message=request.POST.get('message', ''), status='', user=request.user, channel=channel)
     message.save()
     # create an dictionary from the message instance so we can send only required details to pusher
     message = {'name': message.user.firstName, 'status': message.status, 'message': message.message, 'id': message.id}
     #trigger the message, channel and event to pusher
-    pusher.trigger(u'my_channel', u'an_event', message)
+    pusher.trigger(channel, u'an_event', message)
     # return a json response of the broadcasted message
     return JsonResponse(message, safe=False)
 
-def conversations(channel):
+def conversations(request):
+    channel = ''
+    if request.method == 'GET':
+        channel = request.GET.get('channel', '')
     data = Conversation.objects.all().filter(channel=channel)
     data = [{'name': person.user.firstName, 'status': person.status, 'message': person.message, 'id': person.id} for person in data]
-    print(data)
     return JsonResponse(data, safe=False)
     
 @csrf_exempt

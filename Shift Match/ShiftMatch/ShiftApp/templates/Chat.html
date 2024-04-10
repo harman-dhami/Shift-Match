@@ -180,8 +180,14 @@
       }
     });
 
-    var user_channel = pusher.subscribe('private-chat-{{currentUser.id}}-{{userTwo.id}}');
-    var my_channel = pusher.subscribe('presence-a_channel');
+    var channel = '{{channel}}';
+    var encodedChannel = encodeURIComponent(channel);
+    var currentUserID = '{{currentUser.id}}';
+    var userTwoID = '{{userTwo.id}}';
+    var sortedID = [parseInt({{ currentUser.id }}), parseInt({{ userTwo.id }})].sort((a, b)=> a - b);
+    var unique_channel = sortedID.join('-');
+    var user_channel = pusher.subscribe(unique_channel);
+    var my_channel = pusher.subscribe('my_channel');
     var config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } };
     new Vue({
         el: "#app",
@@ -196,7 +202,7 @@
         },
         methods: {
             sendMessage() {
-                axios.post('broadcast', this.queryParams({message: this.message}), config)
+                axios.post('broadcast', this.queryParams({message: this.message, channel: encodedChannel}), config)
                     .then(response => {
                         this.message = '';
                     });
@@ -204,20 +210,35 @@
             getConversations() {
                 axios.get('conversations', {
                     params: {
-                        channel: {{channel}}
+                        channel: encodedChannel
                     }
                 }).then((response) => {
                     this.conversations = response.data;
                     this.readall();
                 });  
+
             },
             listen() {
                 my_channel.bind("an_event", (data)=> {
                     this.conversations.push(data);
-                    axios.post('/conversations/'+ data.id +'/delivered', this.queryParams({socket_id: socketId}));
+                    axios.post('conversations'+ data.id +'delivered', this.queryParams({socket_id: socketId}));
                 })
                 
                  my_channel.bind("delivered_message", (data)=> {
+                    for(var i=0; i < this.conversations.length; i++){
+                        if (this.conversations[i].id == data.id){
+                            this.conversations[i].status = data.status;
+                        }
+                    }
+                    
+                })
+
+                user_channel.bind("an_event", (data)=> {
+                    this.conversations.push(data);
+                    axios.post('/conversations/'+ data.id +'/delivered', this.queryParams({socket_id: socketId}));
+                })
+
+                user_channel.bind("delivered_message", (data)=> {
                     for(var i=0; i < this.conversations.length; i++){
                         if (this.conversations[i].id == data.id){
                             this.conversations[i].status = data.status;
@@ -245,14 +266,13 @@
                 }
 
                 return array.join("&");
-                }
+            }
         }
     });
 
   </script>
 
   <script>
-
     $(document).ready(function() { 
       $('input[name=user]').change(function(){
            $('form').submit();

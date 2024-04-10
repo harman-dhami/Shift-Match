@@ -48,25 +48,6 @@
                 </nav>
             </div>
 
-            <!-- <form action="{% url 'pickingUpShifts' %}" method="POST">
-                {% csrf_token %}
-                {% for shift in shifts %}
-
-                <div id="shift">
-                    <div class="info">
-                        <img src=" " alt="picture">
-                        <i class="bx bxs-message-rounded"></i>
-                        <input type="hidden" id="shift" name="shift" value="
-                        {{ shift.id}}">
-                        Shift Start: {{ shift.shiftStart}}
-                        Shift End: {{ shift.shiftEnd}}
-                        Hours: {{ shift.hours}}
-                        Owner: {{ shift.username}}
-                        <button type="submit"><i class="bx bxs-check-circle"></i></button>
-                    </div>
-                    {% endfor %}
-                </form> -->
-
             <div class="left-column">
 
                 <div id="header">
@@ -75,14 +56,23 @@
 
                 <div id="add-shift">
                     <div class="title">ADD TO POOL</div>
-                    <div id="shift">
-                        <div id="details">
-                            <p>Date:</p>
-                            <p>Time:</p>
-                            <p>Role:</p>
-                            <p>Location:</p>
-                        </div>
-                        <i class="bx bxs-plus-circle"></i>
+                    {% if form2 %}
+                        <form action="{% url 'MatchView' %}" method="POST" name="form2">
+                            {% csrf_token %}
+                            {% for shift in userMatchingShifts %}
+                                <div id="shift">
+                                    <div id="details">
+                                        <input type="hidden" id="shift" name="shift" value="{{shift.id}}">
+                                        <p>Date: {{shift.shiftStart.date}} </p>
+                                        <p>Time: {{shift.shiftStart.time}} </p>
+                                        <p>Role: {{shift.qualification}} </p>
+                                        <p>Location: {{shift.location}} </p>
+                                    </div>
+                                
+                                    <button type="submit" name="form2" ><i class="bx bxs-plus-circle"></i></button>
+                            {% endfor %}
+                        </form>
+                    {% endif %}
                     </div>
                     <div id="shift">
                         <div id="details">
@@ -115,13 +105,30 @@
 
                 <div id="remove-shift">
                     <div class="title">REMOVE FROM POOL</div>
+                    {% if form3 %}
+                    <form action="{% url 'MatchView' %}" method="POST"  id="form3" name="form3">
+                        {% csrf_token %}
+                    <div id="shift">
+                        <div id="details">
+                        {% for shift in userMatchingAndPool %}
+                            <input type="hidden" id="shift" name="shift" value="{{shift.id}}">
+                            <p>Date: {{shift.shiftStart.date}} </p>
+                            <p>Time: {{shift.shiftStart.time}} </p>
+                            <p>Role: {{shift.qualification}} </p>
+                            <p>Location: {{shift.location}} </p>
+                            <!-- <p>Request:</p> -->
+                        </div>
+                            <button type="submit" name="form3"><i class="bx bxs-x-circle"></i></button>
+                        {% endfor %}
+                    </div>
+                    </form>
+                    {% endif %}
                     <div id="shift">
                         <div id="details">
                             <p>Date:</p>
                             <p>Time:</p>
                             <p>Role:</p>
                             <p>Location:</p>
-                            <p>Request:</p>
                         </div>
                         <i class="bx bxs-x-circle"></i>
                     </div>
@@ -131,7 +138,6 @@
                             <p>Time:</p>
                             <p>Role:</p>
                             <p>Location:</p>
-                            <p>Request:</p>
                         </div>
                         <i class="bx bxs-x-circle"></i>
                     </div>
@@ -141,17 +147,6 @@
                             <p>Time:</p>
                             <p>Role:</p>
                             <p>Location:</p>
-                            <p>Request:</p>
-                        </div>
-                        <i class="bx bxs-x-circle"></i>
-                    </div>
-                    <div id="shift">
-                        <div id="details">
-                            <p>Date:</p>
-                            <p>Time:</p>
-                            <p>Role:</p>
-                            <p>Location:</p>
-                            <p>Request:</p>
                         </div>
                         <i class="bx bxs-x-circle"></i>
                     </div>
@@ -163,7 +158,7 @@
                 <div id="shift-pool">
                     <div class="title">MATCH SHIFTS</div>
                     <div id="filter">
-                        <form action="{% url 'MatchView' %}" method="POST">
+                        <form action="{% url 'MatchView' %}" method="POST"  id="form1" name="form1">
                             {% csrf_token %}
                             {{form}}
                             <label>Roles Not Willing To Work
@@ -174,7 +169,7 @@
                                 {% endfor %}
                             </select>
                             </label>
-                            <input type="submit" value="Match">
+                            <input type="submit" name="form1" value="Match">
                         </form>
                     </div>
                     {% for shift in matchingShifts %}
