@@ -304,20 +304,39 @@ nav .design:hover,
 }
 
 #filter form label {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
 }
 
 #filter #form1 input[name='shift'] {
-    margin: 0 0 0 15%;
+    margin: 2% 0 1% 0;
 }
 
 #filter #form1 input[name='daysAvailabletoWork'] {
-    margin: 0 0 0 7.5%;
+    margin: 2% 0 0 0;
 }
 
 #filter form #roles {
-    margin: 0 0 1% 1.5%;
+    margin: 0 0 0 1.5%;
+}
+
+#filter form span {
+    width: 20vh;
+    margin: 0 0 0 1.5%;
+}
+
+#filter input[type='submit'] {
+    padding: 1%;
+    margin: -8% 0 0 85%;
+    width: 10vh;
+    font-size: 12px;
+    background-color: #151111;
+    color: #fff;
+    border-radius: 20px;
+}
+
+#filter input[type='submit']:hover {
+    background-color: #8371fd;
 }
 
 #pool-details {
