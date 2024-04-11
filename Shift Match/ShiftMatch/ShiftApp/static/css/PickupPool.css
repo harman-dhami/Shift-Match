@@ -185,9 +185,6 @@ nav .design:hover,
     width: 45%;
     max-height: 75vh;
     margin: 2% 1% 0 2%;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 10px;
     overflow-y: auto;
 }
 
@@ -197,9 +194,6 @@ nav .design:hover,
     width: 50%;
     max-height: 75vh;
     margin: 2% 2% 0 1%;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 10px;
     overflow-y: auto;
 }
 
