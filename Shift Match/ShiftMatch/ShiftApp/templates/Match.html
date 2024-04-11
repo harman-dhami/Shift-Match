@@ -55,119 +55,79 @@
                 </div>
 
                 <div id="add-shift">
-                    <div class="title">ADD TO POOL</div>
                     {% if form2 %}
-                        <form action="{% url 'MatchView' %}" method="POST" name="form2">
-                            {% csrf_token %}
-                            {% for shift in userMatchingShifts %}
-                                <div id="shift">
-                                    <div id="details">
-                                        <input type="hidden" id="shift" name="shift" value="{{shift.id}}">
-                                        <p>Date: {{shift.shiftStart.date}} </p>
-                                        <p>Time: {{shift.shiftStart.time}} </p>
-                                        <p>Role: {{shift.qualification}} </p>
-                                        <p>Location: {{shift.location}} </p>
-                                    </div>
-                                
-                                    <button type="submit" name="form2" ><i class="bx bxs-plus-circle"></i></button>
-                            {% endfor %}
-                        </form>
+                    <form action="{% url 'MatchView' %}" method="POST" name="form2">
+                        <div class="title">ADD TO POOL</div>
+                        {% csrf_token %}
+                        {% for shift in userMatchingShifts %}
+                        <div id="shift">
+                            <div id="details">
+                                <input type="hidden" id="shift" name="shift" value="{{shift.id}}">
+                                <a>Date:
+                                    <p> {{shift.shiftStart.date}} </p>
+                                </a>
+                                <a>Time:
+                                    <p>{{shift.shiftStart.time}} </p>
+                                </a>
+                                <a>Role:
+                                    <p>{{shift.qualification}} </p>
+                                </a>
+                                <a>Location:
+                                    <p>{{shift.location}} </p>
+                                </a>
+                            </div>
+                            <button type="submit" name="form2"><i class="bx bxs-plus-circle"></i></button>
+                        </div>
+                        {% endfor %}
+                    </form>
                     {% endif %}
-                    </div>
-                    <div id="shift">
-                        <div id="details">
-                            <p>Date:</p>
-                            <p>Time:</p>
-                            <p>Role:</p>
-                            <p>Location:</p>
-                        </div>
-                        <i class="bx bxs-plus-circle"></i>
-                    </div>
-                    <div id="shift">
-                        <div id="details">
-                            <p>Date:</p>
-                            <p>Time:</p>
-                            <p>Role:</p>
-                            <p>Location:</p>
-                        </div>
-                        <i class="bx bxs-plus-circle"></i>
-                    </div>
-                    <div id="shift">
-                        <div id="details">
-                            <p>Date:</p>
-                            <p>Time:</p>
-                            <p>Role:</p>
-                            <p>Location:</p>
-                        </div>
-                        <i class="bx bxs-plus-circle"></i>
-                    </div>
                 </div>
 
                 <div id="remove-shift">
-                    <div class="title">REMOVE FROM POOL</div>
                     {% if form3 %}
-                    <form action="{% url 'MatchView' %}" method="POST"  id="form3" name="form3">
+                    <form action="{% url 'MatchView' %}" method="POST" id="form3" name="form3">
+                        <div class="title">REMOVE FROM POOL</div>
                         {% csrf_token %}
-                    <div id="shift">
-                        <div id="details">
                         {% for shift in userMatchingAndPool %}
-                            <input type="hidden" id="shift" name="shift" value="{{shift.id}}">
-                            <p>Date: {{shift.shiftStart.date}} </p>
-                            <p>Time: {{shift.shiftStart.time}} </p>
-                            <p>Role: {{shift.qualification}} </p>
-                            <p>Location: {{shift.location}} </p>
-                            <!-- <p>Request:</p> -->
-                        </div>
+                        <div id="shift">
+                            <div id="details">
+                                <input type="hidden" id="shift" name="shift" value="{{shift.id}}">
+                                <a>Date:
+                                    <p> {{shift.shiftStart.date}} </p>
+                                </a>
+                                <a>Time:
+                                    <p>{{shift.shiftStart.time}} </p>
+                                </a>
+                                <a>Role:
+                                    <p>{{shift.qualification}} </p>
+                                </a>
+                                <a>Location:
+                                    <p>{{shift.location}} </p>
+                                </a>
+                                <!-- <p>Request:</p> -->
+                            </div>
                             <button type="submit" name="form3"><i class="bx bxs-x-circle"></i></button>
+                        </div>
                         {% endfor %}
-                    </div>
                     </form>
                     {% endif %}
-                    <div id="shift">
-                        <div id="details">
-                            <p>Date:</p>
-                            <p>Time:</p>
-                            <p>Role:</p>
-                            <p>Location:</p>
-                        </div>
-                        <i class="bx bxs-x-circle"></i>
-                    </div>
-                    <div id="shift">
-                        <div id="details">
-                            <p>Date:</p>
-                            <p>Time:</p>
-                            <p>Role:</p>
-                            <p>Location:</p>
-                        </div>
-                        <i class="bx bxs-x-circle"></i>
-                    </div>
-                    <div id="shift">
-                        <div id="details">
-                            <p>Date:</p>
-                            <p>Time:</p>
-                            <p>Role:</p>
-                            <p>Location:</p>
-                        </div>
-                        <i class="bx bxs-x-circle"></i>
-                    </div>
                 </div>
             </div>
 
             <div class="right-column">
-
                 <div id="shift-pool">
                     <div class="title">MATCH SHIFTS</div>
                     <div id="filter">
-                        <form action="{% url 'MatchView' %}" method="POST"  id="form1" name="form1">
+                        <form action="{% url 'MatchView' %}" method="POST" id="form1" name="form1">
                             {% csrf_token %}
                             {{form}}
-                            <label>Roles Not Willing To Work
-                            <select class="js-example-basic-multiple" id="locations" name="locations[]"
-                                multiple="multiple">
-                                {% for i in locations %}
-                                <option name="locations" value="{{i}}">{{i}}</option>
-                                {% endfor %}
-                            </select>
+                            <label id="roles">Roles Not Willing To Work:
+                                <select class="js-example-basic-multiple" id="locations" name="locations[]"
+                                    multiple="multiple">
+                                    {% for i in locations %}
+                                    <option name="locations" value="{{i}}">{{i}}</option>
+                                    {% endfor %}
+                                </select>
                             </label>
                             <input type="submit" name="form1" value="Match">
                         </form>
@@ -339,7 +299,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <script>
