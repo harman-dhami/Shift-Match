@@ -11,7 +11,7 @@
 body {
     background-color: #d0d7f2;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     overflow: hidden;
 }
@@ -175,7 +175,7 @@ nav .design:hover,
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 10px;
-    overflow-x: auto;
+    overflow-y: auto;
 }
 
 #remove-shift {
@@ -220,7 +220,7 @@ nav .design:hover,
     overflow-y: auto;
 }
 
-/* Main Content */
+/* Left Column Main Content */
 .title {
     font-size: 17px;
     padding: 2% 1% 5% 1%;
@@ -243,12 +243,24 @@ nav .design:hover,
 }
 
 #details p {
-    /* change right margin when theres shift details */
-    margin: 3% 5% 3% 1%;
     align-self: center;
     font-size: 15px;
     color: #c2baba;
     font-weight: bold;
+}
+
+#shift a {
+    margin: 3% 6% 3% 2%;
+    align-self: center;
+    font-size: 15px;
+    color: #000;
+    font-weight: bold;
+    margin-right: 5%;
+}
+
+#shift button {
+    background-color: #fff;
+    margin: 0 1% 0 0;
 }
 
 #shift .bxs-plus-circle {
@@ -273,6 +285,7 @@ nav .design:hover,
     color: rgb(195, 26, 26);
 }
 
+/* Right Column Main Content */
 #filter {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -290,12 +303,21 @@ nav .design:hover,
     margin: 2% 1% 2% 1%;
 }
 
-#filter form {
-    display: flex;
+#filter form label {
+    font-size: 15px;
+    font-weight: bold;
 }
 
-#filter input {
-    margin: 1% 0 0 0;
+#filter #form1 input[name='shift'] {
+    margin: 0 0 0 15%;
+}
+
+#filter #form1 input[name='daysAvailabletoWork'] {
+    margin: 0 0 0 7.5%;
+}
+
+#filter form #roles {
+    margin: 0 0 1% 1.5%;
 }
 
 #pool-details {

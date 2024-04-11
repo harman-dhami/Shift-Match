@@ -122,17 +122,220 @@ nav .design:hover,
     display: flex;
     flex-direction: column;
     margin: 1% 1% 0 1%;
+    position: relative;
 }
 
 #pages {
     width: 95%;
     margin: 0 1% 1% 1%;
-    /* flex-grow: 1; */
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     background-color: #f1f4fc;
     align-self: center;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-    border-radius: 1%;
+    border-radius: 10px;
+    position: relative;
+}
+
+.container {
+    width: 95%;
+    height: 93vh;
+    margin: 0 1% 1% 1%;
+    display: flex;
+    flex-direction: row;
+    background-color: #f1f4fc;
+    align-self: center;
+    position: relative;
+}
+
+/* Left Column */
+.left-column {
+    width: 10%;
+    display: flex;
+    flex-grow: 2;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 93.5vh;
+}
+
+.left-column div {
+    flex-grow: 1;
+    margin: 0 8px;
+}
+
+.left-column div+div {
+    margin-top: 8px;
+}
+
+#panel-heading {
+    display: flex;
+    font-size: 20px;
+    color: #000;
+    max-height: 10.5vh;
+    margin: 2% 1% 2.5% 1%;
+    font-weight: 600;
+    padding: 2% 1% 1%;
+}
+
+#recent-contacts {
+    display: flex;
+    flex-direction: column;
+    max-height: 50vh;
+    margin: 0 1% 0 1%;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+#contacts {
+    display: flex;
+    flex-direction: column;
+    max-height: 50vh;
+    margin: 0 1% 0 1%;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+/* Right Column */
+.right-column {
+    width: 10%;
+    display: flex;
+    flex-grow: 3;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1% 0 0 0;
+}
+
+.right-column div {
+    flex-grow: 1;
+    margin: 0 8px;
+}
+
+.right-column div+div {
+    margin-top: 8px;
+}
+
+/* Left Column Main Content */
+.title {
+    font-size: 17px;
+    padding: 2% 1% 0 1%;
+    color: #000;
+    font-weight: 600;
+    overflow: hidden;
+}
+
+#recent-contacts form {
+    height: 50vh;
+}
+
+#id_work_days {
+    display: flex;
+    flex-direction: column;
+    margin: 2% 0 0 0;
+    max-height: 40vh;
+}
+
+#id_work_days label {
+    display: flex;
+    height: 100vh;
+    margin: 2% 1% 0 2%;
+    padding: 1%;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+}
+
+#id_work_days span {
+    margin: 4% 0 0 2%;
+}
+
+/* Right Column Main Content */
+.panel-primary {
+    height: 91.5vh;
+    max-width: 100%;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+}
+
+.panel-body {
+    padding: 2% 0;
+}
+
+.chat-header {
+    height: 10vh;
+    border-bottom: 1px solid #000;
+}
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    max-height: 66vh;
+    padding: 2% 0;
+    margin: 2% 1% 0 0;
+    background: #fff;
+    overflow-y: auto;
+}
+
+.chat .clearfix {
+    display: flex;
+    flex-direction: row;
+    padding: 1% 2%;
+    margin: 0 0 1.5% 0;
+    max-width: 70%;
+}
+
+.img-circle {
+    display: flex;
+    flex-direction: column;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 0 0 1% 2%;
+}
+
+.chat-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-body .header {
+    margin: 0 0 0.5% 2%;
+}
+
+.chat-body p {
+    padding: 2% 0 2% 3%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+}
+
+.panel-footer {
+    padding: 10px 0 20px 0;
+    position: absolute;
+    bottom: 0;
+    width: 60%;
+}
+
+#btn-input {
+    width: 77.5%;
+    padding: 10px;
+    margin: 0 10px 0 0;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+}
+
+#btn-chat {
+    padding: 10px 20px;
+    margin: 0 1% 0 0;
+    border-radius: 20px;
+    background-color: #151111;
+    color: #fff;
+    cursor: pointer;
+}
+
+#btn-chat:hover {
+    background-color: #8371fd;
 }
