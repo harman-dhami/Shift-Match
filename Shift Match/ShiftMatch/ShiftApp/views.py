@@ -339,7 +339,8 @@ def Chatview(request):
         "users": users,
         "currentUser": request.user,
         "userTwo": user2,
-        "channel": channel
+        "channel": channel,
+        "firstName": userTwo
     }
     
     return render(request, "Chat.html", context)
