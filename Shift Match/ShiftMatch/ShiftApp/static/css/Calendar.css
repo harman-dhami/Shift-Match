@@ -111,6 +111,7 @@ nav .design:hover,
 .dropdown-content a:hover {
   background-color: #2e95f7;
   border-radius: 10px;
+  color: white;
 }
 
 .dropdown:hover .dropdown-content {

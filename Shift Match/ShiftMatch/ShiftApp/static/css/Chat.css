@@ -270,6 +270,11 @@ nav .design:hover,
     border-bottom: 1px solid #000;
 }
 
+.chat-header h1 {
+    font-size: 40px;
+    margin: 2% 0 0 2%;
+}
+
 .chat {
     display: flex;
     flex-direction: column;
