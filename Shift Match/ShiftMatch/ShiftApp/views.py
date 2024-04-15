@@ -23,11 +23,6 @@ from .pusher import pusher_client
 from django.views.decorators.csrf import csrf_exempt
 
 
-myclient = pymongo.MongoClient("mongodb+srv://user01:WAX5VkFPgLmrclRt@shiftmatch.mux73es.mongodb.net/?retryWrites=true&w=majority")
-mydb = myclient["ShiftMatch"]
-mycol = mydb["users"]
-
-
 def registration(request):
     
     if request.method == 'POST':
@@ -345,7 +340,7 @@ def Chatview(request):
     
     return render(request, "Chat.html", context)
 
-pusher = Pusher(app_id=u'1781407', key=u'4b5bb58a37e41d8eb66d', secret=u'4be0810d178aa1aa094c', cluster=u'us3')
+pusher = Pusher(app_id=u'', key=u'', secret=u'', cluster=u'us3')
 
 @csrf_exempt
 def broadcast(request):
